@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "lapislib_test:block/optional_block"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[39,)"
+license="All rights reserved"
+[[mods]]
+modId="lapislib_test"
+version="1.0"
+displayName="LapisLib Test Mod"
+authors="TJT01"
+description='''
+Just your average everyday test mod
+'''
+[[dependencies.lapislib_test]]
+    modId="lapislib"
+    mandatory=true
+    versionRange="[1.18.1,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.lapislib_test]]
+    modId="forge"
+    mandatory=true
+    versionRange="[39,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.lapislib_test]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.1,1.19)"
+    ordering="NONE"
+    side="BOTH"
