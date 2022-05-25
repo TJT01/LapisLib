@@ -13,8 +13,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-//version = "${project.minecraft}-${project.modVersion}"
-version = "1.18.1-1.0.0"
+version = "${project.minecraft}-${project.modVersion}"
+//version = "1.18.1-1.0.1"
 group = 'mod.tjt01' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'lapislib'
 
@@ -159,7 +159,7 @@ jar {
         attributes([
                 "Specification-Title"     : "examplemod",
                 "Specification-Vendor"    : "examplemodsareus",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Specification-Version"   : version, // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "examplemodsareus",
