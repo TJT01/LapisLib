@@ -81,10 +81,10 @@ public class OptionalRecipeBuilder {
         @Nullable
         @Override
         public JsonObject serializeAdvancement() {
-            ConditionalAdvancement.Builder adv = ConditionalAdvancement.builder()
-            .addAdvancement(recipe);
+            ConditionalAdvancement.Builder adv = ConditionalAdvancement.builder();
             for (ICondition condition : conditions)
                 adv.addCondition(condition);
+            adv.addAdvancement(recipe);
             return adv.write();
         }
 
