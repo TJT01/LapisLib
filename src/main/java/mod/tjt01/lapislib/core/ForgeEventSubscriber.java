@@ -1,5 +1,6 @@
 package mod.tjt01.lapislib.core;
 
+import mod.tjt01.lapislib.core.config.LapisLibConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -21,13 +22,14 @@ public class ForgeEventSubscriber {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onToolTipEvent(final ItemTooltipEvent event) {
         List<Component> tooltip = event.getToolTip();
-        Set<ResourceLocation> tags = event.getItemStack().getItem().getTags();
 
-        if (event.getFlags().isAdvanced()) {
-
-            for (ResourceLocation tag : tags) {
-                tooltip.add(new TextComponent("#" + tag.toString()).setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-            }
+        if (event.getFlags().isAdvanced() && LapisLibConfig.showItemTags) {
+            event.getItemStack().getTags().forEach(
+                    itemTagKey -> tooltip.add(
+                            new TextComponent("#" + itemTagKey.location())
+                                    .setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY))
+                    )
+            );
         }
     }
 }

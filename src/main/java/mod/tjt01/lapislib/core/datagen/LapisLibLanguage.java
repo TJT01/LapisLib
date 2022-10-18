@@ -14,5 +14,6 @@ public class LapisLibLanguage extends LanguageProvider {
     @Override
     protected void addTranslations() {
         this.add("lapislib.common.disabled", "Disabled");
+        this.add("config.lapislib.showItemTags", "Show Item Tags");
     }
 }

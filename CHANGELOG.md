@@ -8,6 +8,7 @@ The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.
 ## [Unreleased]
 ### Added
 - Updated to minecraft 1.18.2
+- Added an option to turn off item tags in F3+H
 
 ### Changed
 - Changed the description to something less placeholder-y
