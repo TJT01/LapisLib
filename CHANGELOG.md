@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 but this project does not adhere to Semantic Versioning.
 The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.3
 
+## [1.18.2-1.0.2a]
+### Fixed
+- Registered the config "added" in 1.0.2 :facepalm:
+
 ## [1.18.2-1.0.2]
 ### Added
 - Updated to Minecraft 1.18.2
