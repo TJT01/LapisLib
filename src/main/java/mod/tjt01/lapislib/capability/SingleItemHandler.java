@@ -8,7 +8,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * An IItemHandler which contains only 1 item
+ * An <code>IItemHandler</code> which can contain only 1 item.
  */
 public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializable<CompoundTag> {
     public ItemStack stack;
@@ -17,6 +17,9 @@ public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializab
         this(ItemStack.EMPTY);
     }
 
+    /**
+     * @param stack The {@link ItemStack stack} this <code>SingleItemHandler</code> holds.
+     */
     public SingleItemHandler(ItemStack stack) {
         this.stack = stack;
     }

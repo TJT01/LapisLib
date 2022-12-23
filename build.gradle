@@ -1,3 +1,5 @@
+import javax.swing.JFileChooser
+
 buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
@@ -98,7 +100,12 @@ minecraft {
                 }
             }
         }
-
+        def lapisLibDataArgs = [
+                '--mod', 'lapislib',
+                '--all',
+                '--output', file('src/generated/resources/'),
+                '--existing', file('src/main/resources/')
+        ]
         data {
             workingDirectory project.file('run')
 
@@ -115,7 +122,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'lapislib', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args lapisLibDataArgs
 
             mods {
                 lapislib {
@@ -124,6 +131,23 @@ minecraft {
                 lapislib_test {
                     source sourceSets.test
                 }
+            }
+        }
+
+        test_data {
+            parent runs.data
+            mods {
+                lapislib_test {
+                    source sourceSets.test
+                }
+            }
+
+            afterEvaluate {
+                args.removeAll {
+                    lapisLibDataArgs.contains(it instanceof File ? (it as File).absolutePath : it.toString())
+                }
+
+                args '--mod', 'lapislib', '--all', '--output', file('src/generated_test/resources/'), '--existing', file('src/test/resources/')
             }
         }
     }
