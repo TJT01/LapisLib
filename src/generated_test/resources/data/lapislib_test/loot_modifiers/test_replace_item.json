@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/zombified_piglin"
+    }
+  ],
+  "target": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "replacement": "minecraft:porkchop",
+  "type": "lapislib:replace_item"
+}

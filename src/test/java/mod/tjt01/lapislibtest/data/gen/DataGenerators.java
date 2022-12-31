@@ -14,5 +14,6 @@ public class DataGenerators {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
         generator.addProvider(new TestRecipes(generator));
+        generator.addProvider(new LootModifiers(generator));
     }
 }

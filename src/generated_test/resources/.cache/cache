@@ -1,2 +1,4 @@
+b5bde1d521b0f87c8a619eef13821228d9a13d6e data/forge/loot_modifiers/global_loot_modifiers.json
 1d5bfe0ded058d6d561ca54c06f3d551fbeb9831 data/lapislib_test/advancements/recipes/misc/coal_to_diamond.json
+ecdb23870237cdc5300d1d04c1e72b875baa309a data/lapislib_test/loot_modifiers/test_replace_item.json
 34a87dab61dd2c0e138253ace45a224318cf0dc0 data/lapislib_test/recipes/coal_to_diamond.json
