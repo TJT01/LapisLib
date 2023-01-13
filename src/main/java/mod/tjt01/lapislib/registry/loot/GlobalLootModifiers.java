@@ -16,6 +16,9 @@ public class GlobalLootModifiers {
     public static final RegistryObject<GlobalLootModifierSerializer<ReplaceItemModifier>> REPLACE_ITEM = LOOT_MODIFIERS
             .register("replace_item", () -> ReplaceItemModifier.Serializer.INSTANCE);
 
+    public static final RegistryObject<GlobalLootModifierSerializer<ReplaceItemModifier>> REMOVE_ITEM = LOOT_MODIFIERS
+            .register("remove_item", () -> ReplaceItemModifier.Serializer.INSTANCE);
+
     public static void register(IEventBus bus) {
         LOOT_MODIFIERS.register(bus);
     }
