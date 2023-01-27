@@ -1,6 +1,7 @@
 package mod.tjt01.lapislib.registry.loot;
 
 import mod.tjt01.lapislib.LapisLib;
+import mod.tjt01.lapislib.data.loot.modifier.RemoveItemModifier;
 import mod.tjt01.lapislib.data.loot.modifier.ReplaceItemModifier;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -16,8 +17,8 @@ public class GlobalLootModifiers {
     public static final RegistryObject<GlobalLootModifierSerializer<ReplaceItemModifier>> REPLACE_ITEM = LOOT_MODIFIERS
             .register("replace_item", () -> ReplaceItemModifier.Serializer.INSTANCE);
 
-    public static final RegistryObject<GlobalLootModifierSerializer<ReplaceItemModifier>> REMOVE_ITEM = LOOT_MODIFIERS
-            .register("remove_item", () -> ReplaceItemModifier.Serializer.INSTANCE);
+    public static final RegistryObject<GlobalLootModifierSerializer<RemoveItemModifier>> REMOVE_ITEM = LOOT_MODIFIERS
+            .register("remove_item", () -> RemoveItemModifier.Serializer.INSTANCE);
 
     public static void register(IEventBus bus) {
         LOOT_MODIFIERS.register(bus);
