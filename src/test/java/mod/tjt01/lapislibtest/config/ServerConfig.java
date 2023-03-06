@@ -4,7 +4,11 @@ import mod.tjt01.lapislibtest.LapisLibTest;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ServerConfig {
-    final ForgeConfigSpec.BooleanValue enableOptionalTestRecipes;
+    public final ForgeConfigSpec.BooleanValue enableOptionalTestRecipes;
+
+    private static String getTranslation(String path) {
+        return "config." + LapisLibTest.MODID + "." + path;
+    }
 
     public ServerConfig(final ForgeConfigSpec.Builder builder) {
         enableOptionalTestRecipes = builder
