@@ -8,6 +8,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,18 +19,9 @@ import java.util.Set;
 
 @Mod.EventBusSubscriber
 public class ForgeEventSubscriber {
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onToolTipEvent(final ItemTooltipEvent event) {
-        List<Component> tooltip = event.getToolTip();
 
-        if (event.getFlags().isAdvanced() && LapisLibConfig.showItemTags) {
-            event.getItemStack().getTags().forEach(
-                    itemTagKey -> tooltip.add(
-                            new TextComponent("#" + itemTagKey.location())
-                                    .setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY))
-                    )
-            );
-        }
+    @SubscribeEvent
+    public static void onRegisterCommands(RegisterCommandsEvent event) {
+        LapisLibCommands.register(event.getDispatcher());
     }
 }

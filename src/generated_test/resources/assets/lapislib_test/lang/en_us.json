@@ -1,0 +1,15 @@
+{
+  "config.lapislib_test.testBoolean": "Test Boolean",
+  "config.lapislib_test.testBoolean2": "Test Boolean 2",
+  "config.lapislib_test.testBoolean3": "Test Boolean 3",
+  "config.lapislib_test.testDouble": "Test Double",
+  "config.lapislib_test.testDoubleRanged": "Test Ranged Double",
+  "config.lapislib_test.testEnum": "Test Enum",
+  "config.lapislib_test.testFloat": "Test Float",
+  "config.lapislib_test.testFloatRanged": "Test Ranged Float",
+  "config.lapislib_test.testInt": "Test Integer",
+  "config.lapislib_test.testIntRanged": "Test Ranged Integer",
+  "config.lapislib_test.testLong": "Test Long Integer",
+  "config.lapislib_test.testLongRanged": "Test Ranged Long Integer",
+  "config.lapislib_test.testString": "Test String"
+}

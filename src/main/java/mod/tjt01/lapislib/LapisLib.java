@@ -1,7 +1,10 @@
 package mod.tjt01.lapislib;
 
+import mod.tjt01.lapislib.client.config.screen.RootConfigScreen;
 import mod.tjt01.lapislib.core.config.LapisLibConfig;
+import mod.tjt01.lapislib.core.network.LapisLibPacketHandler;
 import mod.tjt01.lapislib.registry.loot.GlobalLootModifiers;
+import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -21,6 +24,14 @@ public class LapisLib {
 
         modLoadingContext.registerConfig(ModConfig.Type.CLIENT, LapisLibConfig.CLIENT_SPEC);
 
+        LapisLibPacketHandler.register();
+
         GlobalLootModifiers.register(bus);
+
+        modLoadingContext.registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> {
+            return RootConfigScreen.builder(MODID)
+                    .client(LapisLibConfig.CLIENT_SPEC)
+                    .getFactory();
+        });
     }
 }
