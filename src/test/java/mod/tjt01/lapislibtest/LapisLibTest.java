@@ -1,9 +1,7 @@
 package mod.tjt01.lapislibtest;
 
-import mod.tjt01.lapislib.client.config.component.LabeledConfigEntry;
 import mod.tjt01.lapislib.client.config.screen.RootConfigScreen;
 import mod.tjt01.lapislibtest.block.LapisLibTestBlocks;
-import mod.tjt01.lapislibtest.config.CommonConfig;
 import mod.tjt01.lapislibtest.config.LapisLibTestConfig;
 import mod.tjt01.lapislibtest.item.LapisLibTestItems;
 import net.minecraftforge.client.ConfigGuiHandler;

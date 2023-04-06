@@ -4,14 +4,19 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.LapisLib;
 import mod.tjt01.lapislib.client.config.component.ColorConfigEntry;
+import mod.tjt01.lapislib.util.ColorCodec;
 import mod.tjt01.lapislib.util.ColorSequence;
 import mod.tjt01.lapislib.util.client.ExtraGuiUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -37,6 +42,9 @@ public class ColorPickerScreen extends Screen {
     private GradientSlider greenSlider;
     private GradientSlider blueSlider;
     private GradientSlider alphaSlider;
+
+    private EditBox hexCodeBox;
+
     private HueSlider hueSlider;
 
     public final boolean useAlpha;
@@ -88,6 +96,7 @@ public class ColorPickerScreen extends Screen {
         }
 
         updateSliderColors();
+
     }
 
     protected void updateSliderColors() {
@@ -107,6 +116,13 @@ public class ColorPickerScreen extends Screen {
             this.blueSlider.value = (this.color & 255) / 255.0D;
         }
     };
+
+    @Override
+    public void tick() {
+        if (this.hexCodeBox != null) {
+            this.hexCodeBox.tick();
+        }
+    }
 
     protected void HSVChanged() {
         this.color = Mth.hsvToRgb(hue % 1, Mth.clamp(sat, 0, 1), Mth.clamp(val, 0, 1));
@@ -194,10 +210,47 @@ public class ColorPickerScreen extends Screen {
                 CommonComponents.GUI_BACK, this.hue, this
         );
 
+        this.hexCodeBox = new EditBox(
+                this.font, this.width/2 + 4, this.height/2 + 58 - 20, 76, 20,
+                new TextComponent("")
+        );
+
+        this.hexCodeBox.setValue(
+                this.useAlpha ?
+                        ColorCodec.encodeARGB(color, true) :
+                        ColorCodec.encodeRGB(color, true)
+        );
+
+        this.hexCodeBox.setMaxLength(useAlpha ? 9 : 7);
+
+        this.hexCodeBox.setFilter(s -> {
+            if (s == null) {
+                return false;
+            }
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                if (!((c == '#' && i == 0) || (c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'))) {
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        this.hexCodeBox.setResponder(s -> {
+            try {
+                if (this.hexCodeBox.isFocused()) {
+                    color = ColorCodec.decode(s);
+                    this.entry.setColor(this.color);
+                    this.RGBChanged();
+                }
+            } catch (NumberFormatException ignored) {}
+        });
+
         this.addRenderableWidget(this.hueSlider);
         this.addRenderableWidget(this.redSlider);
         this.addRenderableWidget(this.greenSlider);
         this.addRenderableWidget(this.blueSlider);
+        this.addRenderableWidget(this.hexCodeBox);
 
         if (this.useAlpha) {
             this.alphaSlider = new GradientSlider(
@@ -224,16 +277,16 @@ public class ColorPickerScreen extends Screen {
         int displayColor = this.color;
         if (!useAlpha) displayColor |= 0xFF000000;
         fill(
-                poseStack, this.width/2 + 4 - 1, this.height/2 + 58 - 20 - 1,
+                poseStack, this.width/2 + 4 + 80 - 1, this.height/2 + 58 - 20 - 1,
                 this.width/2 + 4 + 100 + 1, this.height/2 + 58 + 1, 0xFF000000
         );
 
         RenderSystem.setShaderTexture(0, CHECKERBOARD_TEXTURE);
 
-        blit(poseStack, this.width/2 + 4, this.height/2 + 58 - 20, 0, 0, 100, 20, 32, 32);
+        blit(poseStack, this.width/2 + 4 + 80, this.height/2 + 58 - 20, 0, 0, 20, 20, 32, 32);
 
         fill(
-                poseStack, this.width/2 + 4, this.height/2 + 58 - 20,
+                poseStack, this.width/2 + 4 + 80, this.height/2 + 58 - 20,
                 this.width/2 + 4 + 100, this.height/2 + 58, displayColor
         );
 
