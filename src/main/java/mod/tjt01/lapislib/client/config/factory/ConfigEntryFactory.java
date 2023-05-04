@@ -4,10 +4,15 @@ import mod.tjt01.lapislib.LapisLib;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.component.*;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 @FunctionalInterface
 public interface ConfigEntryFactory {
@@ -55,9 +60,13 @@ public interface ConfigEntryFactory {
                 return new StringConfigEntry(
                         label, tracker, (ForgeConfigSpec.ConfigValue<String>) configValue, valueSpec
                 );
+            } else if (value instanceof List<?> list) {
+                return ListConfigEntry.create(
+                        label, tracker, (ForgeConfigSpec.ConfigValue<List<?>>) configValue, valueSpec, parent
+                );
             } else {
                 LapisLib.LOGGER.warn("No config entry for type {}", value.getClass());
-                return new InvalidConfigEntry(String.join(".", configValue.getPath()));
+                return new InvalidConfigEntry(value.getClass().toString(), String.join(".", configValue.getPath()));
             }
         }
     }

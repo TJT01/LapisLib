@@ -76,7 +76,7 @@ public class RootConfigScreen extends Screen {
                     btn -> minecraft.setScreen(
                             new ConfigScreen(
                                     this.modId, ConfigComponents.clientTitle, this, clientConfig,
-                                    clientTracker, entryFactoryMap
+                                    clientTracker, entryFactoryMap, true
                             )
                     )
             );
@@ -93,7 +93,7 @@ public class RootConfigScreen extends Screen {
                         minecraft.setScreen(
                                 new ConfigScreen(
                                         this.modId, ConfigComponents.commonTitle, this, commonConfig,
-                                        commonTracker, entryFactoryMap
+                                        commonTracker, entryFactoryMap, true
                                 )
                         );
                     }

@@ -14,8 +14,12 @@ import java.util.List;
 public class InvalidConfigEntry extends ConfigEntry{
     private final Component label;
 
-    public InvalidConfigEntry(String path) {
-        this.label = new TranslatableComponent("lapislib.common.config.unsupported", path);
+    public InvalidConfigEntry(String type, String path) {
+        this.label = new TranslatableComponent("lapislib.common.config.unsupported", type, path);
+    }
+
+    public InvalidConfigEntry(Component component) {
+        this.label = component;
     }
 
     @Override

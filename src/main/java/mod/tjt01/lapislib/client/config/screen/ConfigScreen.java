@@ -24,12 +24,20 @@ public class ConfigScreen extends Screen {
     private final ConfigChangeTracker tracker;
     private final Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> valueFactoryMap;
     protected ConfigList list;
+    protected final boolean isRoot;
 
     public ConfigScreen(
             String modId, Component pTitle, Screen parent, ForgeConfigSpec spec, ConfigChangeTracker tracker,
             Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> valueFactoryMap
     ) {
-        this(modId, pTitle, parent, spec, tracker, spec.getValues(), valueFactoryMap);
+        this(modId, pTitle, parent, spec, tracker, valueFactoryMap, false);
+    }
+
+    public ConfigScreen(
+            String modId, Component pTitle, Screen parent, ForgeConfigSpec spec, ConfigChangeTracker tracker,
+            Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> valueFactoryMap, boolean isRoot
+    ) {
+        this(modId, pTitle, parent, spec, tracker, spec.getValues(), valueFactoryMap, isRoot);
     }
 
     public ConfigScreen(
@@ -38,6 +46,15 @@ public class ConfigScreen extends Screen {
             ForgeConfigSpec spec, ConfigChangeTracker tracker, UnmodifiableConfig configGroup,
             Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> valueFactoryMap
     ) {
+        this(modId, pTitle, parent, spec, tracker, configGroup, valueFactoryMap, false);
+    }
+
+    public ConfigScreen(
+            String modId, Component pTitle,
+            Screen parent,
+            ForgeConfigSpec spec, ConfigChangeTracker tracker, UnmodifiableConfig configGroup,
+            Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> valueFactoryMap, boolean isRoot
+    ) {
         super(pTitle);
         this.parent = parent;
         this.spec = spec;
@@ -45,6 +62,7 @@ public class ConfigScreen extends Screen {
         this.configGroup = configGroup;
         this.modId = modId;
         this.valueFactoryMap = valueFactoryMap;
+        this.isRoot = isRoot;
     }
 
     @SuppressWarnings("unchecked")
@@ -77,12 +95,30 @@ public class ConfigScreen extends Screen {
             }
         });
 
-        this.addRenderableWidget(
-                new Button(
-                        center - 64, this.height - 32, 128, 20, CommonComponents.GUI_DONE,
-                        button -> this.getMinecraft().setScreen(parent)
-                )
-        );
+        if (isRoot) {
+            this.addRenderableWidget(
+                    new Button(
+                            center - 132, this.height - 26, 128, 20, CommonComponents.GUI_CANCEL,
+                            button -> this.getMinecraft().setScreen(parent)
+                    )
+            );
+            this.addRenderableWidget(
+                    new Button(
+                            center + 8, this.height - 26, 128, 20, CommonComponents.GUI_DONE,
+                            button -> {
+                                this.tracker.save();
+                                this.getMinecraft().setScreen(parent);
+                            }
+                    )
+            );
+        } else {
+            this.addRenderableWidget(
+                    new Button(
+                            center - 64, this.height - 26, 128, 20, CommonComponents.GUI_DONE,
+                            button -> this.getMinecraft().setScreen(parent)
+                    )
+            );
+        }
     }
 
     @Override

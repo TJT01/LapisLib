@@ -4,6 +4,6 @@
   "lapislib.common.config.common": "Common",
   "lapislib.common.config.root_title": "%s config",
   "lapislib.common.config.server": "Server",
-  "lapislib.common.config.unsupported": "%s has an unsupported type",
+  "lapislib.common.config.unsupported": "Type %s is not supported (in %s)",
   "lapislib.common.disabled": "Disabled"
 }

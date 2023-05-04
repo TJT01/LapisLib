@@ -3,6 +3,10 @@ package mod.tjt01.lapislibtest.config;
 import mod.tjt01.lapislibtest.LapisLibTest;
 import net.minecraftforge.common.ForgeConfigSpec;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class CommonConfig {
 
     public final ForgeConfigSpec.ConfigValue<Integer> colorInt;
@@ -82,5 +86,25 @@ public class CommonConfig {
         this.colorAlphaString = builder.comment("Test color value (string, with alpha)")
                 .translation(getTranslation("testColorStringAlpha"))
                 .define("testColorAlphaString", "BAADF00D");
+
+        builder.comment("Test integer LinkedList")
+                .translation(getTranslation("testIntegerArray"))
+                .defineList("testIntArray", () -> {
+                    LinkedList<Integer> integers = new LinkedList<>();
+                    integers.add(5);
+                    integers.add(10);
+                    integers.add(15);
+                    integers.add(20);
+                    return integers;
+                }, o -> o instanceof Integer);
+
+        builder.comment("Test string ArrayList")
+                .translation(getTranslation("testIntegerArray"))
+                .defineList("testIntArray", () -> {
+                    ArrayList<String> strings = new ArrayList<>();
+                    strings.add("foo");
+                    strings.add("bar");
+                    return strings;
+                }, o -> o instanceof Integer);
     }
 }

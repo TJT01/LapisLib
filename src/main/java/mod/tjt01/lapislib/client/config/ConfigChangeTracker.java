@@ -36,8 +36,9 @@ public class ConfigChangeTracker {
 
     public void save() {
         for (Map.Entry<String, Object> entry: changes.entrySet()) {
-            ForgeConfigSpec.ConfigValue<Object> value = spec.get(entry.getKey());
-            value.set(entry.getValue());
+            ForgeConfigSpec.ValueSpec valueSpec = spec.get(entry.getKey());
+            ForgeConfigSpec.ConfigValue<Object> configValue = spec.getValues().get(entry.getKey());
+            if (valueSpec.test(entry.getValue())) configValue.set(entry.getValue());
         }
 
         this.clearChanges();
