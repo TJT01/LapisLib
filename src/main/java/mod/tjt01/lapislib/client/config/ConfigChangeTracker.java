@@ -1,16 +1,26 @@
 package mod.tjt01.lapislib.client.config;
 
+import com.electronwill.nightconfig.core.CommentedConfig;
+import mod.tjt01.lapislib.core.network.LapisLibPacketHandler;
+import mod.tjt01.lapislib.core.network.SubmitServerConfigPacket;
+import mod.tjt01.lapislib.util.ConfigUtil;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.config.IConfigEvent;
+import net.minecraftforge.fml.config.IConfigSpec;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ConfigChangeTracker {
-    private final ForgeConfigSpec spec;
-    private final Map<String, Object> changes = new HashMap<>();
+    protected final ModConfig config;
+    public final Map<String, Object> changes = new HashMap<>();
 
-    public ConfigChangeTracker(ForgeConfigSpec spec) {
-        this.spec = spec;
+    public ConfigChangeTracker(ModConfig config) {
+        this.config = config;
     }
 
     public <T> void setValue(String path, ForgeConfigSpec.ConfigValue<T> configValue, T value) {
@@ -35,10 +45,24 @@ public class ConfigChangeTracker {
     }
 
     public void save() {
+        if (this.changes.isEmpty()) return;
+        ForgeConfigSpec spec = ConfigUtil.toForgeConfigSpec(config.getSpec());
+        if (spec == null) {
+            throw new IllegalStateException("Cannot retrieve config spec for " + config.getFileName());
+        }
+        CommentedConfig modified = CommentedConfig.copy(config.getConfigData());
         for (Map.Entry<String, Object> entry: changes.entrySet()) {
-            ForgeConfigSpec.ValueSpec valueSpec = spec.get(entry.getKey());
-            ForgeConfigSpec.ConfigValue<Object> configValue = spec.getValues().get(entry.getKey());
-            if (valueSpec.test(entry.getValue())) configValue.set(entry.getValue());
+            modified.set(entry.getKey(), entry.getValue());
+        }
+        this.config.getConfigData().putAll(modified);
+
+        spec.afterReload();
+        try {
+            Method m = ModConfig.class.getDeclaredMethod("fireEvent", IConfigEvent.class);
+            m.setAccessible(true);
+            m.invoke(config, new ModConfigEvent.Reloading(config));
+        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+            e.printStackTrace();
         }
 
         this.clearChanges();

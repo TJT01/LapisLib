@@ -79,12 +79,6 @@ public abstract class AbstractTextConfigEntry<T> extends LabeledConfigEntry {
     }
 
     @Override
-    public boolean changeFocus(boolean pFocus) {
-        LapisLib.LOGGER.debug("changeFocus {}", pFocus);
-        return super.changeFocus(pFocus);
-    }
-
-    @Override
     public void tick() {
         textBox.tick();
     }

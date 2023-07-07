@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.factory.ConfigEntryFactory;
 import mod.tjt01.lapislib.client.config.component.*;
+import mod.tjt01.lapislib.core.network.SubmitServerConfigPacket;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;

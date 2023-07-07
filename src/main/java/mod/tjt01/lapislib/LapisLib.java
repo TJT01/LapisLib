@@ -28,10 +28,8 @@ public class LapisLib {
 
         GlobalLootModifiers.register(bus);
 
-        modLoadingContext.registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () -> {
-            return RootConfigScreen.builder(MODID)
-                    .client(LapisLibConfig.CLIENT_SPEC)
-                    .getFactory();
-        });
+        modLoadingContext.registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () ->
+                RootConfigScreen.builder(MODID).getFactory()
+        );
     }
 }

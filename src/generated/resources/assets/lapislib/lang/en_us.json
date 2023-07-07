@@ -2,8 +2,11 @@
   "config.lapislib.showItemTags": "Show Item Tags",
   "lapislib.common.config.client": "Client",
   "lapislib.common.config.common": "Common",
+  "lapislib.common.config.no_level": "To edit server configs; join a world, then use \u00A7o/lapislib showModList\u00A7r.",
+  "lapislib.common.config.no_permission": "Only operators can modify server configs.",
   "lapislib.common.config.root_title": "%s config",
   "lapislib.common.config.server": "Server",
   "lapislib.common.config.unsupported": "Type %s is not supported (in %s)",
-  "lapislib.common.disabled": "Disabled"
+  "lapislib.common.disabled": "Disabled",
+  "lapislib.common.edit": "Edit"
 }

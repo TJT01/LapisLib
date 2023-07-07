@@ -26,7 +26,6 @@ public class LapisLibTest {
 
         modLoadingContext.registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () ->
                 RootConfigScreen.builder(MODID)
-                        .common(LapisLibTestConfig.COMMON_SPEC)
                         .defineColor(LapisLibTestConfig.COMMON_CONFIG.colorInt, false)
                         .defineColor(LapisLibTestConfig.COMMON_CONFIG.colorAlphaInt, true)
                         .defineColor(LapisLibTestConfig.COMMON_CONFIG.colorString, false)

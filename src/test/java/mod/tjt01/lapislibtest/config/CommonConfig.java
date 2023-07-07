@@ -98,13 +98,57 @@ public class CommonConfig {
                     return integers;
                 }, o -> o instanceof Integer);
 
+        builder.comment("Test Long LinkedList")
+                .translation(getTranslation("testLongArray"))
+                .defineList("testLongArray", () -> {
+                    ArrayList<Long> integers = new ArrayList<>();
+                    integers.add(5L);
+                    integers.add(10L);
+                    integers.add(15L);
+                    integers.add(20L);
+                    return integers;
+                }, o -> o instanceof Long);
+
         builder.comment("Test string ArrayList")
-                .translation(getTranslation("testIntegerArray"))
-                .defineList("testIntArray", () -> {
+                .translation(getTranslation("testStringArray"))
+                .defineList("testStringArray", () -> {
                     ArrayList<String> strings = new ArrayList<>();
                     strings.add("foo");
                     strings.add("bar");
                     return strings;
-                }, o -> o instanceof Integer);
+                }, o -> o instanceof String);
+
+        builder.comment("Test boolean ArrayList")
+                .translation(getTranslation("testBoolArray"))
+                .defineList("testBoolArray", () -> {
+                    ArrayList<Boolean> bools = new ArrayList<>();
+                    bools.add(false);
+                    bools.add(true);
+                    bools.add(false);
+                    bools.add(true);
+                    return bools;
+                }, o -> o instanceof Boolean);
+
+        builder.comment("Test Float ArrayList")
+                .translation(getTranslation("testFloatArray"))
+                .defineList("testFloatArray", () -> {
+                    ArrayList<Float> floats = new ArrayList<>();
+                    floats.add(1.0F);
+                    floats.add(1.5F);
+                    floats.add(2.0F);
+                    floats.add(3.0F);
+                    return floats;
+                }, o -> o instanceof Float);
+
+        builder.comment("Test Double ArrayList")
+                .translation(getTranslation("testDoubleArray"))
+                .defineList("testDoubleArray", () -> {
+                    ArrayList<Double> doubles = new ArrayList<>();
+                    doubles.add(1.0D);
+                    doubles.add(1.5D);
+                    doubles.add(2.0D);
+                    doubles.add(3.0D);
+                    return doubles;
+                }, o -> o instanceof Double);
     }
 }
