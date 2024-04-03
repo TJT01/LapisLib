@@ -26,5 +26,9 @@ public class LapisLibPacketHandler {
                 id++, SubmitServerConfigPacket.class,
                 SubmitServerConfigPacket::encode, SubmitServerConfigPacket::decode, SubmitServerConfigPacket::handle
         );
+        CHANNEL.registerMessage(
+                id++, ServerConfigResyncPacket.class,
+                ServerConfigResyncPacket::encode, ServerConfigResyncPacket::decode, ServerConfigResyncPacket::handle
+        );
     }
 }

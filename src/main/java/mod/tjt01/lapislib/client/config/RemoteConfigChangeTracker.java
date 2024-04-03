@@ -17,7 +17,7 @@ public class RemoteConfigChangeTracker extends ConfigChangeTracker {
     }
 
     public void save() {
-        LapisLibPacketHandler.CHANNEL.sendToServer(new SubmitServerConfigPacket(modId, this));
+        LapisLibPacketHandler.CHANNEL.sendToServer(new SubmitServerConfigPacket(this.config.getFileName(), this));
         this.clearChanges();
     }
 }

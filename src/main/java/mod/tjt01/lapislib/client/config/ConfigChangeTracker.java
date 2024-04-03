@@ -44,6 +44,14 @@ public class ConfigChangeTracker {
         this.changes.clear();
     }
 
+    public CommentedConfig getCommentedConfig() {
+        CommentedConfig modified = CommentedConfig.copy(config.getConfigData());
+        for (Map.Entry<String, Object> entry: changes.entrySet()) {
+            modified.set(entry.getKey(), entry.getValue());
+        }
+        return modified;
+    }
+
     public void save() {
         if (this.changes.isEmpty()) return;
         ForgeConfigSpec spec = ConfigUtil.toForgeConfigSpec(config.getSpec());

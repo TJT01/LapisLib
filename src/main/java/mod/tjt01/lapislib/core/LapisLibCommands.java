@@ -14,6 +14,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.network.PacketDistributor;
+import org.jetbrains.annotations.ApiStatus;
 
 public class LapisLibCommands {
     protected static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
