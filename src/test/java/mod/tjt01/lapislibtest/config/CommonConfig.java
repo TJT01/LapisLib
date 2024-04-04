@@ -150,5 +150,8 @@ public class CommonConfig {
                     doubles.add(3.0D);
                     return doubles;
                 }, o -> o instanceof Double);
+
+        builder.comment("Test No Translation")
+                .define("testNoTranslation", "");
     }
 }

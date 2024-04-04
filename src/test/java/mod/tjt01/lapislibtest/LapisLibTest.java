@@ -23,6 +23,8 @@ public class LapisLibTest {
 
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, LapisLibTestConfig.SERVER_SPEC);
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, LapisLibTestConfig.COMMON_SPEC);
+        //Note: It seems like Forge does not properly support having multiple configs of the same type
+        //modLoadingContext.registerConfig(ModConfig.Type.COMMON, LapisLibTestConfig.SECONDARY_SPEC, "lapislib_test_secondary.toml");
 
         modLoadingContext.registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () ->
                 RootConfigScreen.builder(MODID)

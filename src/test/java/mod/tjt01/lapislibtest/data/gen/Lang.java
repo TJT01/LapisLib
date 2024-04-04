@@ -15,6 +15,8 @@ public class Lang extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        addConfigKey("category.category", "Test Category");
+
         addConfigKey("testString", "Test String");
         addConfigKey("testBoolean", "Test Boolean");
         addConfigKey("testBoolean2", "Test Boolean 2");

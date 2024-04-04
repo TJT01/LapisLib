@@ -10,6 +10,8 @@ public class LapisLibTestConfig {
     public static final ServerConfig SERVER_CONFIG;
     public static final ForgeConfigSpec COMMON_SPEC;
     public static final CommonConfig COMMON_CONFIG;
+    public static final ForgeConfigSpec SECONDARY_SPEC;
+    public static final SecondaryConfig SECONDARY_CONFIG;
 
     static {
         final Pair<ServerConfig, ForgeConfigSpec> specPairServer = new ForgeConfigSpec.Builder().configure(ServerConfig::new);
@@ -19,6 +21,10 @@ public class LapisLibTestConfig {
         final Pair<CommonConfig, ForgeConfigSpec> specPairCommon = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
         COMMON_CONFIG = specPairCommon.getLeft();
         COMMON_SPEC = specPairCommon.getRight();
+
+        final Pair<SecondaryConfig, ForgeConfigSpec> specPairSecondary = new ForgeConfigSpec.Builder().configure(SecondaryConfig::new);
+        SECONDARY_CONFIG = specPairSecondary.getLeft();
+        SECONDARY_SPEC = specPairSecondary.getRight();
     }
 
     public static boolean enableOptionalTestRecipes = true;

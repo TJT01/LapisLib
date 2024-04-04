@@ -9,11 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RemoteConfigChangeTracker extends ConfigChangeTracker {
-    private final String modId;
-
-    public RemoteConfigChangeTracker(ModConfig config, String modId) {
+    public RemoteConfigChangeTracker(ModConfig config) {
         super(config);
-        this.modId = modId;
     }
 
     public void save() {

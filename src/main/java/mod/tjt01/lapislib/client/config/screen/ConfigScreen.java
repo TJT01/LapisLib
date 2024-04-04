@@ -6,20 +6,20 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.factory.ConfigEntryFactory;
 import mod.tjt01.lapislib.client.config.component.*;
-import mod.tjt01.lapislib.core.network.SubmitServerConfigPacket;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.config.ModConfig;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
 
 public class ConfigScreen extends Screen {
     protected final Screen parent;
-    private final String modId;
+    private final ModConfig modConfig;
     private final ForgeConfigSpec spec;
     private final UnmodifiableConfig configGroup;
     private final ConfigChangeTracker tracker;
@@ -28,30 +28,30 @@ public class ConfigScreen extends Screen {
     protected final boolean isRoot;
 
     public ConfigScreen(
-            String modId, Component pTitle, Screen parent, ForgeConfigSpec spec, ConfigChangeTracker tracker,
+            ModConfig modConfig, Component pTitle, Screen parent, ForgeConfigSpec spec, ConfigChangeTracker tracker,
             Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> valueFactoryMap
     ) {
-        this(modId, pTitle, parent, spec, tracker, valueFactoryMap, false);
+        this(modConfig, pTitle, parent, spec, tracker, valueFactoryMap, false);
     }
 
     public ConfigScreen(
-            String modId, Component pTitle, Screen parent, ForgeConfigSpec spec, ConfigChangeTracker tracker,
+            ModConfig modConfig, Component pTitle, Screen parent, ForgeConfigSpec spec, ConfigChangeTracker tracker,
             Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> valueFactoryMap, boolean isRoot
     ) {
-        this(modId, pTitle, parent, spec, tracker, spec.getValues(), valueFactoryMap, isRoot);
+        this(modConfig, pTitle, parent, spec, tracker, spec.getValues(), valueFactoryMap, isRoot);
     }
 
     public ConfigScreen(
-            String modId, Component pTitle,
+            ModConfig modConfig, Component pTitle,
             Screen parent,
             ForgeConfigSpec spec, ConfigChangeTracker tracker, UnmodifiableConfig configGroup,
             Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> valueFactoryMap
     ) {
-        this(modId, pTitle, parent, spec, tracker, configGroup, valueFactoryMap, false);
+        this(modConfig, pTitle, parent, spec, tracker, configGroup, valueFactoryMap, false);
     }
 
     public ConfigScreen(
-            String modId, Component pTitle,
+            ModConfig modConfig, Component pTitle,
             Screen parent,
             ForgeConfigSpec spec, ConfigChangeTracker tracker, UnmodifiableConfig configGroup,
             Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> valueFactoryMap, boolean isRoot
@@ -61,12 +61,11 @@ public class ConfigScreen extends Screen {
         this.spec = spec;
         this.tracker = tracker;
         this.configGroup = configGroup;
-        this.modId = modId;
+        this.modConfig = modConfig;
         this.valueFactoryMap = valueFactoryMap;
         this.isRoot = isRoot;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void init() {
         int center = this.width/2;
@@ -77,12 +76,12 @@ public class ConfigScreen extends Screen {
 
         configGroup.valueMap().forEach((key, obj) -> {
             if (obj instanceof AbstractConfig) {
-                Component categoryTitle = new TranslatableComponent("config." + modId + ".category." + key);
+                Component categoryTitle = new TranslatableComponent("config." + modConfig.getModId() + ".category." + key);
 
                 CategoryEntry categoryEntry = new CategoryEntry(
                         this, categoryTitle, screen ->
                         new ConfigScreen(
-                                modId, categoryTitle, this, spec, tracker, (UnmodifiableConfig) obj,
+                                modConfig, categoryTitle, this, spec, tracker, (UnmodifiableConfig) obj,
                                 this.valueFactoryMap
                         )
                 );
