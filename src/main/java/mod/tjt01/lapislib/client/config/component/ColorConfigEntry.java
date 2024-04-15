@@ -46,7 +46,7 @@ public abstract class ColorConfigEntry<T> extends LabeledConfigEntry{
         buttons = ImmutableList.of(button);
     }
 
-    public abstract int getColor();
+    public abstract int getCurrentColor();
 
     public abstract void setColor(int value);
 
@@ -97,7 +97,7 @@ public abstract class ColorConfigEntry<T> extends LabeledConfigEntry{
             RenderSystem.setShaderTexture(0, image);
             RenderSystem.setShaderColor(1, 1, 1, this.alpha);
             int uvY = this.getYImage(this.isHoveredOrFocused());
-            int color = entry.getColor();
+            int color = entry.getCurrentColor();
             if (!entry.hasAlpha) color |= 0xFF000000;
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
@@ -128,7 +128,7 @@ public abstract class ColorConfigEntry<T> extends LabeledConfigEntry{
         }
 
         @Override
-        public int getColor() {
+        public int getCurrentColor() {
             try {
                 return ColorCodec.decode(get());
             } catch (NumberFormatException ignored) {
@@ -153,7 +153,7 @@ public abstract class ColorConfigEntry<T> extends LabeledConfigEntry{
         }
 
         @Override
-        public int getColor() {
+        public int getCurrentColor() {
             return get();
         }
 

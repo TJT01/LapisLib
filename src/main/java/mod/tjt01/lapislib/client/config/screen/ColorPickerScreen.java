@@ -63,7 +63,7 @@ public class ColorPickerScreen extends Screen {
         this.useAlpha = hasAlpha;
         this.entry = entry;
 
-        this.color = entry.getColor();
+        this.color = entry.getCurrentColor();
 
         this.RGBChanged();
     }

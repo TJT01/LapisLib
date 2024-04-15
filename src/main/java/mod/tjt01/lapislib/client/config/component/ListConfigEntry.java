@@ -18,7 +18,7 @@ import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 
-public class ListConfigEntry extends LabeledConfigEntry{
+public class ListConfigEntry extends AbstractForgeConfigEntry<List<?>> {
     protected static final Component BUTTON_LABEL = new TranslatableComponent("lapislib.common.edit");
     protected final ConfigChangeTracker tracker;
     protected final Button button;
@@ -33,12 +33,15 @@ public class ListConfigEntry extends LabeledConfigEntry{
     ) {
         List<?> aDefault = (List<?>) valueSpec.getDefault();
         ListType listType = ListType.UNKNOWN;
+
         if (!aDefault.isEmpty()) listType = ListType.fromObject(aDefault);
+
         if (listType == ListType.UNKNOWN) {
             listType = ListType.fromValidator(valueSpec);
         }
+
         if (listType == ListType.UNKNOWN) {
-            LapisLib.LOGGER.debug("Cannot infer type of list {}", String.join(".", configValue.getPath()));
+            LapisLib.LOGGER.error("Cannot infer type of list {}", String.join(".", configValue.getPath()));
             return new InvalidConfigEntry(
                     new TextComponent("Cannot infer type of list " + String.join(".", configValue.getPath()))
             );
@@ -51,7 +54,7 @@ public class ListConfigEntry extends LabeledConfigEntry{
             Component label, ConfigChangeTracker tracker, ForgeConfigSpec.ConfigValue<List<?>> configValue,
             ForgeConfigSpec.ValueSpec valueSpec, ListType type, Screen parent
     ) {
-        super(label);
+        super(label, tracker, configValue, valueSpec);
         this.tracker = tracker;
         this.configValue = configValue;
 
@@ -67,7 +70,7 @@ public class ListConfigEntry extends LabeledConfigEntry{
             int mouseX, int mouseY, boolean isMouseOver,
             float partialTick
     ) {
-        button.x = left + width - 50;
+        button.x = left + width - 50 - 40;
         button.y = top;
         button.render(poseStack, mouseX, mouseY, partialTick);
 

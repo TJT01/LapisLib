@@ -18,6 +18,10 @@ public abstract class LabeledConfigEntry extends ConfigEntry{
         this.label = label;
     }
 
+    public int getColor() {
+        return 0xFFFFFFFF;
+    }
+
     @Override
     public void render(
             @Nonnull PoseStack poseStack, int index,
@@ -25,6 +29,6 @@ public abstract class LabeledConfigEntry extends ConfigEntry{
             int mouseX, int mouseY, boolean isMouseOver,
             float pPartialTick
     ) {
-        Screen.drawString(poseStack, Minecraft.getInstance().font, label, left, top + 6, 0xFFFFFFFF);
+        Screen.drawString(poseStack, Minecraft.getInstance().font, label, left, top + 6, getColor());
     }
 }

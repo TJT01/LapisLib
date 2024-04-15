@@ -24,5 +24,11 @@ public class LapisLibLanguage extends LanguageProvider {
         this.add("lapislib.common.edit", "Edit");
         this.add("lapislib.common.config.no_level", "To edit server configs; join a world, then use \u00A7o/lapislib showModList\u00A7r.");
         this.add("lapislib.common.config.no_permission", "Only operators can modify server configs.");
+
+        this.add("lapislib.common.config.reset.text", "R");
+        this.add("lapislib.common.config.reset.tooltip", "Reset");
+
+        this.add("lapislib.common.config.undo.text", "U");
+        this.add("lapislib.common.config.undo.tooltip", "Undo");
     }
 }

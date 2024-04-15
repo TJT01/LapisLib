@@ -44,7 +44,7 @@ public abstract class AbstractNumberConfigEntry<T extends Number> extends Abstra
     }
 
     @Override
-    protected boolean isValid() {
+    public boolean isValid() {
         final T num = this.tracker.getValue(this.path, this.configValue);
 
         return valueSpec.test(num);

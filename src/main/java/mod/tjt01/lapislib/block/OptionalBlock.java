@@ -13,7 +13,7 @@ import net.minecraft.core.NonNullList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 public class OptionalBlock extends Block {
     public final Supplier<Boolean> condition;

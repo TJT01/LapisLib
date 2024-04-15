@@ -5,11 +5,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
-import org.jetbrains.annotations.NotNull;
 
-/**
- * An <code>IItemHandler</code> which can contain only 1 item.
- */
+import javax.annotation.Nonnull;
+
 public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializable<CompoundTag> {
     public ItemStack stack;
 
@@ -17,15 +15,12 @@ public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializab
         this(ItemStack.EMPTY);
     }
 
-    /**
-     * @param stack The {@link ItemStack stack} this <code>SingleItemHandler</code> holds.
-     */
     public SingleItemHandler(ItemStack stack) {
         this.stack = stack;
     }
 
     @Override
-    public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+    public void setStackInSlot(int slot, ItemStack stack) {
         this.stack = stack;
         this.onContentsChanged();
     }
@@ -35,15 +30,15 @@ public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializab
         return 1;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public ItemStack getStackInSlot(int slot) {
         return stack;
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
         if (stack.isEmpty())
             return ItemStack.EMPTY;
 
@@ -75,7 +70,7 @@ public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializab
         return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
         if (amount == 0)
@@ -114,7 +109,7 @@ public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializab
     }
 
     @Override
-    public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+    public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
         return true;
     }
 

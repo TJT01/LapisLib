@@ -15,10 +15,9 @@ import net.minecraftforge.server.command.TextComponentHelper;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class EnumEntry extends LabeledConfigEntry{
+public class EnumEntry extends AbstractForgeConfigEntry<Enum<?>>{
     protected final CycleButton<Enum<?>> cycleButton;
     protected final ConfigChangeTracker tracker;
-    protected final ImmutableList<CycleButton<Enum<?>>> cycleButtons;
     protected final String path;
     protected final ForgeConfigSpec.ConfigValue<Enum<?>> configValue;
     protected final ForgeConfigSpec.ValueSpec valueSpec;
@@ -27,7 +26,7 @@ public class EnumEntry extends LabeledConfigEntry{
             Component label, ConfigChangeTracker tracker, ForgeConfigSpec.ConfigValue<Enum<?>> configValue,
             ForgeConfigSpec.ValueSpec valueSpec
     ) {
-        super(label);
+        super(label, tracker, configValue, valueSpec);
         this.tracker = tracker;
         this.path = String.join(".", configValue.getPath());
         this.configValue = configValue;
@@ -41,7 +40,7 @@ public class EnumEntry extends LabeledConfigEntry{
                     tracker.setValue(path, configValue, value);
                 });
 
-        cycleButtons = ImmutableList.of(cycleButton);
+        this.widgets.add(cycleButton);
     }
 
     protected String enumToString(Enum<?> enm) {
@@ -51,20 +50,8 @@ public class EnumEntry extends LabeledConfigEntry{
     @Override
     public void render(@Nonnull PoseStack poseStack, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
         super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
-        cycleButton.x = left + width - 110;
+        cycleButton.x = left + width - 110 - 40;
         cycleButton.y = top;
         cycleButton.render(poseStack, mouseX, mouseY, pPartialTick);
-    }
-
-    @Nonnull
-    @Override
-    public List<? extends NarratableEntry> narratables() {
-        return cycleButtons;
-    }
-
-    @Nonnull
-    @Override
-    public List<? extends GuiEventListener> children() {
-        return cycleButtons;
     }
 }

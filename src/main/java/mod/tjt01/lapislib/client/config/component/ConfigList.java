@@ -10,6 +10,16 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigEntry> {
         super(pMinecraft, pWidth, pHeight, pY0, pY1, pItemHeight);
     }
 
+    @Override
+    public int getRowWidth() {
+        return 260;
+    }
+
+    @Override
+    protected int getScrollbarPosition() {
+        return this.width/2 + (260/2 + 14);
+    }
+
     public void tick() {
         for (ConfigEntry entry: this.children()) {
             entry.tick();

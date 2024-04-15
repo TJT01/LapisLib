@@ -4,8 +4,12 @@
   "lapislib.common.config.common": "Common",
   "lapislib.common.config.no_level": "To edit server configs; join a world, then use \u00A7o/lapislib showModList\u00A7r.",
   "lapislib.common.config.no_permission": "Only operators can modify server configs.",
+  "lapislib.common.config.reset.text": "R",
+  "lapislib.common.config.reset.tooltip": "Reset",
   "lapislib.common.config.root_title": "%s config",
   "lapislib.common.config.server": "Server",
+  "lapislib.common.config.undo.text": "U",
+  "lapislib.common.config.undo.tooltip": "Undo",
   "lapislib.common.config.unsupported": "Type %s is not supported (in %s)",
   "lapislib.common.disabled": "Disabled",
   "lapislib.common.edit": "Edit"
