@@ -21,10 +21,9 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class ColorConfigEntry<T> extends LabeledConfigEntry{
+public abstract class ColorConfigEntry<T> extends AbstractForgeConfigEntry<T>{
     protected final ColorPickerButton button;
     protected final ConfigChangeTracker tracker;
-    protected final ImmutableList<ColorPickerButton> buttons;
     protected final String path;
     protected final ForgeConfigSpec.ConfigValue<T> configValue;
     protected final ForgeConfigSpec.ValueSpec valueSpec;
@@ -34,7 +33,7 @@ public abstract class ColorConfigEntry<T> extends LabeledConfigEntry{
             Component label, Screen parent, ConfigChangeTracker tracker,
             ForgeConfigSpec.ConfigValue<T> configValue, ForgeConfigSpec.ValueSpec valueSpec, boolean hasAlpha
     ) {
-        super(label);
+        super(label, tracker, configValue, valueSpec);
         this.tracker = tracker;
         this.path = String.join(".", configValue.getPath());
         this.configValue = configValue;
@@ -43,7 +42,7 @@ public abstract class ColorConfigEntry<T> extends LabeledConfigEntry{
 
         this.button = new ColorConfigEntry.ColorPickerButton(0, 0, 20, 20, parent, this);
 
-        buttons = ImmutableList.of(button);
+        this.widgets.add(button);
     }
 
     public abstract int getCurrentColor();
@@ -61,21 +60,9 @@ public abstract class ColorConfigEntry<T> extends LabeledConfigEntry{
     @Override
     public void render(@Nonnull PoseStack poseStack, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
         super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
-        button.x = left + width - 20;
+        button.x = left + width - 60;
         button.y = top;
         button.render(poseStack, mouseX, mouseY, pPartialTick);
-    }
-
-    @Nonnull
-    @Override
-    public List<? extends NarratableEntry> narratables() {
-        return buttons;
-    }
-
-    @Nonnull
-    @Override
-    public List<? extends GuiEventListener> children() {
-        return buttons;
     }
 
     public static class ColorPickerButton extends AbstractButton {
@@ -115,7 +102,7 @@ public abstract class ColorConfigEntry<T> extends LabeledConfigEntry{
         public void updateNarration(@Nonnull NarrationElementOutput pNarrationElementOutput) {
 
         }
-    };
+    }
 
     public static class StringColorConfigEntry extends ColorConfigEntry<String> {
 

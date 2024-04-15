@@ -22,7 +22,6 @@ public class ListConfigEntry extends AbstractForgeConfigEntry<List<?>> {
     protected static final Component BUTTON_LABEL = new TranslatableComponent("lapislib.common.edit");
     protected final ConfigChangeTracker tracker;
     protected final Button button;
-    protected final List<Button> buttons;
 
     protected final ForgeConfigSpec.ConfigValue<List<?>> configValue;
 
@@ -60,7 +59,7 @@ public class ListConfigEntry extends AbstractForgeConfigEntry<List<?>> {
 
         this.button = new Button(0, 0, 50, 20, BUTTON_LABEL, pButton -> Minecraft.getInstance().setScreen(new ListEditScreen(new TextComponent("ABCXYZ"), tracker, configValue, valueSpec, type, parent)));
 
-        this.buttons = Collections.singletonList(button);
+        this.widgets.add(button);
     }
 
     @Override
@@ -75,18 +74,6 @@ public class ListConfigEntry extends AbstractForgeConfigEntry<List<?>> {
         button.render(poseStack, mouseX, mouseY, partialTick);
 
         super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
-    }
-
-    @Nonnull
-    @Override
-    public List<? extends NarratableEntry> narratables() {
-        return buttons;
-    }
-
-    @Nonnull
-    @Override
-    public List<? extends GuiEventListener> children() {
-        return buttons;
     }
 
     public enum ListType {

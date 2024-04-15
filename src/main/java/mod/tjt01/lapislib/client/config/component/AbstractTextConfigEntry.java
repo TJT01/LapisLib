@@ -44,12 +44,12 @@ public abstract class AbstractTextConfigEntry<T> extends AbstractForgeConfigEntr
     protected abstract T fromString(String text);
 
     protected void checkValid() {
-        this.textBox.setTextColor(isValid() ? 0xFFFFFFFF : 0xFFFF0000);
+        textBox.setTextColor(isValid() ? 0xFFE0E0E0 : 0xFFFF0000);
     }
 
     @Override
     public void onResetOrUndo() {
-        onChanged(getString(tracker.getValue(this.path, this.configValue)), false);
+        textBox.setValue(getString(tracker.getValue(path, configValue)));
     }
 
     @Override

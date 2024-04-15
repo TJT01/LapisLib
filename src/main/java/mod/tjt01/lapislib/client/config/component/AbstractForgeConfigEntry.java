@@ -60,6 +60,9 @@ public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
                     onResetOrUndo();
                 }
         );
+        
+        widgets.add(resetButton);
+        widgets.add(undoButton);
     }
 
     public boolean isValid() {
