@@ -104,16 +104,22 @@ public class ColorPickerScreen extends Screen {
             redSlider.startColor = color & (~0xFFFF0000) | 0xFF000000;
             redSlider.endColor = color & (~0xFFFF0000) | 0xFFFF0000;
             this.redSlider.value = (this.color >> 16 & 255) / 255.0D;
+            this.redSlider.setMessage(new TranslatableComponent("lapislib.common.config.red", this.color >> 16 & 255));
         }
         if (greenSlider != null) {
             greenSlider.startColor = color & (~0xFF00FF00) | 0xFF000000;
             greenSlider.endColor = color & (~0xFF00FF00) | 0xFF00FF00;
             this.greenSlider.value = (this.color >> 8 & 255) / 255.0D;
+            this.greenSlider.setMessage(new TranslatableComponent("lapislib.common.config.green", this.color >> 8 & 255));
         }
         if (blueSlider != null) {
             blueSlider.startColor = color & (~0xFF0000FF) | 0xFF000000;
             blueSlider.endColor = color & (~0xFF0000FF) | 0xFF0000FF;
             this.blueSlider.value = (this.color & 255) / 255.0D;
+            this.blueSlider.setMessage(new TranslatableComponent("lapislib.common.config.blue", this.color & 255));
+        }
+        if (useAlpha && alphaSlider != null) {
+            this.alphaSlider.setMessage(new TranslatableComponent("lapislib.common.config.alpha", this.color >> 24 & 255));
         }
     };
 
@@ -216,9 +222,9 @@ public class ColorPickerScreen extends Screen {
         );
 
         this.hexCodeBox.setValue(
-                this.useAlpha ?
-                        ColorCodec.encodeARGB(color, true) :
-                        ColorCodec.encodeRGB(color, true)
+                this.useAlpha
+                        ? ColorCodec.encodeARGB(color, true)
+                        : ColorCodec.encodeRGB(color, true)
         );
 
         this.hexCodeBox.setMaxLength(useAlpha ? 9 : 7);
@@ -343,6 +349,16 @@ public class ColorPickerScreen extends Screen {
                     this.x + valuePixels - 1, this.y, this.x + valuePixels + 1, this.y + this.height,
                     0x7F000000
             );
+
+            int len = Minecraft.getInstance().font.width(getMessage());
+
+            float pX = this.x + (this.width - len)/2.0F;
+            float pY = this.y + (this.height - 8)/2.0F;
+            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX - 1, pY, 0xFF000000);
+            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX + 1, pY, 0xFF000000);
+            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX, pY - 1, 0xFF000000);
+            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX, pY + 1, 0xFF000000);
+            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX, pY, 0xFFFFFFFF);
         }
 
         protected void setValueFromMouseX(double mouseX) {

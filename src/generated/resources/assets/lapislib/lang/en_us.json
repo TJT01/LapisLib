@@ -1,9 +1,13 @@
 {
   "config.lapislib.showItemTags": "Show Item Tags",
+  "lapislib.common.config.alpha": "Alpha: %s",
+  "lapislib.common.config.blue": "Blue: %s",
   "lapislib.common.config.client": "Client",
   "lapislib.common.config.common": "Common",
+  "lapislib.common.config.green": "Green: %s",
   "lapislib.common.config.no_level": "To edit server configs; join a world, then use \u00A7o/lapislib showModList\u00A7r.",
   "lapislib.common.config.no_permission": "Only operators can modify server configs.",
+  "lapislib.common.config.red": "Red: %s",
   "lapislib.common.config.reset.text": "R",
   "lapislib.common.config.reset.tooltip": "Reset",
   "lapislib.common.config.root_title": "%s config",

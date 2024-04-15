@@ -3,7 +3,6 @@ package mod.tjt01.lapislib.client.config.factory;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.component.ColorConfigEntry;
 import mod.tjt01.lapislib.client.config.component.ConfigEntry;
-import mod.tjt01.lapislib.client.config.component.StringConfigEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.ForgeConfigSpec;

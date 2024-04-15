@@ -77,12 +77,12 @@ public class RootConfigScreen extends Screen {
             Button button;
             if (modConfig.getType() == ModConfig.Type.SERVER) {
                 button = new Button(
-                        center - BUTTON_WIDTH/2, 0, BUTTON_WIDTH, 20, ConfigComponents.clientTitle,
+                        center - BUTTON_WIDTH/2, 0, BUTTON_WIDTH, 20, ConfigComponents.serverTitle,
                         btn -> {
                             ConfigChangeTracker tracker = trackerMap.computeIfAbsent(modConfig, RemoteConfigChangeTracker::new);
                             minecraft.setScreen(
                                     new ConfigScreen(
-                                            modConfig, ConfigComponents.clientTitle, this,
+                                            modConfig, ConfigComponents.serverTitle, this,
                                             ConfigUtil.toForgeConfigSpec(modConfig.getSpec()),
                                             tracker, entryFactoryMap, true
                                     )
@@ -118,13 +118,16 @@ public class RootConfigScreen extends Screen {
                         && minecraft.player != null
                         && minecraft.player.hasPermissions(2);
             } else {
+                Component title = modConfig.getType() == ModConfig.Type.CLIENT
+                        ? ConfigComponents.clientTitle
+                        : ConfigComponents.commonTitle;
                 button = new Button(
-                        BUTTON_WIDTH/2, 0, BUTTON_WIDTH, 20, ConfigComponents.clientTitle,
+                        center - BUTTON_WIDTH/2, 0, BUTTON_WIDTH, 20, title,
                         btn -> {
                             ConfigChangeTracker tracker = trackerMap.computeIfAbsent(modConfig, ConfigChangeTracker::new);
                             minecraft.setScreen(
                                     new ConfigScreen(
-                                            modConfig, ConfigComponents.clientTitle, this,
+                                            modConfig, title, this,
                                             ConfigUtil.toForgeConfigSpec(modConfig.getSpec()),
                                             tracker, entryFactoryMap, true
                                     )

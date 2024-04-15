@@ -101,7 +101,7 @@ public class CommonConfig {
         builder.comment("Test Long LinkedList")
                 .translation(getTranslation("testLongArray"))
                 .defineList("testLongArray", () -> {
-                    ArrayList<Long> integers = new ArrayList<>();
+                    LinkedList<Long> integers = new LinkedList<>();
                     integers.add(5L);
                     integers.add(10L);
                     integers.add(15L);
@@ -112,7 +112,7 @@ public class CommonConfig {
         builder.comment("Test string ArrayList")
                 .translation(getTranslation("testStringArray"))
                 .defineList("testStringArray", () -> {
-                    ArrayList<String> strings = new ArrayList<>();
+                    LinkedList<String> strings = new LinkedList<>();
                     strings.add("foo");
                     strings.add("bar");
                     return strings;

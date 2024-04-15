@@ -30,5 +30,10 @@ public class LapisLibLanguage extends LanguageProvider {
 
         this.add("lapislib.common.config.undo.text", "U");
         this.add("lapislib.common.config.undo.tooltip", "Undo");
+
+        this.add("lapislib.common.config.red", "Red: %s");
+        this.add("lapislib.common.config.green", "Green: %s");
+        this.add("lapislib.common.config.blue", "Blue: %s");
+        this.add("lapislib.common.config.alpha", "Alpha: %s");
     }
 }

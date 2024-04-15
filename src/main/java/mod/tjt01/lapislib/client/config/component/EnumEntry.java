@@ -1,19 +1,13 @@
 package mod.tjt01.lapislib.client.config.component;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
-import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.client.gui.components.CycleButton;
-import net.minecraft.client.gui.components.events.GuiEventListener;
-import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.server.command.TextComponentHelper;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 
 public class EnumEntry extends AbstractForgeConfigEntry<Enum<?>>{
     protected final CycleButton<Enum<?>> cycleButton;
@@ -41,6 +35,11 @@ public class EnumEntry extends AbstractForgeConfigEntry<Enum<?>>{
                 });
 
         this.widgets.add(cycleButton);
+    }
+
+    @Override
+    public void onResetOrUndo() {
+        this.cycleButton.setValue(this.tracker.getValue(this.path, this.configValue));
     }
 
     protected String enumToString(Enum<?> enm) {
