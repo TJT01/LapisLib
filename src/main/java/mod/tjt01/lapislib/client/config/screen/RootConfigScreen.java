@@ -1,7 +1,6 @@
 package mod.tjt01.lapislib.client.config.screen;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.ConfigComponents;
@@ -38,7 +37,7 @@ public class RootConfigScreen extends Screen {
     @Nullable
     private final List<ModConfig> configs;
     @Nullable
-    private Map<ModConfig, ConfigChangeTracker> trackerMap = new HashMap<>();
+    private final Map<ModConfig, ConfigChangeTracker> trackerMap = new HashMap<>();
 
     private final Map<ForgeConfigSpec.ConfigValue<?>, ConfigEntryFactory> entryFactoryMap;
 
@@ -210,6 +209,6 @@ public class RootConfigScreen extends Screen {
                         modId, new TranslatableComponent("lapislib.common.config.root_title", displayName),
                         screen, entryMap, list);
             });
-        };
+        }
     }
 }

@@ -4,7 +4,6 @@ import mod.tjt01.lapislib.data.loot.modifier.ReplaceItemModifier;
 import mod.tjt01.lapislibtest.LapisLibTest;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;

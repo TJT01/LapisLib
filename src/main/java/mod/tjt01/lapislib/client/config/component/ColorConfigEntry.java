@@ -1,6 +1,5 @@
 package mod.tjt01.lapislib.client.config.component;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
@@ -8,8 +7,6 @@ import mod.tjt01.lapislib.client.config.screen.ColorPickerScreen;
 import mod.tjt01.lapislib.util.ColorCodec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractButton;
-import net.minecraft.client.gui.components.events.GuiEventListener;
-import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -19,7 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 
 public abstract class ColorConfigEntry<T> extends AbstractForgeConfigEntry<T>{
     protected final ColorPickerButton button;

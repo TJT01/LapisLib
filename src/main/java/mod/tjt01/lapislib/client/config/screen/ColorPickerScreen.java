@@ -8,7 +8,6 @@ import mod.tjt01.lapislib.util.ColorCodec;
 import mod.tjt01.lapislib.util.ColorSequence;
 import mod.tjt01.lapislib.util.client.ExtraGuiUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
@@ -20,12 +19,10 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.client.gui.GuiUtils;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class ColorPickerScreen extends Screen {
     private static final ResourceLocation CHECKERBOARD_TEXTURE = new ResourceLocation(
@@ -121,7 +118,7 @@ public class ColorPickerScreen extends Screen {
         if (useAlpha && alphaSlider != null) {
             this.alphaSlider.setMessage(new TranslatableComponent("lapislib.common.config.alpha", this.color >> 24 & 255));
         }
-    };
+    }
 
     @Override
     public void tick() {
@@ -464,7 +461,7 @@ public class ColorPickerScreen extends Screen {
             this.hue = hue;
             this.sat = sat;
             this.val = val;
-        };
+        }
 
         private void onInput(double mouseX, double mouseY) {
             this.sat = (float) Mth.clamp((mouseX - x) / (float)this.width, 0.0F, 1.0F);

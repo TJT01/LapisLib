@@ -5,7 +5,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class CommonConfig {
 
@@ -98,16 +97,17 @@ public class CommonConfig {
                     return integers;
                 }, o -> o instanceof Integer);
 
-        builder.comment("Test Long LinkedList")
-                .translation(getTranslation("testLongArray"))
-                .defineList("testLongArray", () -> {
-                    LinkedList<Long> integers = new LinkedList<>();
-                    integers.add(5L);
-                    integers.add(10L);
-                    integers.add(15L);
-                    integers.add(20L);
-                    return integers;
-                }, o -> o instanceof Long);
+        // Longs don't seem to be supported properly in arrays
+//        builder.comment("Test Long LinkedList")
+//                .translation(getTranslation("testLongArray"))
+//                .defineList("testLongArray", () -> {
+//                    LinkedList<Long> integers = new LinkedList<>();
+//                    integers.add(5L);
+//                    integers.add(10L);
+//                    integers.add(15L);
+//                    integers.add(20L);
+//                    return integers;
+//                }, o -> o instanceof Long);
 
         builder.comment("Test string ArrayList")
                 .translation(getTranslation("testStringArray"))
@@ -128,17 +128,17 @@ public class CommonConfig {
                     bools.add(true);
                     return bools;
                 }, o -> o instanceof Boolean);
-
-        builder.comment("Test Float ArrayList")
-                .translation(getTranslation("testFloatArray"))
-                .defineList("testFloatArray", () -> {
-                    ArrayList<Float> floats = new ArrayList<>();
-                    floats.add(1.0F);
-                    floats.add(1.5F);
-                    floats.add(2.0F);
-                    floats.add(3.0F);
-                    return floats;
-                }, o -> o instanceof Float);
+        // Floats don't seem to be supported properly in arrays
+//        builder.comment("Test Float ArrayList")
+//                .translation(getTranslation("testFloatArray"))
+//                .defineList("testFloatArray", () -> {
+//                    ArrayList<Float> floats = new ArrayList<>();
+//                    floats.add(1.0F);
+//                    floats.add(1.5F);
+//                    floats.add(2.0F);
+//                    floats.add(3.0F);
+//                    return floats;
+//                }, o -> o instanceof Float);
 
         builder.comment("Test Double ArrayList")
                 .translation(getTranslation("testDoubleArray"))

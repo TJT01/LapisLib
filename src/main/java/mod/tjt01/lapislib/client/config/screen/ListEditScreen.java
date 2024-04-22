@@ -3,7 +3,6 @@ package mod.tjt01.lapislib.client.config.screen;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.LapisLib;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
-import mod.tjt01.lapislib.client.config.component.ConfigEntry;
 import mod.tjt01.lapislib.client.config.component.ListConfigEntry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -204,7 +203,7 @@ public class ListEditScreen extends Screen {
         public void tick() {
             for (ListEditScreen.Entry entry: this.children()) {
                 entry.tick();
-            };
+            }
         }
     }
 

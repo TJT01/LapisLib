@@ -3,7 +3,6 @@ package mod.tjt01.lapislibtest.data.gen.condition;
 import com.google.gson.JsonObject;
 import mod.tjt01.lapislibtest.LapisLibTest;
 import mod.tjt01.lapislibtest.config.LapisLibTestConfig;
-import mod.tjt01.lapislibtest.config.ServerConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;

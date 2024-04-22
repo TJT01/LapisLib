@@ -2,8 +2,6 @@ package mod.tjt01.lapislib.core.network;
 
 import mod.tjt01.lapislib.LapisLib;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 

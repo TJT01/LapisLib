@@ -4,9 +4,7 @@ import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 
 public class StringConfigEntry extends AbstractTextConfigEntry<String> {
 

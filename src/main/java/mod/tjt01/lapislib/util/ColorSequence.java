@@ -1,7 +1,5 @@
 package mod.tjt01.lapislib.util;
 
-import net.minecraft.core.NonNullList;
-
 import java.util.LinkedList;
 import java.util.List;
 

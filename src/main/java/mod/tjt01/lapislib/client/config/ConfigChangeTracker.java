@@ -1,12 +1,9 @@
 package mod.tjt01.lapislib.client.config;
 
 import com.electronwill.nightconfig.core.CommentedConfig;
-import mod.tjt01.lapislib.core.network.LapisLibPacketHandler;
-import mod.tjt01.lapislib.core.network.SubmitServerConfigPacket;
 import mod.tjt01.lapislib.util.ConfigUtil;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.IConfigEvent;
-import net.minecraftforge.fml.config.IConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 

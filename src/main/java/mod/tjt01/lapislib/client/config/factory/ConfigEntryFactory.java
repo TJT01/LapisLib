@@ -8,12 +8,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
-import org.apache.commons.lang3.ArrayUtils;
 
 import javax.annotation.Nonnull;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 @FunctionalInterface
 public interface ConfigEntryFactory {

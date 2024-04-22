@@ -1,6 +1,5 @@
 package mod.tjt01.lapislib.client.config;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 
 public class ConfigComponents {
