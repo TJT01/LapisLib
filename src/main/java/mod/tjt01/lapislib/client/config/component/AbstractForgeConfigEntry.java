@@ -13,6 +13,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
     protected static final TranslatableComponent RESET_BUTTON_TEXT
@@ -86,12 +87,17 @@ public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
     @Override
     public void render(@Nonnull PoseStack poseStack, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
         super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
+
         resetButton.x = left + width - 20;
         resetButton.y = top;
+        resetButton.active = !Objects.equals(this.tracker.getValue(this.path, this.configValue), this.valueSpec.getDefault());
+
         resetButton.render(poseStack, mouseX, mouseY, pPartialTick);
 
         undoButton.x = left + width - 40;
         undoButton.y = top;
+        undoButton.active = this.tracker.hasValue(this.path);
+
         undoButton.render(poseStack, mouseX, mouseY, pPartialTick);
     }
 
