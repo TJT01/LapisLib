@@ -1,4 +1,5 @@
 {
+  "config.lapislib_test.category.category": "Test Category",
   "config.lapislib_test.testBoolean": "Test Boolean",
   "config.lapislib_test.testBoolean2": "Test Boolean 2",
   "config.lapislib_test.testBoolean3": "Test Boolean 3",
