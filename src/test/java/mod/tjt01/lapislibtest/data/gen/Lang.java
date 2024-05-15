@@ -1,6 +1,7 @@
 package mod.tjt01.lapislibtest.data.gen;
 
 import mod.tjt01.lapislibtest.LapisLibTest;
+import mod.tjt01.lapislibtest.block.LapisLibTestBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -15,6 +16,9 @@ public class Lang extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        add(LapisLibTestBlocks.CRAFTING_BLOCK.get(), "Test Crafting Block");
+        add("container.lapislib_test.crafting_test", "Crafting Test");
+
         addConfigKey("category.category", "Test Category");
 
         addConfigKey("testString", "Test String");

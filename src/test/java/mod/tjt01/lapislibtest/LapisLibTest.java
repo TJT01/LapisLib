@@ -3,7 +3,10 @@ package mod.tjt01.lapislibtest;
 import mod.tjt01.lapislib.client.config.screen.RootConfigScreen;
 import mod.tjt01.lapislibtest.block.LapisLibTestBlocks;
 import mod.tjt01.lapislibtest.config.LapisLibTestConfig;
+import mod.tjt01.lapislibtest.data.recipe.LapisLibTestRecipeSerializers;
+import mod.tjt01.lapislibtest.data.recipe.LapisLibTestRecipeTypes;
 import mod.tjt01.lapislibtest.item.LapisLibTestItems;
+import mod.tjt01.lapislibtest.menu.LapisLibTestMenus;
 import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -20,6 +23,9 @@ public class LapisLibTest {
         final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         LapisLibTestBlocks.register(bus);
         LapisLibTestItems.register(bus);
+        LapisLibTestMenus.register(bus);
+        LapisLibTestRecipeTypes.register(bus);
+        LapisLibTestRecipeSerializers.register(bus);
 
         modLoadingContext.registerConfig(ModConfig.Type.SERVER, LapisLibTestConfig.SERVER_SPEC);
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, LapisLibTestConfig.COMMON_SPEC);

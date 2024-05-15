@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "lapislib_test:block/test_crafting_block"
+    }
+  }
+}

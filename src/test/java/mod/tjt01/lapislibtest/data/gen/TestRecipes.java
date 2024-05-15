@@ -3,6 +3,7 @@ package mod.tjt01.lapislibtest.data.gen;
 import mod.tjt01.lapislib.data.OptionalRecipeBuilder;
 import mod.tjt01.lapislibtest.LapisLibTest;
 import mod.tjt01.lapislibtest.data.gen.condition.TestCondition;
+import mod.tjt01.lapislibtest.data.gen.recipebuilder.TestRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
@@ -32,5 +33,15 @@ public class TestRecipes extends RecipeProvider {
         })
                 .addCondition(new TestCondition())
                 .save(finishedRecipeConsumer);
+
+        TestRecipeBuilder.testRecipe(Items.BONE)
+                .first(Items.STICK, 6)
+                .last(Tags.Items.STONE, 3)
+                .unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+                .unlockedBy("has_stone", has(Tags.Items.STONE))
+                .save(
+                        finishedRecipeConsumer,
+                        new ResourceLocation(LapisLibTest.MODID, "bone_from_sticks_and_stone")
+                );
     }
 }
