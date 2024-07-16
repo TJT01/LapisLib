@@ -152,6 +152,7 @@ public class RootConfigScreen extends Screen {
     @Override
     public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(poseStack);
+        drawCenteredString(poseStack, font, this.title, this.width/2, 15, 0xFFFFFFFF);
         super.render(poseStack, mouseX, mouseY, partialTick);
     }
 

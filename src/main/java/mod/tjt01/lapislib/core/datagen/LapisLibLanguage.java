@@ -13,7 +13,7 @@ public class LapisLibLanguage extends LanguageProvider {
     protected void addTranslations() {
         this.add("lapislib.common.disabled", "Disabled");
         this.add("config.lapislib.showItemTags", "Show Item Tags");
-        this.add("lapislib.common.config.root_title", "%s config");
+        this.add("lapislib.common.config.root_title", "%s Config");
 
         this.add("lapislib.common.config.client", "Client");
         this.add("lapislib.common.config.common", "Common");

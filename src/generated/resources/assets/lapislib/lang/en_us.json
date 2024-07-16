@@ -10,7 +10,7 @@
   "lapislib.common.config.red": "Red: %s",
   "lapislib.common.config.reset.text": "R",
   "lapislib.common.config.reset.tooltip": "Reset",
-  "lapislib.common.config.root_title": "%s config",
+  "lapislib.common.config.root_title": "%s Config",
   "lapislib.common.config.server": "Server",
   "lapislib.common.config.undo.text": "U",
   "lapislib.common.config.undo.tooltip": "Undo",

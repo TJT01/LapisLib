@@ -59,7 +59,9 @@ public class ListEditScreen extends Screen {
 
     @Override
     public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
+        this.entryList.render(poseStack, mouseX, mouseY, partialTick);
         super.render(poseStack, mouseX, mouseY, partialTick);
+        drawCenteredString(poseStack, font, this.title, this.width/2, 13, 0xFFFFFFFF);
     }
 
     protected void populateList() {
@@ -167,7 +169,7 @@ public class ListEditScreen extends Screen {
             this.getMinecraft().setScreen(this.parent);
         });
 
-        this.addRenderableWidget(entryList);
+        this.addWidget(entryList);
         this.addRenderableWidget(saveButton);
 
         populateList();

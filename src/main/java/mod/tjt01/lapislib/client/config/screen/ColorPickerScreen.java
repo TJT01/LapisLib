@@ -29,8 +29,6 @@ public class ColorPickerScreen extends Screen {
             LapisLib.MODID, "textures/gui/config/checkerboard.png"
     );
 
-    public static final TranslatableComponent title = new TranslatableComponent("lapislib.common.config.color_picker");
-
     private final Screen parent;
     private final ColorConfigEntry<?> entry;
 
@@ -54,7 +52,7 @@ public class ColorPickerScreen extends Screen {
 
     public int alpha = 255;
 
-    public ColorPickerScreen(Screen parent, boolean hasAlpha, ColorConfigEntry<?> entry) {
+    public ColorPickerScreen(Screen parent, Component title, boolean hasAlpha, ColorConfigEntry<?> entry) {
         super(title);
         this.parent = parent;
         this.useAlpha = hasAlpha;
@@ -276,6 +274,7 @@ public class ColorPickerScreen extends Screen {
     @Override
     public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
         renderBackground(poseStack);
+        drawCenteredString(poseStack, font, this.title, this.width/2, 15, 0xFFFFFFFF);
         RenderSystem.setShaderColor(1, 1, 1, 1);
         int displayColor = this.color;
         if (!useAlpha) displayColor |= 0xFF000000;

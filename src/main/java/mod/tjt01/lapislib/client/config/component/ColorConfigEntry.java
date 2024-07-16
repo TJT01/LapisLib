@@ -91,7 +91,7 @@ public abstract class ColorConfigEntry<T> extends AbstractForgeConfigEntry<T>{
 
         @Override
         public void onPress() {
-            Minecraft.getInstance().setScreen(new ColorPickerScreen(parent, entry.hasAlpha, entry));
+            Minecraft.getInstance().setScreen(new ColorPickerScreen(parent, this.entry.label, entry.hasAlpha, entry));
         }
 
         @Override

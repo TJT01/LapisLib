@@ -2,6 +2,7 @@ package mod.tjt01.lapislib.client.config.screen;
 
 import com.electronwill.nightconfig.core.AbstractConfig;
 import com.electronwill.nightconfig.core.UnmodifiableConfig;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.component.CategoryEntry;
@@ -73,7 +74,7 @@ public class ConfigScreen extends Screen {
 
         this.list = new ConfigList(minecraft, this.width, this.height, 32, this.height - 32, 25);
 
-        this.addRenderableWidget(list);
+        this.addWidget(list);
 
         configGroup.valueMap().forEach((key, obj) -> {
             if (obj instanceof AbstractConfig) {
@@ -125,6 +126,8 @@ public class ConfigScreen extends Screen {
     @Override
     public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(poseStack);
+        this.list.render(poseStack, mouseX, mouseY, partialTick);
+        drawCenteredString(poseStack, font, this.title, this.width/2, 13, 0xFFFFFFFF);
         super.render(poseStack, mouseX, mouseY, partialTick);
     }
 

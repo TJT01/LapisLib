@@ -55,7 +55,13 @@ public class ListConfigEntry extends AbstractForgeConfigEntry<List<?>> {
         this.tracker = tracker;
         this.configValue = configValue;
 
-        this.button = new Button(0, 0, 50, 20, BUTTON_LABEL, pButton -> Minecraft.getInstance().setScreen(new ListEditScreen(new TextComponent("ABCXYZ"), tracker, configValue, valueSpec, type, parent)));
+        this.button = new Button(
+                0, 0,
+                50, 20,
+                BUTTON_LABEL,
+                pButton -> Minecraft.getInstance()
+                        .setScreen(new ListEditScreen(label, tracker, configValue, valueSpec, type, parent))
+        );
 
         this.widgets.add(button);
     }
