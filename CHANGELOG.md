@@ -10,6 +10,7 @@ The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.
 - Added global loot modifier types `lapislib:replace_item`, `lapislib:remove_item`, and `lapislib:add_entry`
 - Added configuration gui api
 - Added `IngredientStack` to support recipes which require stacked items
+- Added `IntContainerData`
 
 ## [1.18.2-1.0.2a]
 ### Fixed
