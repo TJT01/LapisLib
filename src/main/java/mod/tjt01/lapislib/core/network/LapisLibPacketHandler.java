@@ -16,10 +16,10 @@ public class LapisLibPacketHandler {
     );
 
     public static void register() {
-        CHANNEL.registerMessage(
-                id++, OpenModListPacket.class,
-                (openModListPacket, friendlyByteBuf) -> {}, OpenModListPacket::new, OpenModListPacket::handle
-        );
+//        CHANNEL.registerMessage(
+//                id++, OpenModListPacket.class,
+//                (openModListPacket, friendlyByteBuf) -> {}, OpenModListPacket::new, OpenModListPacket::handle
+//        );
         CHANNEL.registerMessage(
                 id++, SubmitServerConfigPacket.class,
                 SubmitServerConfigPacket::encode, SubmitServerConfigPacket::decode, SubmitServerConfigPacket::handle
