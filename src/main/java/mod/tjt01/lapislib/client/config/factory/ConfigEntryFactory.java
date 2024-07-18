@@ -5,8 +5,7 @@ import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.component.*;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
@@ -33,9 +32,9 @@ public interface ConfigEntryFactory {
             Component label;
             String translationKey = valueSpec.getTranslationKey();
             if (translationKey == null) {
-                label = new TextComponent(configValue.getPath().get(configValue.getPath().size() - 1));
+                label = Component.literal(configValue.getPath().get(configValue.getPath().size() - 1));
             } else {
-                label = new TranslatableComponent(valueSpec.getTranslationKey());
+                label = Component.translatable(valueSpec.getTranslationKey());
             }
             Object value = configValue.get();
             if (value instanceof Boolean) {

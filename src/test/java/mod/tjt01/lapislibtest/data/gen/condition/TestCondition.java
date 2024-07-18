@@ -14,9 +14,8 @@ public class TestCondition implements ICondition {
         return ID;
     }
 
-    @SuppressWarnings("removal")
     @Override
-    public boolean test() {
+    public boolean test(IContext context) {
         return LapisLibTestConfig.enableOptionalTestRecipes;
     }
 
@@ -24,9 +23,7 @@ public class TestCondition implements ICondition {
         public static final Serializer INSTANCE = new Serializer();
 
         @Override
-        public void write(JsonObject json, TestCondition value) {
-            //NOOP
-        }
+        public void write(JsonObject json, TestCondition value) {}
 
         @Override
         public TestCondition read(JsonObject json) {

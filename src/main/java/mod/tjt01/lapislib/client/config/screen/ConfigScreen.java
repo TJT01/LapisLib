@@ -12,7 +12,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 
@@ -78,7 +78,7 @@ public class ConfigScreen extends Screen {
 
         configGroup.valueMap().forEach((key, obj) -> {
             if (obj instanceof AbstractConfig) {
-                Component categoryTitle = new TranslatableComponent("config." + modConfig.getModId() + ".category." + key);
+                Component categoryTitle = Component.translatable("config." + modConfig.getModId() + ".category." + key);
 
                 CategoryEntry categoryEntry = new CategoryEntry(
                         this, categoryTitle, screen ->

@@ -15,8 +15,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
@@ -99,22 +98,22 @@ public class ColorPickerScreen extends Screen {
             redSlider.startColor = color & (~0xFFFF0000) | 0xFF000000;
             redSlider.endColor = color & (~0xFFFF0000) | 0xFFFF0000;
             this.redSlider.value = (this.color >> 16 & 255) / 255.0D;
-            this.redSlider.setMessage(new TranslatableComponent("lapislib.common.config.red", this.color >> 16 & 255));
+            this.redSlider.setMessage(Component.translatable("lapislib.common.config.red", this.color >> 16 & 255));
         }
         if (greenSlider != null) {
             greenSlider.startColor = color & (~0xFF00FF00) | 0xFF000000;
             greenSlider.endColor = color & (~0xFF00FF00) | 0xFF00FF00;
             this.greenSlider.value = (this.color >> 8 & 255) / 255.0D;
-            this.greenSlider.setMessage(new TranslatableComponent("lapislib.common.config.green", this.color >> 8 & 255));
+            this.greenSlider.setMessage(Component.translatable("lapislib.common.config.green", this.color >> 8 & 255));
         }
         if (blueSlider != null) {
             blueSlider.startColor = color & (~0xFF0000FF) | 0xFF000000;
             blueSlider.endColor = color & (~0xFF0000FF) | 0xFF0000FF;
             this.blueSlider.value = (this.color & 255) / 255.0D;
-            this.blueSlider.setMessage(new TranslatableComponent("lapislib.common.config.blue", this.color & 255));
+            this.blueSlider.setMessage(Component.translatable("lapislib.common.config.blue", this.color & 255));
         }
         if (useAlpha && alphaSlider != null) {
-            this.alphaSlider.setMessage(new TranslatableComponent("lapislib.common.config.alpha", this.color >> 24 & 255));
+            this.alphaSlider.setMessage(Component.translatable("lapislib.common.config.alpha", this.color >> 24 & 255));
         }
     }
 
@@ -213,7 +212,7 @@ public class ColorPickerScreen extends Screen {
 
         this.hexCodeBox = new EditBox(
                 this.font, this.width/2 + 4, this.height/2 + 58 - 20, 76, 20,
-                new TextComponent("")
+                Component.literal("")
         );
 
         this.hexCodeBox.setValue(

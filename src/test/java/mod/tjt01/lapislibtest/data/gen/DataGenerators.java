@@ -6,7 +6,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.data.event.GatherDataEvent;
 
 @Mod.EventBusSubscriber(modid = LapisLibTest.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
@@ -14,9 +14,9 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event){
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
-        generator.addProvider(new TestRecipes(generator));
-        generator.addProvider(new LootModifiers(generator));
-        generator.addProvider(new Lang(generator));
-        generator.addProvider(new BlockStates(generator, helper));
+        generator.addProvider(event.includeServer(), new TestRecipes(generator));
+        generator.addProvider(event.includeServer(), new LootModifiers(generator));
+        generator.addProvider(event.includeClient(), new Lang(generator));
+        generator.addProvider(event.includeClient(), new BlockStates(generator, helper));
     }
 }

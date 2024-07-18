@@ -4,7 +4,7 @@ import mod.tjt01.lapislib.client.config.screen.RootConfigScreen;
 import mod.tjt01.lapislib.core.config.LapisLibConfig;
 import mod.tjt01.lapislib.core.network.LapisLibPacketHandler;
 import mod.tjt01.lapislib.registry.loot.GlobalLootModifiers;
-import net.minecraftforge.client.ConfigGuiHandler;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -28,7 +28,7 @@ public class LapisLib {
 
         GlobalLootModifiers.register(bus);
 
-        modLoadingContext.registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class, () ->
+        modLoadingContext.registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () ->
                 RootConfigScreen.builder(MODID).getFactory()
         );
     }

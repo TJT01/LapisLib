@@ -20,16 +20,12 @@ public class BlockStates extends BlockStateProvider {
         this.simpleBlockItem(block, modelFile);
     }
 
-    private ResourceLocation id(Block block) {
-        return LapisLibTestBlocks.CRAFTING_BLOCK.get().getRegistryName();
-    }
-
     @Override
     protected void registerStatesAndModels() {
         this.simpleBlockAndItem(
                 LapisLibTestBlocks.CRAFTING_BLOCK.get(),
                 this.models().cubeBottomTop(
-                        id(LapisLibTestBlocks.CRAFTING_BLOCK.get()).toString(),
+                        LapisLibTestBlocks.CRAFTING_BLOCK.getId().toString(),
                         blockTexture(LapisLibTestBlocks.CRAFTING_BLOCK.get()),
                         mcLoc("block/iron_block"),
                         modLoc("block/test_crafting_block_top")

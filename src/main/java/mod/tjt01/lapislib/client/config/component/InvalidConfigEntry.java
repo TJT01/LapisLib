@@ -6,7 +6,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -15,7 +15,7 @@ public class InvalidConfigEntry extends ConfigEntry{
     private final Component label;
 
     public InvalidConfigEntry(String type, String path) {
-        this.label = new TranslatableComponent("lapislib.common.config.unsupported", type, path);
+        this.label = Component.translatable("lapislib.common.config.unsupported", type, path);
     }
 
     public InvalidConfigEntry(Component component) {

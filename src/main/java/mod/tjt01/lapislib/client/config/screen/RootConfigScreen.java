@@ -13,8 +13,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.client.ConfigGuiHandler;
+
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
@@ -89,9 +89,9 @@ public class RootConfigScreen extends Screen {
                         },
                         new Button.OnTooltip() {
                             private static final Component NO_LEVEL
-                                    = new TranslatableComponent("lapislib.common.config.no_level");
+                                    = Component.translatable("lapislib.common.config.no_level");
                             private static final Component NO_PERMISSION
-                                    = new TranslatableComponent("lapislib.common.config.no_permission");
+                                    = Component.translatable("lapislib.common.config.no_permission");
 
                             @Override
                             public void onTooltip(@Nonnull Button button, @Nonnull PoseStack poseStack, int mouseX, int mouseY) {
@@ -183,8 +183,8 @@ public class RootConfigScreen extends Screen {
 
 
         @SuppressWarnings("unchecked")
-        public ConfigGuiHandler.ConfigGuiFactory getFactory() {
-            return new ConfigGuiHandler.ConfigGuiFactory((minecraft1, screen) -> {
+        public ConfigScreenHandler.ConfigScreenFactory getFactory() {
+            return new ConfigScreenHandler.ConfigScreenFactory((minecraft1, screen) -> {
                 Optional<? extends ModContainer> container = ModList.get().getModContainerById(modId);
                 if (container.isEmpty())
                     throw new IllegalStateException("Mod container for " + modId + " does not exist");
@@ -207,7 +207,7 @@ public class RootConfigScreen extends Screen {
                 }
 
                 return new RootConfigScreen(
-                        modId, new TranslatableComponent("lapislib.common.config.root_title", displayName),
+                        modId, Component.translatable("lapislib.common.config.root_title", displayName),
                         screen, entryMap, list);
             });
         }

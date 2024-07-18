@@ -1,9 +1,9 @@
 package mod.tjt01.lapislib.client.config;
 
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 
 public class ConfigComponents {
-    public static TranslatableComponent clientTitle = new TranslatableComponent("lapislib.common.config.client");
-    public static TranslatableComponent commonTitle = new TranslatableComponent("lapislib.common.config.common");
-    public static TranslatableComponent serverTitle = new TranslatableComponent("lapislib.common.config.server");
+    public static Component clientTitle = Component.translatable("lapislib.common.config.client");
+    public static Component commonTitle = Component.translatable("lapislib.common.config.common");
+    public static Component serverTitle = Component.translatable("lapislib.common.config.server");
 }

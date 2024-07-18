@@ -27,14 +27,14 @@ public class LootModifiers extends GlobalLootModifierProvider {
 
     @Override
     protected void start() {
-        add("test_replace_item", ReplaceItemModifier.Serializer.INSTANCE, new ReplaceItemModifier(
+        add("test_replace_item", new ReplaceItemModifier(
                 new LootItemCondition[] {
                         new LootTableIdCondition.Builder(new ResourceLocation("entities/zombified_piglin")).build()
                 },
                 Ingredient.of(Items.ROTTEN_FLESH), Items.PORKCHOP
         ));
 
-        add("test_add_loot", AddEntryModifier.Serializer.INSTANCE, new AddEntryModifier(
+        add("test_add_loot", new AddEntryModifier(
                 new LootItemCondition[] {
                         new LootTableIdCondition.Builder(new ResourceLocation("entities/silverfish")).build(),
                 },
@@ -49,7 +49,7 @@ public class LootModifiers extends GlobalLootModifierProvider {
                 }
         ));
 
-        add("test_remove_item", RemoveItemModifier.Serializer.INSTANCE, new RemoveItemModifier(
+        add("test_remove_item", new RemoveItemModifier(
                 new LootItemCondition[] {
                         new LootTableIdCondition.Builder(new ResourceLocation("entities/iron_golem")).build()
                 },

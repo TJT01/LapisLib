@@ -13,7 +13,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
@@ -255,7 +254,7 @@ public class ListEditScreen extends Screen {
 
     public static class AddItemEntry extends Entry {
         public static final Style DELETE_STYLE = Style.EMPTY.withColor(ChatFormatting.GREEN);
-        public static final TextComponent LABEL = new TextComponent("+");
+        public static final Component LABEL = Component.literal("+");
         private final ListEditScreen parent;
         private final Button button;
 
@@ -291,13 +290,13 @@ public class ListEditScreen extends Screen {
             this.index = index;
             this.parent = parent;
 
-            this.deleteButton = new Button(0, 0, 20, 20, new TextComponent("-").withStyle(DELETE_STYLE), button -> {
+            this.deleteButton = new Button(0, 0, 20, 20, Component.literal("-").withStyle(DELETE_STYLE), button -> {
                 this.parent.removeItem(index);
             });
-            this.upButton = new Button(0, 0, 20, 20, new TextComponent("^"), button -> {
+            this.upButton = new Button(0, 0, 20, 20, Component.literal("^"), button -> {
                 this.parent.moveItemBack(index);
             });
-            this.downButton = new Button(0, 0, 20, 20, new TextComponent("v"), button -> {
+            this.downButton = new Button(0, 0, 20, 20, Component.literal("v"), button -> {
                 this.parent.moveItemForward(index);
             });
 
@@ -347,7 +346,7 @@ public class ListEditScreen extends Screen {
 
         public TextboxItemEntry(Object o, int index, ListEditScreen parent) {
             super(o, index, parent);
-            this.editBox = new EditBox(Minecraft.getInstance().font, 0, 0, 98, 18, TextComponent.EMPTY);
+            this.editBox = new EditBox(Minecraft.getInstance().font, 0, 0, 98, 18, Component.empty());
             editBox.setValue(o.toString());
             editBox.setResponder(s -> {
                 Object obj = fromString(s);
@@ -475,7 +474,7 @@ public class ListEditScreen extends Screen {
             super(o, index, parent);
             boolean b = false;
             if (o instanceof Boolean b2) b = b2;
-            checkbox = new CheckboxWidget(parent, index, 0, 20, 20, 20, TextComponent.EMPTY, b, false);
+            checkbox = new CheckboxWidget(parent, index, 0, 20, 20, 20, Component.empty(), b, false);
             this.addRenderableWidget(checkbox);
         }
 

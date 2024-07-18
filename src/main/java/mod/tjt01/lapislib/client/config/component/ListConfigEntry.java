@@ -8,8 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
@@ -17,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ListConfigEntry extends AbstractForgeConfigEntry<List<?>> {
-    protected static final Component BUTTON_LABEL = new TranslatableComponent("lapislib.common.edit");
+    protected static final Component BUTTON_LABEL = Component.translatable("lapislib.common.edit");
     protected final ConfigChangeTracker tracker;
     protected final Button button;
 
@@ -40,7 +39,7 @@ public class ListConfigEntry extends AbstractForgeConfigEntry<List<?>> {
         if (listType == ListType.UNKNOWN) {
             LapisLib.LOGGER.error("Cannot infer type of list {}", String.join(".", configValue.getPath()));
             return new InvalidConfigEntry(
-                    new TextComponent("Cannot infer type of list " + String.join(".", configValue.getPath()))
+                    Component.literal("Cannot infer type of list " + String.join(".", configValue.getPath()))
             );
         } else {
             return new ListConfigEntry(label, tracker, configValue, valueSpec, listType, parent);

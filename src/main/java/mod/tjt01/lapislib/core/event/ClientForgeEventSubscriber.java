@@ -4,7 +4,6 @@ import mod.tjt01.lapislib.core.config.LapisLibConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -22,7 +21,7 @@ public class ClientForgeEventSubscriber {
         if (event.getFlags().isAdvanced() && LapisLibConfig.showItemTags) {
             event.getItemStack().getTags().forEach(
                     itemTagKey -> tooltip.add(
-                            new TextComponent("#" + itemTagKey.location())
+                            Component.literal("#" + itemTagKey.location())
                                     .setStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY))
                     )
             );

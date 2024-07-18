@@ -7,7 +7,6 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
@@ -16,15 +15,15 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
-    protected static final TranslatableComponent RESET_BUTTON_TEXT
-            = new TranslatableComponent("lapislib.common.config.reset.text");
-    protected static final TranslatableComponent RESET_TOOLTIP
-            = new TranslatableComponent("lapislib.common.config.reset.tooltip");
+    protected static final Component RESET_BUTTON_TEXT
+            = Component.translatable("lapislib.common.config.reset.text");
+    protected static final Component RESET_TOOLTIP
+            = Component.translatable("lapislib.common.config.reset.tooltip");
 
-    protected static final TranslatableComponent UNDO_BUTTON_TEXT
-            = new TranslatableComponent("lapislib.common.config.undo.text");
-    protected static final TranslatableComponent UNDO_TOOLTIP
-            = new TranslatableComponent("lapislib.common.config.undo.tooltip");
+    protected static final Component UNDO_BUTTON_TEXT
+            = Component.translatable("lapislib.common.config.undo.text");
+    protected static final Component UNDO_TOOLTIP
+            = Component.translatable("lapislib.common.config.undo.tooltip");
 
     protected final ConfigChangeTracker tracker;
     protected final String path;

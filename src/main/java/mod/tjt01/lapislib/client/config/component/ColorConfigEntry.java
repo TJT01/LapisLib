@@ -11,7 +11,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -69,7 +69,7 @@ public abstract class ColorConfigEntry<T> extends AbstractForgeConfigEntry<T>{
         private final Screen parent;
 
         public ColorPickerButton(int x, int y, int width, int height, Screen parent, ColorConfigEntry<?> entry) {
-            super(x, y, width, height, new TranslatableComponent("lapislib.common.config.open_picker"));
+            super(x, y, width, height, Component.translatable("lapislib.common.config.open_picker"));
             this.parent = parent;
             this.entry = entry;
         }

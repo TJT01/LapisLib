@@ -3,7 +3,7 @@ package mod.tjt01.lapislib.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,6 +14,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Supplier;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class OptionalItem extends Item {
     public final Supplier<Boolean> condition;
@@ -36,7 +38,7 @@ public class OptionalItem extends Item {
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
         if (!condition.get())
-            components.add(new TranslatableComponent(this.getDisabledTooltip()).withStyle(ChatFormatting.RED));
+            components.add(Component.translatable(this.getDisabledTooltip()).withStyle(ChatFormatting.RED));
         super.appendHoverText(stack, level, components, flag);
     }
 }

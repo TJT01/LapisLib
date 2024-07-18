@@ -9,7 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class LapisLibTestMenus {
-    public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, LapisLibTest.MODID);
+    public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.MENU_TYPES, LapisLibTest.MODID);
 
     public static final RegistryObject<MenuType<TestCraftingMenu>> CRAFTING_MENU
             = MENU_TYPES.register("crafting_menu", () -> new MenuType<>(TestCraftingMenu::new));

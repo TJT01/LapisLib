@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import net.minecraft.client.gui.components.CycleButton;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
@@ -26,7 +25,7 @@ public class EnumEntry extends AbstractForgeConfigEntry<Enum<?>>{
         this.configValue = configValue;
         this.valueSpec = valueSpec;
 
-        this.cycleButton = new CycleButton.Builder<Enum<?>>(o -> new TextComponent(o.toString()))
+        this.cycleButton = new CycleButton.Builder<Enum<?>>(o -> Component.literal(o.toString()))
                 .displayOnlyValue()
                 .withValues(tracker.getValue(path, configValue).getDeclaringClass().getEnumConstants())
                 .withInitialValue(tracker.getValue(path, configValue))

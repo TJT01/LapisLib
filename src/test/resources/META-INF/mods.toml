@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[39,)"
+loaderVersion="[43,)"
 license="All rights reserved"
 [[mods]]
 modId="lapislib_test"
@@ -9,21 +9,16 @@ authors="TJT01"
 description='''
 Just your average everyday test mod
 '''
+# Test mod is developed alongside LapisLib. We don't need to define version ranges here.
 [[dependencies.lapislib_test]]
     modId="lapislib"
     mandatory=true
-    versionRange="[1.18.1,)"
-    ordering="NONE"
-    side="BOTH"
+    versionRange="[1.19.2,)"
 [[dependencies.lapislib_test]]
     modId="forge"
     mandatory=true
-    versionRange="[39,)"
-    ordering="NONE"
-    side="BOTH"
+    versionRange="[43.4.0,)"
 [[dependencies.lapislib_test]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.1,1.19)"
-    ordering="NONE"
-    side="BOTH"
+    versionRange="[1.19.2]"

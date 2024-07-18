@@ -4,7 +4,8 @@ import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.component.ColorConfigEntry;
 import mod.tjt01.lapislib.client.config.component.ConfigEntry;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.TranslatableComponent;
+
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.Nonnull;
@@ -21,7 +22,7 @@ public class ColorConfigFactory implements ConfigEntryFactory {
     @Override
     public ConfigEntry make(ForgeConfigSpec.ConfigValue<?> configValue, ForgeConfigSpec.ValueSpec valueSpec, Screen parent, ConfigChangeTracker tracker) {
         Object value = configValue.get();
-        TranslatableComponent label = new TranslatableComponent(valueSpec.getTranslationKey());
+        Component label = Component.translatable(valueSpec.getTranslationKey());
 
         if (value instanceof String) {
             return new ColorConfigEntry.StringColorConfigEntry(
