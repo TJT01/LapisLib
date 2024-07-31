@@ -1,14 +1,14 @@
 {
   "type": "lapislib_test:test",
   "left": {
-    "item": "minecraft:stick",
-    "count": 6
-  },
-  "right": {
-    "tag": "forge:stone",
-    "count": 3
+    "count": 6,
+    "item": "minecraft:stick"
   },
   "result": {
     "item": "minecraft:bone"
+  },
+  "right": {
+    "count": 3,
+    "tag": "forge:stone"
   }
 }

@@ -1,8 +1,9 @@
 {
-  "replace": false,
   "entries": [
     "lapislib_test:test_replace_item",
     "lapislib_test:test_add_loot",
-    "lapislib_test:test_remove_item"
-  ]
+    "lapislib_test:test_remove_item",
+    "lapislib_test:test_block_tag"
+  ],
+  "replace": false
 }

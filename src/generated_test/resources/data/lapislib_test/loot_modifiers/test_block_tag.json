@@ -1,0 +1,21 @@
+{
+  "type": "lapislib:add_entry",
+  "conditions": [
+    {
+      "chance": 0.25,
+      "condition": "minecraft:random_chance"
+    },
+    {
+      "condition": "minecraft:survives_explosion"
+    },
+    {
+      "condition": "lapislib:block_tag",
+      "tag": "forge:ores_in_ground/stone"
+    }
+  ],
+  "entry": {
+    "type": "minecraft:item",
+    "name": "minecraft:cobblestone"
+  },
+  "functions": []
+}

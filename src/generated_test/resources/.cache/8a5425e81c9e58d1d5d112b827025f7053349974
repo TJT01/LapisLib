@@ -1,0 +1,6 @@
+// 1.19.2	2024-07-30T18:39:20.0539553	Global Loot Modifiers : lapislib_test
+0066b5985f5576cf58e3497ab55d51ab20980faa data/forge/loot_modifiers/global_loot_modifiers.json
+641b37e3337a539c15cf594df760c9772b45e09e data/lapislib_test/loot_modifiers/test_add_loot.json
+590a9d1012486f751268a4b3341ea3244e5c3812 data/lapislib_test/loot_modifiers/test_block_tag.json
+a92eed6757e44b49c71be4e928e4681293a442cd data/lapislib_test/loot_modifiers/test_remove_item.json
+53034ca80138bcfc7784c90c0c4966fce9b6996d data/lapislib_test/loot_modifiers/test_replace_item.json

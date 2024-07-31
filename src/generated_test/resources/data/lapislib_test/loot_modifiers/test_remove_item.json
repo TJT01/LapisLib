@@ -1,4 +1,5 @@
 {
+  "type": "lapislib:remove_item",
   "conditions": [
     {
       "condition": "forge:loot_table_id",
@@ -7,6 +8,5 @@
   ],
   "remove": {
     "tag": "forge:ingots/iron"
-  },
-  "type": "lapislib:remove_item"
+  }
 }

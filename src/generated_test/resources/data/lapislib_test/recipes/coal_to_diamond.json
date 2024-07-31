@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "###",
-    "###"
+  "conditions": [
+    {
+      "type": "lapislib_test:test"
+    }
   ],
   "key": {
     "#": {
       "tag": "forge:storage_blocks/coal"
     }
   },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
   "result": {
     "item": "minecraft:diamond"
-  },
-  "conditions": [
-    {
-      "type": "lapislib_test:test"
-    }
-  ]
+  }
 }

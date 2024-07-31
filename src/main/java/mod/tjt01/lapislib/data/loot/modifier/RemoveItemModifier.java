@@ -52,6 +52,6 @@ public class RemoveItemModifier extends LootModifier {
 
     @Override
     public Codec<? extends IGlobalLootModifier> codec() {
-        return null;
+        return CODEC;
     }
 }
