@@ -28,9 +28,11 @@ public class LapisLibTestConfig {
     }
 
     public static boolean enableOptionalTestRecipes = true;
+    public static boolean enableOptionalItems = true;
 
     public static void bakeServer(ModConfig config) {
         enableOptionalTestRecipes = SERVER_CONFIG.enableOptionalTestRecipes.get();
+        enableOptionalItems = SERVER_CONFIG.enableOptionalItems.get();
 
         UnmodifiableConfig values = COMMON_SPEC.getValues();
     }

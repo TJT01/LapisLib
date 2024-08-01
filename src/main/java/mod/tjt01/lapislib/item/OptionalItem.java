@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,6 +30,10 @@ public class OptionalItem extends Item {
         return "lapislib.common.disabled";
     }
 
+    public Component getDisabledHoverText() {
+        return Component.translatable(getDisabledTooltip()).withStyle(ChatFormatting.RED);
+    }
+
     @Override
     public void fillItemCategory(@NotNull CreativeModeTab group, @NotNull NonNullList<ItemStack> stacks) {
         if (condition.get())
@@ -38,7 +43,7 @@ public class OptionalItem extends Item {
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level level, @NotNull List<Component> components, @NotNull TooltipFlag flag) {
         if (!condition.get())
-            components.add(Component.translatable(this.getDisabledTooltip()).withStyle(ChatFormatting.RED));
+            components.add(getDisabledHoverText());
         super.appendHoverText(stack, level, components, flag);
     }
 }

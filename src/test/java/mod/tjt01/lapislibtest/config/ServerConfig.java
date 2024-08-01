@@ -10,12 +10,18 @@ public class ServerConfig {
     }
 
     public final ForgeConfigSpec.BooleanValue enableOptionalTestRecipes;
+    public final ForgeConfigSpec.BooleanValue enableOptionalItems;
 
     public ServerConfig(final ForgeConfigSpec.Builder builder) {
         enableOptionalTestRecipes = builder
                 .comment("Enable some test recipes")
                 .translation("config." + LapisLibTest.MODID + ".testRecipes")
                 .define("testRecipes", true);
+
+        enableOptionalItems = builder
+                .comment("Enable some test items")
+                .translation("config." + LapisLibTest.MODID + ".testItems")
+                .define("testItems", true);
 
         builder
                 .comment(

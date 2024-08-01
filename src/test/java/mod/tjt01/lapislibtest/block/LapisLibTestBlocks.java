@@ -2,6 +2,8 @@ package mod.tjt01.lapislibtest.block;
 
 import mod.tjt01.lapislib.block.OptionalBlock;
 import mod.tjt01.lapislibtest.LapisLibTest;
+import mod.tjt01.lapislibtest.config.LapisLibTestConfig;
+import mod.tjt01.lapislibtest.config.ServerConfig;
 import mod.tjt01.lapislibtest.item.LapisLibTestItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -29,7 +31,7 @@ public class LapisLibTestBlocks {
         return blockRegistry;
     }
 
-    public static final RegistryObject<Block> OPTIONAL_BLOCK = makeBlock("optional_block", () -> new OptionalBlock(BlockBehaviour.Properties.of(Material.STONE), () -> false), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> OPTIONAL_BLOCK = makeBlock("optional_block", () -> new OptionalBlock(BlockBehaviour.Properties.of(Material.STONE), () -> LapisLibTestConfig.enableOptionalItems), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     public static final RegistryObject<Block> CRAFTING_BLOCK = makeBlock("test_crafting_block", () -> new TestCraftingBlock(BlockBehaviour.Properties.of(Material.STONE)), CreativeModeTab.TAB_DECORATIONS);
 

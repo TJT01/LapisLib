@@ -1,4 +1,6 @@
-@MethodsReturnNonnullByDefault @ParametersAreNonnullByDefault @FieldsAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+@FieldsAreNonnullByDefault
 package mod.tjt01.lapislib.block;
 
 import net.minecraft.FieldsAreNonnullByDefault;
