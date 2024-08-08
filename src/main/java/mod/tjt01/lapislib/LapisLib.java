@@ -3,6 +3,8 @@ package mod.tjt01.lapislib;
 import mod.tjt01.lapislib.client.config.screen.RootConfigScreen;
 import mod.tjt01.lapislib.core.config.LapisLibConfig;
 import mod.tjt01.lapislib.core.network.LapisLibPacketHandler;
+import mod.tjt01.lapislib.crafting.ingredient.fluid.FluidIngredient;
+import mod.tjt01.lapislib.crafting.ingredient.fluid.FluidIngredients;
 import mod.tjt01.lapislib.registry.loot.GlobalLootModifiers;
 import mod.tjt01.lapislib.registry.loot.LapisLibLootConditions;
 import net.minecraftforge.client.ConfigScreenHandler;
@@ -11,8 +13,12 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.function.Supplier;
 
 @Mod("lapislib")
 public class LapisLib {
@@ -29,6 +35,7 @@ public class LapisLib {
 
         GlobalLootModifiers.register(bus);
         LapisLibLootConditions.register(bus);
+        FluidIngredients.register(bus);
 
         modLoadingContext.registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () ->
                 RootConfigScreen.builder(MODID).getFactory()

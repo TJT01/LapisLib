@@ -1,9 +1,8 @@
 package mod.tjt01.lapislibtest.data.gen.recipebuilder;
 
 import com.google.gson.JsonObject;
-import mod.tjt01.lapislib.util.IngredientStack;
+import mod.tjt01.lapislib.crafting.ingredient.IngredientStack;
 import mod.tjt01.lapislibtest.data.recipe.LapisLibTestRecipeSerializers;
-import mod.tjt01.lapislibtest.data.recipe.TestRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -19,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;

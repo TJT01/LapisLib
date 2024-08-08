@@ -1,7 +1,7 @@
 package mod.tjt01.lapislibtest.data.recipe;
 
 import com.google.gson.JsonObject;
-import mod.tjt01.lapislib.util.IngredientStack;
+import mod.tjt01.lapislib.crafting.ingredient.IngredientStack;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;

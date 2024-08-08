@@ -1,0 +1,9 @@
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+@FieldsAreNonnullByDefault
+package mod.tjt01.lapislib.crafting.ingredient.fluid;
+
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
+
+import javax.annotation.ParametersAreNonnullByDefault;

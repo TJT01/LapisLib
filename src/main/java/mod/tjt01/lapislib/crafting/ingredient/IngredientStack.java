@@ -1,4 +1,4 @@
-package mod.tjt01.lapislib.util;
+package mod.tjt01.lapislib.crafting.ingredient;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
