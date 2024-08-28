@@ -18,6 +18,9 @@ import java.util.function.Supplier;
 
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
+/**
+ * @see mod.tjt01.lapislib.item.OptionalItem
+ */
 public class OptionalBlock extends Block {
     public final Supplier<Boolean> condition;
 

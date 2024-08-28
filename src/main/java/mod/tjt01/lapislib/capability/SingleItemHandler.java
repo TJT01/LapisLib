@@ -8,6 +8,9 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 
+/**
+ * {@link net.minecraftforge.items.IItemHandler} implementation which holds exactly one item stack.
+ */
 public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializable<CompoundTag> {
     public ItemStack stack;
 
@@ -30,13 +33,11 @@ public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializab
         return 1;
     }
 
-    @Nonnull
     @Override
     public ItemStack getStackInSlot(int slot) {
         return stack;
     }
 
-    @Nonnull
     @Override
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
         if (stack.isEmpty())
@@ -70,7 +71,6 @@ public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializab
         return reachedLimit ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - limit) : ItemStack.EMPTY;
     }
 
-    @Nonnull
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
         if (amount == 0)
@@ -124,12 +124,7 @@ public class SingleItemHandler implements IItemHandlerModifiable, INBTSerializab
         this.onLoad();
     }
 
-    public void onContentsChanged() {
+    public void onContentsChanged() {}
 
-    }
-
-    public void onLoad() {
-
-    }
-
+    public void onLoad() {}
 }

@@ -15,6 +15,7 @@ The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.
 - Added `IngredientStack` to support recipes which require stacked items
 - Added `IntContainerData`
 - Added fluid ingredients for use in custom recipes.
+- Added `SimpleItemStackHandler`
 
 ## [1.18.2-1.0.2a]
 ### Fixed
