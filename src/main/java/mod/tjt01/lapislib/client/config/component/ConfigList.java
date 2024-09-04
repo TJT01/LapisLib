@@ -2,8 +2,11 @@ package mod.tjt01.lapislib.client.config.component;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
+import net.minecraft.util.FormattedCharSequence;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
 
 public class ConfigList extends ContainerObjectSelectionList<ConfigEntry> {
     public ConfigList(Minecraft pMinecraft, int pWidth, int pHeight, int pY0, int pY1, int pItemHeight) {
@@ -39,5 +42,16 @@ public class ConfigList extends ContainerObjectSelectionList<ConfigEntry> {
     @Override
     public int addEntry(@Nonnull ConfigEntry pEntry) {
         return super.addEntry(pEntry);
+    }
+
+    public List<FormattedCharSequence> getTooltip(int mouseX, int mouseY) {
+        if (this.isMouseOver(mouseX, mouseY)) {
+            for (int i = 0; i < this.children().size(); i++) {
+                ConfigEntry entry = this.children().get(i);
+                if (entry.isMouseOver(mouseX, mouseY))
+                    return entry.getTooltip(this.getRowLeft(), this.getRowTop(i), mouseX, mouseY);
+            }
+        }
+        return Collections.emptyList();
     }
 }

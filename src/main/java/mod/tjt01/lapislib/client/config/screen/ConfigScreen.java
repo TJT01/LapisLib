@@ -2,7 +2,6 @@ package mod.tjt01.lapislib.client.config.screen;
 
 import com.electronwill.nightconfig.core.AbstractConfig;
 import com.electronwill.nightconfig.core.UnmodifiableConfig;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.component.CategoryEntry;
@@ -13,10 +12,13 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Map;
 
 public class ConfigScreen extends Screen {
@@ -129,6 +131,10 @@ public class ConfigScreen extends Screen {
         this.list.render(poseStack, mouseX, mouseY, partialTick);
         drawCenteredString(poseStack, font, this.title, this.width/2, 13, 0xFFFFFFFF);
         super.render(poseStack, mouseX, mouseY, partialTick);
+        List<FormattedCharSequence> tooltip = this.list.getTooltip(mouseX, mouseY);
+        if (!tooltip.isEmpty()) {
+            this.renderTooltip(poseStack, tooltip, mouseX, mouseY);
+        }
     }
 
     @Override

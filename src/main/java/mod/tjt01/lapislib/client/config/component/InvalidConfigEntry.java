@@ -6,6 +6,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FormattedCharSequence;
 
 
 import javax.annotation.Nonnull;
@@ -41,6 +42,11 @@ public class InvalidConfigEntry extends ConfigEntry{
     @Nonnull
     @Override
     public List<? extends GuiEventListener> children() {
+        return List.of();
+    }
+
+    @Override
+    public List<FormattedCharSequence> getTooltip(int top, int left, int mouseX, int mouseY) {
         return List.of();
     }
 }

@@ -8,8 +8,10 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FormattedCharSequence;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -47,5 +49,10 @@ public class CategoryEntry extends ConfigEntry {
     @Override
     public List<? extends GuiEventListener> children() {
         return buttons;
+    }
+
+    @Override
+    public List<FormattedCharSequence> getTooltip(int top, int left, int mouseX, int mouseY) {
+        return Collections.emptyList();
     }
 }

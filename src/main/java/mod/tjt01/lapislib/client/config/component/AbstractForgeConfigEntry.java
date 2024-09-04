@@ -2,17 +2,19 @@ package mod.tjt01.lapislib.client.config.component;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.common.ForgeConfigSpec;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
     protected static final Component RESET_BUTTON_TEXT
@@ -24,6 +26,8 @@ public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
             = Component.translatable("lapislib.common.config.undo.text");
     protected static final Component UNDO_TOOLTIP
             = Component.translatable("lapislib.common.config.undo.tooltip");
+
+    protected static final Style RANGE_STYLE = Style.EMPTY.withColor(ChatFormatting.YELLOW);
 
     protected final ConfigChangeTracker tracker;
     protected final String path;
@@ -98,6 +102,28 @@ public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
         undoButton.active = this.tracker.hasValue(this.path);
 
         undoButton.render(poseStack, mouseX, mouseY, pPartialTick);
+    }
+
+    @Override
+    public List<FormattedCharSequence> getTooltip(int top, int left, int mouseX, int mouseY) {
+        if (resetButton.isHoveredOrFocused()) {
+            return Collections.singletonList(RESET_TOOLTIP.getVisualOrderText());
+        } else if (undoButton.isHoveredOrFocused()) {
+            return Collections.singletonList(UNDO_TOOLTIP.getVisualOrderText());
+        } else {
+            ArrayList<FormattedCharSequence> charSequences = new ArrayList<>();
+            charSequences.add(Component.literal(path).getVisualOrderText());
+            charSequences.add(FormattedCharSequence.EMPTY);
+
+            for (String line: StringUtils.split(this.valueSpec.getComment(), '\n')) {
+                charSequences.add(FormattedCharSequence.forward(
+                        line,
+                        line.startsWith("Range: ") || line.startsWith("Allowed Values: ") ? RANGE_STYLE : Style.EMPTY
+                ));
+            }
+
+            return charSequences;
+        }
     }
 
     @Nonnull
