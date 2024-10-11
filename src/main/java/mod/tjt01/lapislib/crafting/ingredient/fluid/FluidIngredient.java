@@ -85,6 +85,10 @@ public interface FluidIngredient extends Predicate<FluidStack> {
 
     List<FluidStack> getFluids();
 
+    default boolean isEmpty() {
+        return getFluids().isEmpty();
+    }
+
     Serializer<? extends FluidIngredient> getSerializer();
 
     interface Serializer<T extends FluidIngredient> {

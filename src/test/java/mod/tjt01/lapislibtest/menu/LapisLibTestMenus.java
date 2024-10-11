@@ -13,6 +13,8 @@ public class LapisLibTestMenus {
 
     public static final RegistryObject<MenuType<TestCraftingMenu>> CRAFTING_MENU
             = MENU_TYPES.register("crafting_menu", () -> new MenuType<>(TestCraftingMenu::new));
+    public static final RegistryObject<MenuType<TestMachineMenu>> MACHINE_MENU
+            = MENU_TYPES.register("machine_menu", () -> IForgeMenuType.create(TestMachineMenu::create));
 
     public static void register(IEventBus bus) {
         MENU_TYPES.register(bus);

@@ -19,6 +19,12 @@ public class Lang extends LanguageProvider {
         add(LapisLibTestBlocks.CRAFTING_BLOCK.get(), "Test Crafting Block");
         add("container.lapislib_test.crafting_test", "Crafting Test");
 
+        add(LapisLibTestBlocks.MACHINE_BLOCK.get(), "Test Machine");
+        add("container.lapislib_test.machine", "Machine");
+
+        add("lapislib_test.gui.fluid.empty", "0 / %s mb");
+        add("lapislib_test.gui.fluid", "%s / %s mb %s");
+
         addConfigKey("category.category", "Test Category");
 
         addConfigKey("testString", "Test String");

@@ -4,9 +4,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
@@ -18,6 +23,18 @@ public class IngredientStack implements Predicate<ItemStack> {
     public IngredientStack(Ingredient ingredient, int count) {
         this.ingredient = ingredient;
         this.count = count;
+    }
+
+    public IngredientStack(ItemLike item, int count) {
+        this(Ingredient.of(item), count);
+    }
+
+    public IngredientStack(int count, ItemLike... items) {
+        this(Ingredient.of(items), count);
+    }
+
+    public IngredientStack(TagKey<Item> tag, int count) {
+        this(Ingredient.of(tag), count);
     }
 
     public static IngredientStack fromJson(@Nullable JsonElement json) {
@@ -47,6 +64,10 @@ public class IngredientStack implements Predicate<ItemStack> {
         return new IngredientStack(ingredient, count);
     }
 
+    public boolean isEmpty() {
+        return ForgeHooks.hasNoElements(this.ingredient);
+    }
+
     public JsonElement toJson() {
         JsonElement ingredientJson = ingredient.toJson();
         if (count == 1) {
@@ -70,7 +91,7 @@ public class IngredientStack implements Predicate<ItemStack> {
 
     public void toNetwork(FriendlyByteBuf buffer) {
         buffer.writeByte(count);
-        ingredient.toNetwork(buffer);
+        CraftingHelper.write(buffer, ingredient);
     }
 
     @Override

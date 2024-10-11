@@ -1,4 +1,7 @@
-// 1.19.2	2024-07-30T18:09:23.2549854	Block States: lapislib_test
+// 1.19.2	2024-09-13T19:00:12.1945104	Block States: lapislib_test
 ade9caf3fb7eb3fb5abc9275b82e942befd1a392 assets/lapislib_test/blockstates/test_crafting_block.json
+c0f14ebafdc7fba003edbcf37e5d8d8e8ccbe10d assets/lapislib_test/blockstates/test_machine.json
 ed1e849bac4f543ed54aa70041ffe0301989a436 assets/lapislib_test/models/block/test_crafting_block.json
+b43876291fa55385ff0493021ac856b1dc234d3b assets/lapislib_test/models/block/test_machine.json
 b17f3d17163cbc3ed7a5e02eacdcb9ea63162c23 assets/lapislib_test/models/item/test_crafting_block.json
+9424d25b5da4b3b91387640bbf3cde8664b50f2d assets/lapislib_test/models/item/test_machine.json

@@ -1,5 +1,6 @@
 {
   "block.lapislib_test.test_crafting_block": "Test Crafting Block",
+  "block.lapislib_test.test_machine": "Test Machine",
   "config.lapislib_test.category.category": "Test Category",
   "config.lapislib_test.testBoolean": "Test Boolean",
   "config.lapislib_test.testBoolean2": "Test Boolean 2",
@@ -14,5 +15,8 @@
   "config.lapislib_test.testLong": "Test Long Integer",
   "config.lapislib_test.testLongRanged": "Test Ranged Long Integer",
   "config.lapislib_test.testString": "Test String",
-  "container.lapislib_test.crafting_test": "Crafting Test"
+  "container.lapislib_test.crafting_test": "Crafting Test",
+  "container.lapislib_test.machine": "Machine",
+  "lapislib_test.gui.fluid": "%s / %s mb %s",
+  "lapislib_test.gui.fluid.empty": "0 / %s mb"
 }

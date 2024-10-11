@@ -1,5 +1,9 @@
-// 1.19.2	2024-07-30T18:09:23.2479787	Recipes
+// 1.19.2	2024-10-10T20:36:17.3259206	Recipes
+9a49af4593199d827ac44aee073fe310e43654bb data/lapislib_test/advancements/recipes/building_blocks/magma_block.json
+2e471a1f05c9ce0aefad511fcd50d8b30af6191b data/lapislib_test/advancements/recipes/building_blocks/wool_washing.json
 d309d3ca1d7f1a91943739679bba1bc1b5351323 data/lapislib_test/advancements/recipes/misc/bone_from_sticks_and_stone.json
 bc697886e934a035b33a201bb0c910ab4866614d data/lapislib_test/advancements/recipes/misc/coal_to_diamond.json
 932da6d52f58321f3e0941cca5ab5e7a20d99395 data/lapislib_test/recipes/bone_from_sticks_and_stone.json
 26217228115f87bf1c2e527fa31d297246bad6d9 data/lapislib_test/recipes/coal_to_diamond.json
+dc7d76c04bfeab11bfab9d2853be33d3a4f18ba0 data/lapislib_test/recipes/magma_block.json
+1767aead86dd5086e0244f377418ae84fc45815b data/lapislib_test/recipes/wool_washing.json

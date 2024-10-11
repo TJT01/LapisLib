@@ -1,0 +1,15 @@
+{
+  "type": "lapislib_test:test_machine",
+  "fluid": {
+    "amount": 1000,
+    "tag": "minecraft:lava"
+  },
+  "item": {
+    "count": 4,
+    "item": "minecraft:cobbled_deepslate"
+  },
+  "result": {
+    "item": "minecraft:magma_block"
+  },
+  "time": 600
+}

@@ -31,5 +31,12 @@ public class BlockStates extends BlockStateProvider {
                         modLoc("block/test_crafting_block_top")
                 )
         );
+        this.simpleBlockAndItem(
+                LapisLibTestBlocks.MACHINE_BLOCK.get(),
+                this.models().cubeAll(
+                        LapisLibTestBlocks.MACHINE_BLOCK.getId().toString(),
+                        mcLoc("block/furnace_front_on")
+                )
+        );
     }
 }

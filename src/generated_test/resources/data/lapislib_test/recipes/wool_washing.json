@@ -1,0 +1,14 @@
+{
+  "type": "lapislib_test:test_machine",
+  "fluid": {
+    "amount": 250,
+    "fluid": true
+  },
+  "item": {
+    "tag": "minecraft:wool"
+  },
+  "result": {
+    "item": "minecraft:white_wool"
+  },
+  "time": 10
+}

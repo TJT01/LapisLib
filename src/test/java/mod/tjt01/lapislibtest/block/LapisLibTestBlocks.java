@@ -31,9 +31,18 @@ public class LapisLibTestBlocks {
         return blockRegistry;
     }
 
-    public static final RegistryObject<Block> OPTIONAL_BLOCK = makeBlock("optional_block", () -> new OptionalBlock(BlockBehaviour.Properties.of(Material.STONE), () -> LapisLibTestConfig.enableOptionalItems), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> OPTIONAL_BLOCK = makeBlock(
+            "optional_block", () -> new OptionalBlock(BlockBehaviour.Properties.of(Material.STONE), () -> LapisLibTestConfig.enableOptionalItems), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
-    public static final RegistryObject<Block> CRAFTING_BLOCK = makeBlock("test_crafting_block", () -> new TestCraftingBlock(BlockBehaviour.Properties.of(Material.STONE)), CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> CRAFTING_BLOCK = makeBlock(
+            "test_crafting_block",
+            () -> new TestCraftingBlock(BlockBehaviour.Properties.of(Material.STONE)),
+            CreativeModeTab.TAB_DECORATIONS);
+
+    public static final RegistryObject<Block> MACHINE_BLOCK = makeBlock(
+            "test_machine",
+            () -> new TestMachineBlock(BlockBehaviour.Properties.of(Material.STONE)),
+            CreativeModeTab.TAB_DECORATIONS);
 
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);
