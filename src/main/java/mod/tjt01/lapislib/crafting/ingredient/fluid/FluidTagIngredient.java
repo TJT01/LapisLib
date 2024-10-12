@@ -25,6 +25,11 @@ public class FluidTagIngredient implements FluidIngredient{
     }
 
     @Override
+    public int getAmountToDrain(FluidStack stack) {
+        return amount;
+    }
+
+    @Override
     public List<FluidStack> getFluids() {
         return Objects.requireNonNull(ForgeRegistries.FLUIDS.tags()).getTag(tag).stream()
                 .map(fluid -> new FluidStack(fluid, amount))

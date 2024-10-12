@@ -31,6 +31,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.wrapper.RangedWrapper;
@@ -113,8 +114,8 @@ public class TestMachineBlockEntity extends BlockEntity implements MenuProvider,
 
     protected final TestMachineRecipeWrapper recipeWrapper = new TestMachineRecipeWrapper(this);
 
-    protected int progress = 0;
-    protected int totalProgress = 0;
+    public int progress = 0;
+    public int totalProgress = 0;
     protected boolean fluidChanged;
     protected final RecipeManager.CachedCheck<TestMachineRecipeWrapper, TestMachineRecipe> cache;
 
@@ -153,6 +154,10 @@ public class TestMachineBlockEntity extends BlockEntity implements MenuProvider,
                             )
                     );
                     self.inventory.extractItem(0, recipe.ingredient.count, false);
+                    self.fluid.drain(
+                            recipe.fluidIngredient.getAmountToDrain(self.fluid.getFluid()),
+                            IFluidHandler.FluidAction.EXECUTE
+                    );
 
                     self.usedRecipes.add(recipe.getId());
                 }

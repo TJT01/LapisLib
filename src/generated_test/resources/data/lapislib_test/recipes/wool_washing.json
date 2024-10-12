@@ -2,7 +2,7 @@
   "type": "lapislib_test:test_machine",
   "fluid": {
     "amount": 250,
-    "fluid": true
+    "fluid": "minecraft:water"
   },
   "item": {
     "tag": "minecraft:wool"

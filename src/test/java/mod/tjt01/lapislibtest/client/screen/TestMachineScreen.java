@@ -55,6 +55,13 @@ public class TestMachineScreen extends AbstractContainerScreen<TestMachineMenu> 
         int y = (this.height - this.imageHeight)/2;
         this.blit(poseStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
 
+        int totalProgress = this.menu.blockEntity.totalProgress;
+
+        if (totalProgress >= 0) {
+            int progress = Mth.floor((float) this.menu.blockEntity.progress / (float) totalProgress * 24.0F);
+            blit(poseStack, x + 79, y + 34, 176, 0, progress, 17);
+        }
+
         FluidStack fluidStack = this.menu.fluid;
         if (!fluidStack.isEmpty()) {
             RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);

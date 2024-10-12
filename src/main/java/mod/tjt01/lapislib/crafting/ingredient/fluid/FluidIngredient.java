@@ -83,6 +83,8 @@ public interface FluidIngredient extends Predicate<FluidStack> {
         return serializer.fromNetwork(buffer);
     }
 
+    int getAmountToDrain(FluidStack stack);
+
     List<FluidStack> getFluids();
 
     default boolean isEmpty() {

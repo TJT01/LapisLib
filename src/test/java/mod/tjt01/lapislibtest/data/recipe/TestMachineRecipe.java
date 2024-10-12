@@ -110,7 +110,7 @@ public class TestMachineRecipe implements Recipe<TestMachineBlockEntity.TestMach
         public TestMachineRecipe fromJson(ResourceLocation recipeId, JsonObject serializedRecipe) {
             IngredientStack ingredientStack = IngredientStack.fromJson(GsonHelper.getAsJsonObject(serializedRecipe, "item"));
             FluidIngredient fluidIngredient = FluidIngredient.fromJson(GsonHelper.getAsJsonObject(serializedRecipe, "fluid"));
-            ItemStack output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(serializedRecipe, "output"), true, true);
+            ItemStack output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(serializedRecipe, "result"), true, true);
             int craftTime = GsonHelper.getAsInt(serializedRecipe, "time", 200);
             String group = GsonHelper.getAsString(serializedRecipe, "group", "");
             return new TestMachineRecipe(recipeId, ingredientStack, fluidIngredient, output, craftTime, group);
