@@ -1,26 +1,17 @@
 on:
   release:
     types: [published]
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        permissions:
-          contents: write
-        steps:
-          - uses: Kir-Antipov/mc-publish@v3.3
-            with:
-              # Only include this section if you wish to publish
-              # your assets on Modrinth.
-              modrinth-id: ZSQQy6SM
-              modrinth-featured: false
-              modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-    
-              # Only include this section if you wish to publish
-              # your assets on CurseForge.
-              curseforge-id: 584858
-              curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-    
-              # Only include this section if you wish to publish
-              # your assets on GitHub.
-              github-token: ${{ secrets.GITHUB_TOKEN }}
-      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: ZSQQy6SM
+          modrinth-featured: false
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+            
+          curseforge-id: 584858
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
