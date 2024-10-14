@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 but this project does not adhere to Semantic Versioning.
 The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.3
 
-## [UNRELEASED]
+## [1.19.2-1.1.0]
 ### Added
 - Ported to 1.19.2 🐸
 - Added `OptionalItem#getDisabledHoverText` and `OptionalBlock#getDisabledHoverText`, which return Components instead of Strings
@@ -16,6 +16,7 @@ The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.
 - Added `IntContainerData`
 - Added fluid ingredients for use in custom recipes.
 - Added `SimpleItemStackHandler`
+- Possibly other things i might've missed
 
 ## [1.18.2-1.0.2a]
 ### Fixed
