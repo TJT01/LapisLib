@@ -9,7 +9,30 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: Kir-Antipov/mc-publish@v3.3
+      # thanks fabric wiki
+      - name: Check Environment Variables
+        run: env
+        
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: "temurin"
+          java-version: 17
+
+      - name: Make Gradle Wrapper Executable
+        if: ${{ runner.os != 'Windows' }}
+        run: chmod +x ./gradlew
+
+      - name: Build
+        run: ./gradlew clean build
+      
+      - name: Publish
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: ZSQQy6SM
           modrinth-featured: false
