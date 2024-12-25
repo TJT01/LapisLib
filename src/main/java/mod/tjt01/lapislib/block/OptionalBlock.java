@@ -37,11 +37,11 @@ public class OptionalBlock extends Block {
         return Component.translatable(getDisabledTooltip()).withStyle(ChatFormatting.RED);
     }
 
-    @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> stacks) {
-        if (condition.get())
-            super.fillItemCategory(group, stacks);
-    }
+//    @Override
+//    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> stacks) {
+//        if (condition.get())
+//            super.fillItemCategory(group, stacks);
+//    }
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable BlockGetter getter, List<Component> components, TooltipFlag flag) {

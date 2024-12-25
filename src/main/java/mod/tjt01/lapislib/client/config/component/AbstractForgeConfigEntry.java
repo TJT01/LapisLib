@@ -5,6 +5,7 @@ import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.network.chat.Component;
@@ -48,21 +49,36 @@ public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
         this.configValue = configValue;
         this.valueSpec = valueSpec;
 
-        resetButton = new Button(
-                0, 0, 20, 20,
-                RESET_BUTTON_TEXT, button -> {
-                    this.tracker.setValue(this.path, configValue, (T) valueSpec.getDefault());
-                    onResetOrUndo();
-                }
-        );
+//        resetButton = new Button(
+//                0, 0, 20, 20,
+//                RESET_BUTTON_TEXT, button -> {
+//                    this.tracker.setValue(this.path, configValue, (T) valueSpec.getDefault());
+//                    onResetOrUndo();
+//                }
+//        );
+//
+//        undoButton = new Button(
+//                0, 0, 20, 20,
+//                UNDO_BUTTON_TEXT, button -> {
+//                    this.tracker.setValue(this.path, configValue, configValue.get());
+//                    onResetOrUndo();
+//                }
+//        );
+        resetButton = Button.builder(RESET_BUTTON_TEXT, button -> {
+            this.tracker.setValue(this.path, configValue, (T) valueSpec.getDefault());
+            onResetOrUndo();
+        })
+                .size(20, 20)
+                .tooltip(Tooltip.create(RESET_BUTTON_TEXT))
+                .build();
 
-        undoButton = new Button(
-                0, 0, 20, 20,
-                UNDO_BUTTON_TEXT, button -> {
-                    this.tracker.setValue(this.path, configValue, configValue.get());
-                    onResetOrUndo();
-                }
-        );
+        undoButton = Button.builder(UNDO_BUTTON_TEXT, button -> {
+            this.tracker.setValue(this.path, configValue, configValue.get());
+            onResetOrUndo();
+        })
+                .size(20, 20)
+                .tooltip(Tooltip.create(UNDO_BUTTON_TEXT))
+                .build();
         
         widgets.add(resetButton);
         widgets.add(undoButton);
