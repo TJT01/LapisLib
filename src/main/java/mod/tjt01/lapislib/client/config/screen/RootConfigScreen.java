@@ -98,7 +98,7 @@ public class RootConfigScreen extends Screen {
                                     )
                             );
                         })
-                        .pos(BUTTON_WIDTH / 2, 0)
+                        .pos(center - BUTTON_WIDTH/2, 0)
                         .size(BUTTON_WIDTH, 20)
                         .tooltip(tooltip)
                         .build();
@@ -121,7 +121,7 @@ public class RootConfigScreen extends Screen {
                                     )
                             );
                         })
-                        .pos(BUTTON_WIDTH/2, 0)
+                        .pos(center - BUTTON_WIDTH/2, 0)
                         .size(BUTTON_WIDTH, 20)
                         .build();
             }

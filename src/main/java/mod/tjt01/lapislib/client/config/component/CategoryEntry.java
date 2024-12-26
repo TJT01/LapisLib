@@ -20,12 +20,9 @@ public class CategoryEntry extends ConfigEntry {
     private final ImmutableList<Button> buttons;
 
     public CategoryEntry(Screen parent, Component text, Function<Screen, Screen> screenFunction) {
-//        this.button = new Button(0, 0, 260, 20, text, pButton ->
-//                Minecraft.getInstance().setScreen(screenFunction.apply(parent))
-//        );
         this.button = Button.builder(text, b -> {
             Minecraft.getInstance().setScreen(screenFunction.apply(parent));
-        }).build();
+        }).size(260, 20).build();
         buttons = ImmutableList.of(button);
     }
 
