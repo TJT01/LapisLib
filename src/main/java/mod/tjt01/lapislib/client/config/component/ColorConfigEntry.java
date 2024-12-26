@@ -10,7 +10,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.resources.ResourceLocation;
@@ -64,9 +63,6 @@ public abstract class ColorConfigEntry<T> extends AbstractForgeConfigEntry<T>{
     }
 
     public static class ColorPickerButton extends AbstractButton {
-        private static final ResourceLocation image = new ResourceLocation(
-                "lapislib", "textures/gui/config/color_picker_button.png"
-        );
         private final ColorConfigEntry<?> entry;
         private final Screen parent;
 
@@ -78,23 +74,28 @@ public abstract class ColorConfigEntry<T> extends AbstractForgeConfigEntry<T>{
 
         @Override
         public void renderWidget(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderTexture(0, image);
             RenderSystem.setShaderColor(1, 1, 1, this.alpha);
-            int uvY = 0;
-            if (this.isActive()) {
-                uvY = 40;
+            int uvY = 20;
+            if (!this.isActive()) {
+                uvY = 0;
             } else if (this.isHoveredOrFocused()) {
-                uvY = 20;
+                uvY = 40;
             }
 
             int color = entry.getCurrentColor();
             if (!entry.hasAlpha) color |= 0xFF000000;
+
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
             RenderSystem.enableDepthTest();
-            guiGraphics.blit(TEXTURE, this.getX(), this.getY(), 0, uvY, 20, 20, 64, 64);
-            guiGraphics.fill(this.getX() + 5, this.getY() + 5, this.getX() + 15, this.getY() + 15, color);
+            guiGraphics.blit(TEXTURE, this.getX(), this.getY(),0, uvY, 20, 20, 64, 64);
+            float r = ((color >> 16) & 0xFF)/ 255.0F;
+            float g = ((color >> 8) & 0xFF)/ 255.0F;
+            float b = (color & 0xFF) / 255.0F;
+            float a = ((color >> 24) & 0xFF)/ 255.0F;
+            guiGraphics.setColor(r, g, b, a);
+            guiGraphics.blit(TEXTURE, this.getX(), this.getY(), 20, uvY, 20, 20, 64, 64);
+            guiGraphics.setColor(1, 1, 1, this.alpha);
         }
 
         @Override
