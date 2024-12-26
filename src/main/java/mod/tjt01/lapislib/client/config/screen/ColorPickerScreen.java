@@ -1,13 +1,14 @@
 package mod.tjt01.lapislib.client.config.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.LapisLib;
 import mod.tjt01.lapislib.client.config.component.ColorConfigEntry;
 import mod.tjt01.lapislib.util.ColorCodec;
 import mod.tjt01.lapislib.util.ColorSequence;
 import mod.tjt01.lapislib.util.client.ExtraGuiUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
@@ -152,10 +153,10 @@ public class ColorPickerScreen extends Screen {
     @Override
     protected void init() {
         this.addRenderableWidget(
-                new Button(
-                        this.width/2 - 64, this.height - 32, 128, 20, CommonComponents.GUI_DONE,
-                        button -> this.getMinecraft().setScreen(parent)
-                )
+                Button.builder(CommonComponents.GUI_DONE, button -> this.getMinecraft().setScreen(parent))
+                        .size(128, 20)
+                        .pos(this.width/2 - 64, this.height - 32)
+                        .build()
         );
 
         this.saturationValueBox = new SaturationValueBox(
@@ -271,27 +272,25 @@ public class ColorPickerScreen extends Screen {
     }
 
     @Override
-    public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        renderBackground(poseStack);
-        drawCenteredString(poseStack, font, this.title, this.width/2, 15, 0xFFFFFFFF);
+    public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        renderBackground(guiGraphics);
+        guiGraphics.drawCenteredString(font, this.title, this.width/2, 15, 0xFFFFFFFF);
         RenderSystem.setShaderColor(1, 1, 1, 1);
         int displayColor = this.color;
         if (!useAlpha) displayColor |= 0xFF000000;
-        fill(
-                poseStack, this.width/2 + 4 + 80 - 1, this.height/2 + 58 - 20 - 1,
+        guiGraphics.fill(
+                this.width/2 + 4 + 80 - 1, this.height/2 + 58 - 20 - 1,
                 this.width/2 + 4 + 100 + 1, this.height/2 + 58 + 1, 0xFF000000
         );
 
-        RenderSystem.setShaderTexture(0, CHECKERBOARD_TEXTURE);
+        guiGraphics.blit(CHECKERBOARD_TEXTURE, this.width/2 + 4 + 80, this.height/2 + 58 - 20, 0, 0, 20, 20, 32, 32);
 
-        blit(poseStack, this.width/2 + 4 + 80, this.height/2 + 58 - 20, 0, 0, 20, 20, 32, 32);
-
-        fill(
-                poseStack, this.width/2 + 4 + 80, this.height/2 + 58 - 20,
+        guiGraphics.fill(
+                this.width/2 + 4 + 80, this.height/2 + 58 - 20,
                 this.width/2 + 4 + 100, this.height/2 + 58, displayColor
         );
 
-        super.render(poseStack, mouseX, mouseY, partialTick);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @Override
@@ -329,35 +328,37 @@ public class ColorPickerScreen extends Screen {
         }
 
         @Override
-        public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
+        public void renderWidget(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
             int valuePixels = (int) (value * this.width);
-
-            fill(poseStack, x - 1, y - 1, x + width + 1, y + height + 1, 0xFF000000);
+            int x = this.getX();
+            int y = this.getY();
+            guiGraphics.fill(x - 1, y - 1, x + width + 1, y + height + 1, 0xFF000000);
             ExtraGuiUtils.fillHorizontalGradient(
-                    poseStack,
+                    guiGraphics,
                     x, y, x + width, y + height,
                     startColor, endColor,
-                    this.getBlitOffset()
+                    0
             );
-            fill(
-                    poseStack,
-                    this.x + valuePixels - 1, this.y, this.x + valuePixels + 1, this.y + this.height,
+            guiGraphics.fill(
+                    x + valuePixels - 1, y, x + valuePixels + 1, y + this.height,
                     0x7F000000
             );
 
+            Font font = Minecraft.getInstance().font;
             int len = Minecraft.getInstance().font.width(getMessage());
 
-            float pX = this.x + (this.width - len)/2.0F;
-            float pY = this.y + (this.height - 8)/2.0F;
-            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX - 1, pY, 0xFF000000);
-            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX + 1, pY, 0xFF000000);
-            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX, pY - 1, 0xFF000000);
-            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX, pY + 1, 0xFF000000);
-            Minecraft.getInstance().font.draw(poseStack, getMessage(), pX, pY, 0xFFFFFFFF);
+            int pX = (int) (x + (this.width - len)/2.0F);
+            int pY = (int) (y + (this.height - 8)/2.0F);
+            guiGraphics.drawString(font, getMessage(), pX - 1, pY, 0xFF000000, false);
+            guiGraphics.drawString(font, getMessage(), pX - 1, pY, 0xFF000000, false);
+            guiGraphics.drawString(font,  getMessage(), pX + 1, pY, 0xFF000000, false);
+            guiGraphics.drawString(font,  getMessage(), pX, pY - 1, 0xFF000000, false);
+            guiGraphics.drawString(font,  getMessage(), pX, pY + 1, 0xFF000000, false);
+            guiGraphics.drawString(font,  getMessage(), pX, pY, 0xFFFFFFFF, false);
         }
 
         protected void setValueFromMouseX(double mouseX) {
-            this.setValue(Mth.clamp((mouseX - (double) this.x) / (double) this.width, 0.0D, 1.0D));
+            this.setValue(Mth.clamp((mouseX - (double) this.getX()) / (double) this.width, 0.0D, 1.0D));
         }
 
         public void setValue(double value) {
@@ -368,7 +369,7 @@ public class ColorPickerScreen extends Screen {
         }
 
         @Override
-        public void updateNarration(@Nonnull NarrationElementOutput narrationElementOutput) {
+        public void updateWidgetNarration(@Nonnull NarrationElementOutput narrationElementOutput) {
 
         }
     }
@@ -406,20 +407,21 @@ public class ColorPickerScreen extends Screen {
         }
 
         @Override
-        public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
+        public void renderWidget(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
             int valuePixels = (int) (value * this.width);
+            int x = this.getX();
+            int y = this.getY();
 
-            fill(poseStack, x - 1, y - 1, x + width + 1, y + height + 1, 0xFF000000);
-            ExtraGuiUtils.sequenceHorizontalGradient(poseStack, x, y, x + width, y + height, sequence, getBlitOffset());
-            fill(
-                    poseStack,
-                    this.x + valuePixels - 1, this.y, this.x + valuePixels + 1, this.y + this.height,
+            guiGraphics.fill(x - 1, y - 1, x + width + 1, y + height + 1, 0xFF000000);
+            ExtraGuiUtils.sequenceHorizontalGradient(guiGraphics, x, y, x + width, y + height, sequence, 0);
+            guiGraphics.fill(
+                    x + valuePixels - 1, y, x + valuePixels + 1, y + this.height,
                     0x7F000000
             );
         }
 
         protected void setValueFromMouseX(double mouseX) {
-            this.setValue(Mth.clamp((mouseX - (double) this.x) / (double) this.width, 0.0D, 1.0D));
+            this.setValue(Mth.clamp((mouseX - (double) this.getX()) / (double) this.width, 0.0D, 1.0D));
         }
 
         protected void setValue(double value) {
@@ -430,7 +432,7 @@ public class ColorPickerScreen extends Screen {
         }
 
         @Override
-        public void updateNarration(@Nonnull NarrationElementOutput narrationElementOutput) {
+        public void updateWidgetNarration(@Nonnull NarrationElementOutput narrationElementOutput) {
 
         }
     }
@@ -451,7 +453,7 @@ public class ColorPickerScreen extends Screen {
         }
 
         @Override
-        public void updateNarration(@Nonnull NarrationElementOutput narrationElementOutput) {
+        public void updateWidgetNarration(@Nonnull NarrationElementOutput narrationElementOutput) {
             // TODO
         }
 
@@ -462,6 +464,8 @@ public class ColorPickerScreen extends Screen {
         }
 
         private void onInput(double mouseX, double mouseY) {
+            int x = this.getX();
+            int y = this.getY();
             this.sat = (float) Mth.clamp((mouseX - x) / (float)this.width, 0.0F, 1.0F);
             this.val = (float) Mth.clamp(1 - ((mouseY - y) / (float)this.height), 0.0F, 1.0F);
             this.parent.setSaturation(this.sat);
@@ -469,18 +473,20 @@ public class ColorPickerScreen extends Screen {
         }
 
         @Override
-        public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
+        public void renderWidget(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
             int col = Mth.hsvToRgb(this.hue % 1, 1, 1);
+            int x = this.getX();
+            int y = this.getY();
 
-            fill(poseStack, x - 1, y - 1, width + x + 1, height + y + 1, 0xFF000000);
+            guiGraphics.fill(x - 1, y - 1, width + x + 1, height + y + 1, 0xFF000000);
             ExtraGuiUtils.fillHorizontalGradient(
-                    poseStack, x, y, width + x, height + y,
+                    guiGraphics, x, y, width + x, height + y,
                     0xFFFFFFFF, col | 0xFF000000,
-                    this.getBlitOffset()
+                    0
             );
-            this.fillGradient(poseStack, x, y, width + x, height + y, 0, 0xFF000000);
-            fill(poseStack, x, (int) (y + (1 - val)*height - 1), x + width, (int) (y + (1 - val)*height + 1), 0x7F000000);
-            fill(poseStack, (int) (x + sat*width - 1), y, (int) (x + sat*width + 1), y + height, 0x7F000000);
+            guiGraphics.fillGradient(x, y, width + x, height + y, 0, 0xFF000000);
+            guiGraphics.fill(x, (int) (y + (1 - val)*height - 1), x + width, (int) (y + (1 - val)*height + 1), 0x7F000000);
+            guiGraphics.fill((int) (x + sat*width - 1), y, (int) (x + sat*width + 1), y + height, 0x7F000000);
         }
 
         @Override

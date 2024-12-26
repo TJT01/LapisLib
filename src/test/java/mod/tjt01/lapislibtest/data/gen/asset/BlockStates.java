@@ -3,16 +3,14 @@ package mod.tjt01.lapislibtest.data.gen.asset;
 import mod.tjt01.lapislibtest.LapisLibTest;
 import mod.tjt01.lapislibtest.block.LapisLibTestBlocks;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.BlockModelProvider;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class BlockStates extends BlockStateProvider {
     public BlockStates(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, LapisLibTest.MODID, existingFileHelper);
+        super(generator.getPackOutput(), LapisLibTest.MODID, existingFileHelper);
     }
 
     private void simpleBlockAndItem(Block block, ModelFile modelFile) {

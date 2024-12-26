@@ -1,7 +1,7 @@
 package mod.tjt01.lapislib.client.config.component;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Checkbox;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -29,11 +29,10 @@ public class BooleanConfigEntry extends AbstractForgeConfigEntry<Boolean> {
     }
 
     @Override
-    public void render(@Nonnull PoseStack poseStack, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
-        super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
-        checkbox.x = left + width - 60;
-        checkbox.y = top;
-        checkbox.render(poseStack, mouseX, mouseY, pPartialTick);
+    public void render(@Nonnull GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
+        super.render(guiGraphics, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
+        checkbox.setPosition(left + width - 60, top);
+        checkbox.render(guiGraphics, mouseX, mouseY, pPartialTick);
     }
 
     @Override

@@ -2,16 +2,16 @@ package mod.tjt01.lapislib.util.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Matrix4f;
 import mod.tjt01.lapislib.util.ColorSequence;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.util.Mth;
+import org.joml.Matrix4f;
 
 public class ExtraGuiUtils {
     public static void fillHorizontalGradient(
-            PoseStack poseStack, int x1, int y1, int x2, int y2, int colorFrom, int colorTo, int blitOffset
+            GuiGraphics graphics, int x1, int y1, int x2, int y2, int colorFrom, int colorTo, int blitOffset
     ) {
-        RenderSystem.disableTexture();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -19,7 +19,7 @@ public class ExtraGuiUtils {
         BufferBuilder bufferBuilder = tesselator.getBuilder();
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
 
-        Matrix4f matrix = poseStack.last().pose();
+        Matrix4f matrix = graphics.pose().last().pose();
         float a1 = (colorFrom >> 24 & 0xFF) / 255.0F;
         float r1 = (colorFrom >> 16 & 0xFF) / 255.0F;
         float g1 = (colorFrom >> 8 & 0xFF) / 255.0F;
@@ -37,13 +37,11 @@ public class ExtraGuiUtils {
 
         tesselator.end();
         RenderSystem.disableBlend();
-        RenderSystem.enableTexture();
     }
 
     public static void sequenceVerticalGradient(
-            PoseStack poseStack, int x1, int y1, int x2, int y2, ColorSequence sequence, int blitOffset
+            GuiGraphics guiGraphics, int x1, int y1, int x2, int y2, ColorSequence sequence, int blitOffset
     ) {
-        RenderSystem.disableTexture();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -51,7 +49,7 @@ public class ExtraGuiUtils {
         BufferBuilder bufferBuilder = tesselator.getBuilder();
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
 
-        Matrix4f matrix = poseStack.last().pose();
+        Matrix4f matrix = guiGraphics.pose().last().pose();
 
         for (int i = 0; i < sequence.getLength() - 1; i++) {
             ColorSequence.Keypoint keypointA = sequence.get(i);
@@ -81,13 +79,11 @@ public class ExtraGuiUtils {
 
         tesselator.end();
         RenderSystem.disableBlend();
-        RenderSystem.enableTexture();
     }
 
     public static void sequenceHorizontalGradient(
-            PoseStack poseStack, int x1, int y1, int x2, int y2, ColorSequence sequence, int blitOffset
+            GuiGraphics guiGraphics, int x1, int y1, int x2, int y2, ColorSequence sequence, int blitOffset
     ) {
-        RenderSystem.disableTexture();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
@@ -95,7 +91,7 @@ public class ExtraGuiUtils {
         BufferBuilder bufferBuilder = tesselator.getBuilder();
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
 
-        Matrix4f matrix = poseStack.last().pose();
+        Matrix4f matrix = guiGraphics.pose().last().pose();
 
         for (int i = 0; i < sequence.getLength() - 1; i++) {
             ColorSequence.Keypoint keypointA = sequence.get(i);
@@ -125,6 +121,5 @@ public class ExtraGuiUtils {
 
         tesselator.end();
         RenderSystem.disableBlend();
-        RenderSystem.enableTexture();
     }
 }

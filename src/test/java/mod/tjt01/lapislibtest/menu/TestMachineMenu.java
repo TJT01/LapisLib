@@ -25,7 +25,7 @@ public class TestMachineMenu extends AbstractContainerMenu {
     public static TestMachineMenu create(int containerId, Inventory playerInventory, FriendlyByteBuf data) {
         BlockPos pos = data.readBlockPos();
         FluidStack fluid = data.readFluidStack();
-        TestMachineBlockEntity blockEntity = playerInventory.player.level
+        TestMachineBlockEntity blockEntity = playerInventory.player.level()
                 .getBlockEntity(pos, LapisLibTestBlockEntityTypes.MACHINE.get()).orElseThrow();
         return new TestMachineMenu(containerId, playerInventory, blockEntity, fluid);
     }

@@ -5,9 +5,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import mod.tjt01.lapislibtest.LapisLibTest;
 import mod.tjt01.lapislibtest.menu.TestMachineMenu;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.AtlasSet;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -26,7 +29,7 @@ public class TestMachineScreen extends AbstractContainerScreen<TestMachineMenu> 
         super(menu, playerInventory, title);
     }
 
-    protected static void fluidTile(PoseStack poseStack, int x, int y, int blitOffset, int w, int h, TextureAtlasSprite sprite) {
+    protected static void fluidTile(GuiGraphics guiGraphics, int x, int y, int blitOffset, int w, int h, TextureAtlasSprite sprite) {
         int offset = 16 - h;
         int x2 = x + w;
         int y2 = y + h;
@@ -40,29 +43,40 @@ public class TestMachineScreen extends AbstractContainerScreen<TestMachineMenu> 
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(poseStack);
-        super.render(poseStack, mouseX, mouseY, partialTick);
-        this.renderTooltip(poseStack, mouseX, mouseY);
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(guiGraphics);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (this.width - this.imageWidth)/2;
-        int y = (this.height - this.imageHeight)/2;
-        this.blit(poseStack, x, y, 0, 0, this.imageWidth, this.imageHeight);
+    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
+        guiGraphics.blit(TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight);
 
         int totalProgress = this.menu.blockEntity.totalProgress;
 
         if (totalProgress >= 0) {
             int progress = Mth.floor((float) this.menu.blockEntity.progress / (float) totalProgress * 24.0F);
-            blit(poseStack, x + 79, y + 34, 176, 0, progress, 17);
+            guiGraphics.blit(TEXTURE, +79, y + 34, 176, 0, progress, 17);
         }
 
         FluidStack fluidStack = this.menu.fluid;
+
+        if (mouseX >= this.leftPos + 34 && mouseX <= this.leftPos + 49 && mouseY >= this.topPos + 17 && mouseY <= this.topPos + 68) {
+            this.setTooltipForNextRenderPass(
+                    fluidStack.isEmpty()
+                            ? Component.translatable("lapislib_test.gui.fluid.empty", 4000)
+                            : Component.translatable(
+                            "lapislib_test.gui.fluid",
+                            fluidStack.getAmount(),
+                            4000,
+                            fluidStack.getDisplayName()
+                    )
+            );
+        }
+
         if (!fluidStack.isEmpty()) {
             RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
             RenderSystem.enableBlend();
@@ -81,34 +95,12 @@ public class TestMachineScreen extends AbstractContainerScreen<TestMachineMenu> 
             int height = Mth.floor(52.0F * (fluidStack.getAmount() / 4000.0F));
 
             for (int i = 69 - 16; i > 69 - height; i -= 16) {
-                fluidTile(poseStack,  this.leftPos + 34, this.topPos + i, this.getBlitOffset(), 16, 16, still);
+                fluidTile(guiGraphics, this.leftPos + 34, this.topPos + i, 0, 16, 16, still);
             }
             int topTile = height % 16;
             if (topTile > 0) {
-                fluidTile(poseStack, this.leftPos + 34, this.topPos + 69 - height, this.getBlitOffset(), 16, topTile, still);
+                fluidTile(guiGraphics, this.leftPos + 34, this.topPos + 69 - height, 0, 16, topTile, still);
             }
-        }
-    }
-
-    @Override
-    protected void renderTooltip(PoseStack poseStack, int x, int y) {
-        if (x >= this.leftPos + 34 && x <= this.leftPos + 49 && y >= this.topPos + 17 && y <= this.topPos + 68) {
-            FluidStack fluid = this.menu.fluid;
-            this.renderTooltip(
-                    poseStack,
-                    fluid.isEmpty()
-                            ? Component.translatable("lapislib_test.gui.fluid.empty", 4000)
-                            : Component.translatable(
-                                    "lapislib_test.gui.fluid",
-                            fluid.getAmount(),
-                                    4000,
-                                    fluid.getDisplayName()
-                            ),
-                    x,
-                    y
-            );
-        } else {
-            super.renderTooltip(poseStack, x, y);
         }
     }
 }

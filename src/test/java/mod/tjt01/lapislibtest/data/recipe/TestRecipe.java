@@ -3,6 +3,7 @@ package mod.tjt01.lapislibtest.data.recipe;
 import com.google.gson.JsonObject;
 import mod.tjt01.lapislib.crafting.ingredient.IngredientStack;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -45,7 +46,7 @@ public class TestRecipe implements Recipe<SimpleContainer> {
             toAdd.setCount(stack.count);
             if (current.isEmpty()) {
                 container.setItem(slot, toAdd);
-            } else if (ItemStack.isSame(current, toAdd) && ItemStack.tagMatches(current, toAdd)) {
+            } else if (ItemStack.isSameItemSameTags(current, toAdd)) {
                 toAdd.grow(current.getCount());
                 container.setItem(slot, toAdd);
             } else if (!player.getInventory().add(toAdd)) {
@@ -74,7 +75,7 @@ public class TestRecipe implements Recipe<SimpleContainer> {
 
     @Nonnull
     @Override
-    public ItemStack assemble(@Nonnull SimpleContainer pContainer) {
+    public ItemStack assemble(@Nonnull SimpleContainer pContainer, RegistryAccess registryAccess) {
         return out.copy();
     }
 
@@ -85,7 +86,7 @@ public class TestRecipe implements Recipe<SimpleContainer> {
 
     @Nonnull
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return out;
     }
 

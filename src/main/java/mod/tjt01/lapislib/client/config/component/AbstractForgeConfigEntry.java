@@ -1,8 +1,8 @@
 package mod.tjt01.lapislib.client.config.component;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
@@ -49,21 +49,6 @@ public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
         this.configValue = configValue;
         this.valueSpec = valueSpec;
 
-//        resetButton = new Button(
-//                0, 0, 20, 20,
-//                RESET_BUTTON_TEXT, button -> {
-//                    this.tracker.setValue(this.path, configValue, (T) valueSpec.getDefault());
-//                    onResetOrUndo();
-//                }
-//        );
-//
-//        undoButton = new Button(
-//                0, 0, 20, 20,
-//                UNDO_BUTTON_TEXT, button -> {
-//                    this.tracker.setValue(this.path, configValue, configValue.get());
-//                    onResetOrUndo();
-//                }
-//        );
         resetButton = Button.builder(RESET_BUTTON_TEXT, button -> {
             this.tracker.setValue(this.path, configValue, (T) valueSpec.getDefault());
             onResetOrUndo();
@@ -104,20 +89,18 @@ public abstract class AbstractForgeConfigEntry<T> extends LabeledConfigEntry {
     }
 
     @Override
-    public void render(@Nonnull PoseStack poseStack, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
-        super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
+    public void render(@Nonnull GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
+        super.render(guiGraphics, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
 
-        resetButton.x = left + width - 20;
-        resetButton.y = top;
+        resetButton.setPosition(left + width - 20, top);
         resetButton.active = !Objects.equals(this.tracker.getValue(this.path, this.configValue), this.valueSpec.getDefault());
 
-        resetButton.render(poseStack, mouseX, mouseY, pPartialTick);
+        resetButton.render(guiGraphics, mouseX, mouseY, pPartialTick);
 
-        undoButton.x = left + width - 40;
-        undoButton.y = top;
+        undoButton.setPosition(left + width - 40, top);
         undoButton.active = this.tracker.hasValue(this.path);
 
-        undoButton.render(poseStack, mouseX, mouseY, pPartialTick);
+        undoButton.render(guiGraphics, mouseX, mouseY, pPartialTick);
     }
 
     @Override

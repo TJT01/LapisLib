@@ -1,10 +1,10 @@
 package mod.tjt01.lapislib.client.config.component;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.LapisLib;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.screen.ListEditScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -54,29 +54,34 @@ public class ListConfigEntry extends AbstractForgeConfigEntry<List<?>> {
         this.tracker = tracker;
         this.configValue = configValue;
 
-        this.button = new Button(
-                0, 0,
-                50, 20,
-                BUTTON_LABEL,
-                pButton -> Minecraft.getInstance()
+//        this.button = new Button(
+//                0, 0,
+//                50, 20,
+//                BUTTON_LABEL,
+//                pButton -> Minecraft.getInstance()
+//                        .setScreen(new ListEditScreen(label, tracker, configValue, valueSpec, type, parent))
+//        );
+        this.button = Button.builder(
+                BUTTON_LABEL, b -> Minecraft.getInstance()
                         .setScreen(new ListEditScreen(label, tracker, configValue, valueSpec, type, parent))
-        );
+                )
+                .size(50, 20)
+                .build();
 
         this.widgets.add(button);
     }
 
     @Override
     public void render(
-            @Nonnull PoseStack poseStack, int index,
+            @Nonnull GuiGraphics guiGraphics, int index,
             int top, int left, int width, int height,
             int mouseX, int mouseY, boolean isMouseOver,
             float partialTick
     ) {
-        button.x = left + width - 50 - 40;
-        button.y = top;
-        button.render(poseStack, mouseX, mouseY, partialTick);
+        button.setPosition(left + width - 50 - 40, top);
+        button.render(guiGraphics, mouseX, mouseY, partialTick);
 
-        super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
+        super.render(guiGraphics, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
     }
 
     public enum ListType {

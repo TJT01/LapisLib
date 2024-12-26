@@ -1,11 +1,11 @@
 package mod.tjt01.lapislib.client.config.screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.LapisLib;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.component.ListConfigEntry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -57,10 +57,10 @@ public class ListEditScreen extends Screen {
     }
 
     @Override
-    public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        this.entryList.render(poseStack, mouseX, mouseY, partialTick);
-        super.render(poseStack, mouseX, mouseY, partialTick);
-        drawCenteredString(poseStack, font, this.title, this.width/2, 13, 0xFFFFFFFF);
+    public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.entryList.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.drawCenteredString(font, this.title, this.width/2, 13, 0xFFFFFFFF);
     }
 
     protected void populateList() {
@@ -163,10 +163,13 @@ public class ListEditScreen extends Screen {
     @Override
     protected void init() {
         this.entryList = new EntryList(this.getMinecraft(), this.width, this.height, 32, this.height - 32, 24);
-        this.saveButton = new Button(this.width/2 - 64, this.height - 26, 128, 20, CommonComponents.GUI_DONE, pButton -> {
+        this.saveButton = Button.builder(CommonComponents.GUI_DONE, pButton -> {
             save();
             this.getMinecraft().setScreen(this.parent);
-        });
+        })
+                .pos(this.width/2 - 64, this.height - 26)
+                .size(128, 20)
+                .build();
 
         this.addWidget(entryList);
         this.addRenderableWidget(saveButton);
@@ -211,18 +214,14 @@ public class ListEditScreen extends Screen {
     public abstract static class Entry extends ContainerObjectSelectionList.Entry<Entry> {
         public static final Style DELETE_STYLE = Style.EMPTY.withColor(ChatFormatting.RED);
 
-        public final LinkedList<Widget> widgets = new LinkedList<>();
+        public final LinkedList<AbstractWidget> widgets = new LinkedList<>();
         public final LinkedList<NarratableEntry> narratables = new LinkedList<>();
         public final LinkedList<GuiEventListener> guiEventListeners = new LinkedList<>();
 
-        public void addRenderableWidget(Widget widget) {
+        public void addRenderableWidget(AbstractWidget widget) {
             this.widgets.add(widget);
-            if (widget instanceof NarratableEntry entry) {
-                this.narratables.add(entry);
-            }
-            if (widget instanceof GuiEventListener listener) {
-                this.guiEventListeners.add(listener);
-            }
+            this.narratables.add(widget);
+            this.guiEventListeners.add(widget);
         }
 
         @Nonnull
@@ -233,13 +232,13 @@ public class ListEditScreen extends Screen {
 
         @Override
         public void render(
-                @Nonnull PoseStack poseStack, int index,
+                @Nonnull GuiGraphics guiGraphics, int index,
                 int top, int left, int width, int height,
                 int mouseX, int mouseY, boolean isMouseOver,
                 float partialTick
         ) {
-            for (Widget widget: this.widgets) {
-                widget.render(poseStack, mouseX, mouseY, partialTick);
+            for (AbstractWidget widget: this.widgets) {
+                widget.render(guiGraphics, mouseX, mouseY, partialTick);
             }
         }
 
@@ -260,16 +259,18 @@ public class ListEditScreen extends Screen {
 
         public AddItemEntry(ListEditScreen parent) {
             this.parent = parent;
-            this.button = new Button(0, 0, 128, 20, LABEL, btn -> parent.addItem());
+            this.button = Button.builder(LABEL, btn -> parent.addItem())
+                    .size(128, 20)
+                    .build();
             this.addRenderableWidget(button);
         }
 
         @Override
-        public void render(@Nonnull PoseStack poseStack, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float partialTick) {
-            button.x = left + width/2 - 64;
-            button.y = top;
+        public void render(@Nonnull GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float partialTick) {
 
-            super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
+            button.setPosition(left + width/2 - 64, top);
+
+            super.render(guiGraphics, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
         }
     }
 
@@ -290,51 +291,42 @@ public class ListEditScreen extends Screen {
             this.index = index;
             this.parent = parent;
 
-            this.deleteButton = new Button(0, 0, 20, 20, Component.literal("-").withStyle(DELETE_STYLE), button -> {
-                this.parent.removeItem(index);
-            });
-            this.upButton = new Button(0, 0, 20, 20, Component.literal("^"), button -> {
-                this.parent.moveItemBack(index);
-            });
-            this.downButton = new Button(0, 0, 20, 20, Component.literal("v"), button -> {
-                this.parent.moveItemForward(index);
-            });
+            this.deleteButton = Button.builder(
+                            Component.literal("-").withStyle(DELETE_STYLE),
+                            button -> this.parent.removeItem(index)
+                    )
+                    .size(20, 20)
+                    .build();
+            this.upButton = Button.builder(
+                            Component.literal("^"), button ->  this.parent.moveItemBack(index)
+                    )
+                    .size(20, 20)
+                    .build();
+            this.downButton = Button.builder(
+                    Component.literal("v"),
+                    button -> this.parent.moveItemForward(index)
+            )
+                    .size(20, 20)
+                    .build();
 
             if (parent.canRemoveItems()) this.addRenderableWidget(deleteButton);
             if (index > 0) this.addRenderableWidget(upButton);
             if (index < parent.objects.size() - 1) this.addRenderableWidget(downButton);
         }
 
-        @Nonnull
-        @Override
-        public List<? extends NarratableEntry> narratables() {
-            return this.narratables;
-        }
-
         @Override
         public void render(
-                @Nonnull PoseStack poseStack, int index,
+                @Nonnull GuiGraphics guiGraphics, int index,
                 int top, int left, int width, int height,
                 int mouseX, int mouseY, boolean isMouseOver,
                 float partialTick
         ) {
-            this.deleteButton.x = left + width - 20;
-            this.deleteButton.y = top;
-            this.upButton.x = left + width - 60;
-            this.upButton.y = top;
-            this.downButton.x = left + width - 40;
-            this.downButton.y = top;
+            this.deleteButton.setPosition(left + width - 20, top);
+            this.upButton.setPosition(left + width - 60, top);
+            this.downButton.setPosition(left + width - 40, top);
 
-            drawString(poseStack, Minecraft.getInstance().font, "#" + index, left, top + 10, 0xFFFFFFFF);
-            super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
-        }
-
-        public void tick() {}
-
-        @Nonnull
-        @Override
-        public List<? extends GuiEventListener> children() {
-            return this.guiEventListeners;
+            guiGraphics.drawString(Minecraft.getInstance().font, "#" + index, left, top + 10, 0xFFFFFFFF);
+            super.render(guiGraphics, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
         }
     }
 
@@ -362,10 +354,9 @@ public class ListEditScreen extends Screen {
         }
 
         @Override
-        public void render(@Nonnull PoseStack poseStack, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float partialTick) {
-            this.editBox.x = left + width - (80 + 100);
-            this.editBox.y = top + 1;
-            super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
+        public void render(@Nonnull GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float partialTick) {
+            this.editBox.setPosition(left + width - (80 + 100),top + 1);
+            super.render(guiGraphics, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
         }
 
         @Override
@@ -480,14 +471,13 @@ public class ListEditScreen extends Screen {
 
         @Override
         public void render(
-                @Nonnull PoseStack poseStack, int index,
+                @Nonnull GuiGraphics guiGraphics, int index,
                 int top, int left, int width, int height,
                 int mouseX, int mouseY, boolean isMouseOver,
                 float partialTick
         ) {
-            this.checkbox.x = left + (width/2) - 10;
-            this.checkbox.y = top;
-            super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
+            this.checkbox.setPosition(left + (width/2) - 10, top);
+            super.render(guiGraphics, index, top, left, width, height, mouseX, mouseY, isMouseOver, partialTick);
         }
     }
 }

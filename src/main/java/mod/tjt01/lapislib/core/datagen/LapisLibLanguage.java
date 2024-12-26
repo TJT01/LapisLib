@@ -6,7 +6,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 
 public class LapisLibLanguage extends LanguageProvider {
     public LapisLibLanguage(DataGenerator gen) {
-        super(gen, LapisLib.MODID, "en_us");
+        super(gen.getPackOutput(), LapisLib.MODID, "en_us");
     }
 
     @Override

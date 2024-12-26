@@ -28,5 +28,6 @@
     "recipes": [
       "lapislib_test:wool_washing"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

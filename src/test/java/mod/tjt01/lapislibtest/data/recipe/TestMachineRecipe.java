@@ -6,6 +6,7 @@ import mod.tjt01.lapislib.crafting.ingredient.fluid.FluidIngredient;
 import mod.tjt01.lapislibtest.block.LapisLibTestBlocks;
 import mod.tjt01.lapislibtest.block.entity.TestMachineBlockEntity;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -51,7 +52,7 @@ public class TestMachineRecipe implements Recipe<TestMachineBlockEntity.TestMach
     }
 
     @Override
-    public ItemStack assemble(TestMachineBlockEntity.TestMachineRecipeWrapper pContainer) {
+    public ItemStack assemble(TestMachineBlockEntity.TestMachineRecipeWrapper pContainer, RegistryAccess registryAccess) {
         return output.copy();
     }
 
@@ -61,7 +62,7 @@ public class TestMachineRecipe implements Recipe<TestMachineBlockEntity.TestMach
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return output;
     }
 

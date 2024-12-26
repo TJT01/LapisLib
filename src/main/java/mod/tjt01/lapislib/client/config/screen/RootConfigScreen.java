@@ -1,14 +1,15 @@
 package mod.tjt01.lapislib.client.config.screen;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.ConfigComponents;
 import mod.tjt01.lapislib.client.config.RemoteConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.factory.ColorConfigFactory;
 import mod.tjt01.lapislib.client.config.factory.ConfigEntryFactory;
 import mod.tjt01.lapislib.util.ConfigUtil;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.CommonComponents;
@@ -30,6 +31,10 @@ import java.util.stream.Collectors;
 
 public class RootConfigScreen extends Screen {
     private static final int BUTTON_WIDTH = 150;
+    private static final Component NO_LEVEL
+            = Component.translatable("lapislib.common.config.no_level");
+    private static final Component NO_PERMISSION
+            = Component.translatable("lapislib.common.config.no_permission");
 
     private final Screen parent;
     private final String modId;
@@ -64,10 +69,10 @@ public class RootConfigScreen extends Screen {
     protected void init() {
         int center = this.width/2;
         addRenderableWidget(
-                new Button(
-                        center - 64, this.height - 32, 128, 20, CommonComponents.GUI_BACK,
-                        button -> minecraft.setScreen(parent)
-                )
+                Button.builder(CommonComponents.GUI_BACK, button -> minecraft.setScreen(parent))
+                        .pos(center - 64, this.height - 32)
+                        .size(128, 20)
+                        .build()
         );
 
         NonNullList<Button> buttons = NonNullList.create();
@@ -75,8 +80,14 @@ public class RootConfigScreen extends Screen {
         for (ModConfig modConfig: configs) {
             Button button;
             if (modConfig.getType() == ModConfig.Type.SERVER) {
-                button = new Button(
-                        center - BUTTON_WIDTH/2, 0, BUTTON_WIDTH, 20, ConfigComponents.serverTitle,
+                Tooltip tooltip = null;
+                if (minecraft.level == null) {
+                    tooltip = Tooltip.create(NO_LEVEL);
+                } else if (minecraft.player != null && !minecraft.player.hasPermissions(2)) {
+                    tooltip = Tooltip.create(NO_PERMISSION);
+                }
+                button = Button.builder(
+                        ConfigComponents.serverTitle,
                         btn -> {
                             ConfigChangeTracker tracker = trackerMap.computeIfAbsent(modConfig, RemoteConfigChangeTracker::new);
                             minecraft.setScreen(
@@ -86,33 +97,11 @@ public class RootConfigScreen extends Screen {
                                             tracker, entryFactoryMap, true
                                     )
                             );
-                        },
-                        new Button.OnTooltip() {
-                            private static final Component NO_LEVEL
-                                    = Component.translatable("lapislib.common.config.no_level");
-                            private static final Component NO_PERMISSION
-                                    = Component.translatable("lapislib.common.config.no_permission");
-
-                            @Override
-                            public void onTooltip(@Nonnull Button button, @Nonnull PoseStack poseStack, int mouseX, int mouseY) {
-                                if (minecraft.level == null) {
-                                    RootConfigScreen.this.renderTooltip(
-                                            poseStack, minecraft.font.split(
-                                                    NO_LEVEL, Math.max(RootConfigScreen.this.width / 2 - 43, 170)
-                                            ),
-                                            mouseX, mouseY
-                                    );
-                                } else if (minecraft.player != null && !minecraft.player.hasPermissions(2)) {
-                                    RootConfigScreen.this.renderTooltip(
-                                            poseStack, minecraft.font.split(
-                                                    NO_PERMISSION, Math.max(RootConfigScreen.this.width / 2 - 43, 170)
-                                            ),
-                                            mouseX, mouseY
-                                    );
-                                }
-                            }
-                        }
-                );
+                        })
+                        .pos(BUTTON_WIDTH / 2, 0)
+                        .size(BUTTON_WIDTH, 20)
+                        .tooltip(tooltip)
+                        .build();
                 button.active = minecraft.level != null
                         && minecraft.player != null
                         && minecraft.player.hasPermissions(2);
@@ -120,8 +109,8 @@ public class RootConfigScreen extends Screen {
                 Component title = modConfig.getType() == ModConfig.Type.CLIENT
                         ? ConfigComponents.clientTitle
                         : ConfigComponents.commonTitle;
-                button = new Button(
-                        center - BUTTON_WIDTH/2, 0, BUTTON_WIDTH, 20, title,
+                button = Button.builder(
+                        title,
                         btn -> {
                             ConfigChangeTracker tracker = trackerMap.computeIfAbsent(modConfig, ConfigChangeTracker::new);
                             minecraft.setScreen(
@@ -131,9 +120,10 @@ public class RootConfigScreen extends Screen {
                                             tracker, entryFactoryMap, true
                                     )
                             );
-                        }
-                );
-
+                        })
+                        .pos(BUTTON_WIDTH/2, 0)
+                        .size(BUTTON_WIDTH, 20)
+                        .build();
             }
 
             buttons.add(button);
@@ -144,16 +134,16 @@ public class RootConfigScreen extends Screen {
         int btY = 0;
 
         for (Button button: buttons) {
-            button.y = yOffset + btY;
+            button.setY(yOffset + btY);
             btY += 24;
         }
     }
 
     @Override
-    public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(poseStack);
-        drawCenteredString(poseStack, font, this.title, this.width/2, 15, 0xFFFFFFFF);
-        super.render(poseStack, mouseX, mouseY, partialTick);
+    public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(guiGraphics);
+        guiGraphics.drawCenteredString(font, this.title, this.width/2, 15, 0xFFFFFFFF);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @SuppressWarnings("ConstantConditions")

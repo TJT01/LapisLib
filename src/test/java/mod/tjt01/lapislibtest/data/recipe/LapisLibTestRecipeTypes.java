@@ -2,6 +2,7 @@ package mod.tjt01.lapislibtest.data.recipe;
 
 import mod.tjt01.lapislibtest.LapisLibTest;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -10,7 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 public class LapisLibTestRecipeTypes {
-    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, LapisLibTest.MODID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, LapisLibTest.MODID);
 
     private static <T extends Recipe<?>> RegistryObject<RecipeType<T>> register(String name) {
         return RECIPE_TYPES.register(name, () -> RecipeType.simple(new ResourceLocation(LapisLibTest.MODID, name)));

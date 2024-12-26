@@ -2,18 +2,17 @@ package mod.tjt01.lapislib.client.config.screen;
 
 import com.electronwill.nightconfig.core.AbstractConfig;
 import com.electronwill.nightconfig.core.UnmodifiableConfig;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import mod.tjt01.lapislib.client.config.component.CategoryEntry;
 import mod.tjt01.lapislib.client.config.component.ConfigList;
 import mod.tjt01.lapislib.client.config.factory.ConfigEntryFactory;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 
@@ -101,39 +100,45 @@ public class ConfigScreen extends Screen {
 
         if (isRoot) {
             this.addRenderableWidget(
-                    new Button(
-                            center - 132, this.height - 26, 128, 20, CommonComponents.GUI_CANCEL,
+                    Button.builder(
+                            CommonComponents.GUI_CANCEL,
                             button -> this.getMinecraft().setScreen(parent)
                     )
+                            .pos(center - 132, this.height - 26)
+                            .size(128, 20)
+                            .build()
             );
             this.addRenderableWidget(
-                    new Button(
-                            center + 8, this.height - 26, 128, 20, CommonComponents.GUI_DONE,
+                    Button.builder(
+                            CommonComponents.GUI_DONE,
                             button -> {
                                 this.tracker.save();
                                 this.getMinecraft().setScreen(parent);
                             }
                     )
+                            .pos(center + 8, this.height - 26)
+                            .size(128, 20)
+                            .build()
             );
         } else {
             this.addRenderableWidget(
-                    new Button(
-                            center - 64, this.height - 26, 128, 20, CommonComponents.GUI_DONE,
-                            button -> this.getMinecraft().setScreen(parent)
-                    )
+                    Button.builder(CommonComponents.GUI_DONE, button -> this.getMinecraft().setScreen(parent))
+                            .pos(center - 64, this.height - 26)
+                            .size(128, 20)
+                            .build()
             );
         }
     }
 
     @Override
-    public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(poseStack);
-        this.list.render(poseStack, mouseX, mouseY, partialTick);
-        drawCenteredString(poseStack, font, this.title, this.width/2, 13, 0xFFFFFFFF);
-        super.render(poseStack, mouseX, mouseY, partialTick);
+    public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(guiGraphics);
+        this.list.render(guiGraphics, mouseX, mouseY, partialTick);
+        guiGraphics.drawCenteredString(font, this.title, this.width/2, 13, 0xFFFFFFFF);
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
         List<FormattedCharSequence> tooltip = this.list.getTooltip(mouseX, mouseY);
         if (!tooltip.isEmpty()) {
-            this.renderTooltip(poseStack, tooltip, mouseX, mouseY);
+            this.setTooltipForNextRenderPass(tooltip);
         }
     }
 

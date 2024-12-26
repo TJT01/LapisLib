@@ -1,7 +1,7 @@
 package mod.tjt01.lapislib.client.config.component;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.CycleButton;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -46,10 +46,9 @@ public class EnumEntry extends AbstractForgeConfigEntry<Enum<?>>{
     }
 
     @Override
-    public void render(@Nonnull PoseStack poseStack, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
-        super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
-        cycleButton.x = left + width - 110 - 40;
-        cycleButton.y = top;
-        cycleButton.render(poseStack, mouseX, mouseY, pPartialTick);
+    public void render(@Nonnull GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
+        super.render(guiGraphics, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
+        cycleButton.setPosition(left + width - 110 - 40, top);
+        cycleButton.render(guiGraphics, mouseX, mouseY, pPartialTick);
     }
 }

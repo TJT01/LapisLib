@@ -1,8 +1,8 @@
 package mod.tjt01.lapislib.client.config.component;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mod.tjt01.lapislib.client.config.ConfigChangeTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -78,10 +78,9 @@ public abstract class AbstractTextConfigEntry<T> extends AbstractForgeConfigEntr
     }
 
     @Override
-    public void render(@Nonnull PoseStack poseStack, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
-        super.render(poseStack, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
-        textBox.x = left + width - 149;
-        textBox.y = top + 1;
-        textBox.render(poseStack, mouseX, mouseY, pPartialTick);
+    public void render(@Nonnull GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean isMouseOver, float pPartialTick) {
+        super.render(guiGraphics, index, top, left, width, height, mouseX, mouseY, isMouseOver, pPartialTick);
+        textBox.setPosition(left + width - 149, top + 1);
+        textBox.render(guiGraphics, mouseX, mouseY, pPartialTick);
     }
 }

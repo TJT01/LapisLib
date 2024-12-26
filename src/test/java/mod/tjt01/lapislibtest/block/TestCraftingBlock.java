@@ -20,8 +20,6 @@ import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 public class TestCraftingBlock extends Block{
     private static final Component TITLE = Component.translatable("container.lapislib_test.test_crafting");
 

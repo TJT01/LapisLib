@@ -145,7 +145,7 @@ public class TestMachineBlockEntity extends BlockEntity implements MenuProvider,
                 }
                 if (self.progress >= self.totalProgress) {
                     self.progress = 0;
-                    ItemStack result = recipe.assemble(self.recipeWrapper);
+                    ItemStack result = recipe.assemble(self.recipeWrapper, level.registryAccess());
                     self.inventory.setStackInSlot(
                             1,
                             ItemHandlerHelper.copyStackWithSize(
@@ -192,7 +192,7 @@ public class TestMachineBlockEntity extends BlockEntity implements MenuProvider,
     public void awardUsedRecipes(ServerPlayer player) {
         List<Recipe<?>> recipes = new ArrayList<>();
         for (ResourceLocation id : usedRecipes) {
-            player.getLevel().getRecipeManager().byKey(id).ifPresent(recipes::add);
+            player.level().getRecipeManager().byKey(id).ifPresent(recipes::add);
         }
         player.awardRecipes(recipes);
         usedRecipes.clear();
@@ -202,14 +202,14 @@ public class TestMachineBlockEntity extends BlockEntity implements MenuProvider,
         if (this.inventory.getStackInSlot(0).isEmpty() || this.fluid.getFluid().isEmpty())
             return false;
 
-        ItemStack result = recipe.assemble(this.recipeWrapper);
+        ItemStack result = recipe.assemble(this.recipeWrapper, level.registryAccess());
 
         if (result.isEmpty()) return false;
 
         ItemStack output = this.inventory.getStackInSlot(1);
 
         if (output.isEmpty()) return true;
-        if (!result.sameItem(output)) return false;
+        if (!ItemStack.isSameItem(result, output)) return false;
         if (
                 output.getCount() + result.getCount() > output.getMaxStackSize()
                         || output.getCount() + result.getCount() > result.getMaxStackSize()

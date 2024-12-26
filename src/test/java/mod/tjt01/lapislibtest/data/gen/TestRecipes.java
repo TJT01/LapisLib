@@ -11,6 +11,7 @@ import mod.tjt01.lapislibtest.data.gen.recipebuilder.TestMachineRecipeBuilder;
 import mod.tjt01.lapislibtest.data.gen.recipebuilder.TestRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -30,13 +31,13 @@ import java.util.function.Consumer;
 
 public class TestRecipes extends RecipeProvider {
     public TestRecipes(DataGenerator generator) {
-        super(generator);
+        super(generator.getPackOutput());
     }
 
     @Override
-    protected void buildCraftingRecipes(@Nonnull Consumer<FinishedRecipe> finishedRecipeConsumer) {
+    protected void buildRecipes(@Nonnull Consumer<FinishedRecipe> finishedRecipeConsumer) {
         OptionalRecipeBuilder.optional(recipeConsumer -> {
-            ShapedRecipeBuilder.shaped(Items.DIAMOND)
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Items.DIAMOND)
                     .pattern("###")
                     .pattern("###")
                     .pattern("###")
@@ -47,7 +48,7 @@ public class TestRecipes extends RecipeProvider {
                 .addCondition(new TestCondition())
                 .save(finishedRecipeConsumer);
 
-        TestRecipeBuilder.testRecipe(Items.BONE)
+        TestRecipeBuilder.testRecipe(RecipeCategory.MISC, Items.BONE)
                 .first(Items.STICK, 6)
                 .last(Tags.Items.STONE, 3)
                 .unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
@@ -58,6 +59,7 @@ public class TestRecipes extends RecipeProvider {
                 );
 
         TestMachineRecipeBuilder.machine(
+                RecipeCategory.MISC,
                 new IngredientStack(Items.COBBLED_DEEPSLATE, 4),
                 new FluidTagIngredient(FluidTags.LAVA, 1000),
                 20*30,
@@ -70,6 +72,7 @@ public class TestRecipes extends RecipeProvider {
                 );
 
         TestMachineRecipeBuilder.machine(
+                RecipeCategory.MISC,
                 Ingredient.of(ItemTags.WOOL),
                 new FluidStackIngredient(new FluidStack(Fluids.WATER, 250)),
                 10,

@@ -23,7 +23,7 @@ import net.minecraftforge.common.loot.LootTableIdCondition;
 
 public class LootModifiers extends GlobalLootModifierProvider {
     public LootModifiers(DataGenerator gen) {
-        super(gen, LapisLibTest.MODID);
+        super(gen.getPackOutput(), LapisLibTest.MODID);
     }
 
     @Override

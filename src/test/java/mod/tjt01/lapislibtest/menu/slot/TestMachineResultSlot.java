@@ -46,7 +46,7 @@ public class TestMachineResultSlot extends SlotItemHandler {
 
     @Override
     protected void checkTakeAchievements(ItemStack stack) {
-        stack.onCraftedBy(this.player.level, this.player, this.removeCount);
+        stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
 
         if (this.player instanceof ServerPlayer serverPlayer) {
             parent.awardUsedRecipes(serverPlayer);

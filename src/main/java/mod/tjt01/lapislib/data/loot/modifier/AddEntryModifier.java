@@ -19,8 +19,6 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
-import net.minecraftforge.common.loot.LootModifierManager;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.annotation.Nonnull;
 import java.util.function.BiFunction;
@@ -36,7 +34,7 @@ public class AddEntryModifier extends LootModifier {
                     return DataResult.success(entry);
                 } catch (JsonSyntaxException e) {
                     LapisLib.LOGGER.warn("Unable to decode loot entry", e);
-                    return DataResult.error(e.getMessage());
+                    return DataResult.error(e::getMessage);
                 }
             },
             entry -> {
@@ -45,7 +43,7 @@ public class AddEntryModifier extends LootModifier {
                     return DataResult.success(new Dynamic<>(JsonOps.INSTANCE, json));
                 } catch (JsonSyntaxException e) {
                     LapisLib.LOGGER.warn("Unable to encode loot entry", e);
-                    return DataResult.error(e.getMessage());
+                    return DataResult.error(e::getMessage);
                 }
             }
     );
@@ -59,7 +57,7 @@ public class AddEntryModifier extends LootModifier {
                     return DataResult.success(itemFunctions);
                 } catch (JsonSyntaxException e) {
                     LapisLib.LOGGER.warn("Unable to decode loot functions", e);
-                    return DataResult.error(e.getMessage());
+                    return DataResult.error(e::getMessage);
                 }
             },
             itemFunctions -> {
@@ -68,7 +66,7 @@ public class AddEntryModifier extends LootModifier {
                     return DataResult.success(new Dynamic<>(JsonOps.INSTANCE, json));
                 } catch (JsonSyntaxException e) {
                     LapisLib.LOGGER.warn("Unable to encode loot functions", e);
-                    return DataResult.error(e.getMessage());
+                    return DataResult.error(e::getMessage);
                 }
             }
     );

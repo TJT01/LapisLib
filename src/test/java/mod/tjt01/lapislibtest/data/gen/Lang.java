@@ -7,7 +7,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 
 public class Lang extends LanguageProvider {
     public Lang(DataGenerator gen) {
-        super(gen, LapisLibTest.MODID, "en_us");
+        super(gen.getPackOutput(), LapisLibTest.MODID, "en_us");
     }
 
     private void addConfigKey(String name, String translation) {

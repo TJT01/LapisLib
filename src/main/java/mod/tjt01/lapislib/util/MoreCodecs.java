@@ -16,7 +16,7 @@ public class MoreCodecs {
                     return DataResult.success(Ingredient.fromJson(IGlobalLootModifier.getJson(dynamic)));
                 } catch (JsonParseException e) {
                     LapisLib.LOGGER.warn("Failed to decode ingredient", e);
-                    return DataResult.error(e.getMessage());
+                    return DataResult.error(e::getMessage);
                 }
             },
             ingredient -> {
@@ -24,7 +24,7 @@ public class MoreCodecs {
                     return DataResult.success(new Dynamic<>(JsonOps.INSTANCE, ingredient.toJson()));
                 } catch (JsonParseException e) {
                     LapisLib.LOGGER.warn("Failed to encode ingredient", e);
-                    return DataResult.error(e.getMessage());
+                    return DataResult.error(e::getMessage);
                 }
             }
     );

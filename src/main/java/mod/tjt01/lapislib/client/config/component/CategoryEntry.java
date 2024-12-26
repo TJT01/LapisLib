@@ -1,8 +1,8 @@
 package mod.tjt01.lapislib.client.config.component;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -20,9 +20,12 @@ public class CategoryEntry extends ConfigEntry {
     private final ImmutableList<Button> buttons;
 
     public CategoryEntry(Screen parent, Component text, Function<Screen, Screen> screenFunction) {
-        this.button = new Button(0, 0, 260, 20, text, pButton ->
-                Minecraft.getInstance().setScreen(screenFunction.apply(parent))
-        );
+//        this.button = new Button(0, 0, 260, 20, text, pButton ->
+//                Minecraft.getInstance().setScreen(screenFunction.apply(parent))
+//        );
+        this.button = Button.builder(text, b -> {
+            Minecraft.getInstance().setScreen(screenFunction.apply(parent));
+        }).build();
         buttons = ImmutableList.of(button);
     }
 
@@ -34,15 +37,14 @@ public class CategoryEntry extends ConfigEntry {
 
     @Override
     public void render(
-            @Nonnull PoseStack poseStack, int index,
+            @Nonnull GuiGraphics guiGraphics, int index,
             int top, int left, int width, int height,
             int mouseX, int mouseY, boolean isMouseOver,
             float partialTick
     ) {
-        this.button.x = left;
-        this.button.y = top;
+        this.button.setPosition(left, top);
 
-        this.button.render(poseStack, mouseX, mouseY, partialTick);
+        this.button.render(guiGraphics, mouseX, mouseY, partialTick);
     }
 
     @Nonnull

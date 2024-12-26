@@ -39,5 +39,6 @@
     "recipes": [
       "lapislib_test:bone_from_sticks_and_stone"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

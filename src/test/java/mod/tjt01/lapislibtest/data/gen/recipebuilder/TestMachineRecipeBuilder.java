@@ -12,6 +12,7 @@ import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -25,21 +26,23 @@ import java.util.function.Consumer;
 public class TestMachineRecipeBuilder implements RecipeBuilder {
     @Nullable
     private String group;
+    private final RecipeCategory recipeCategory;
     private final IngredientStack itemIngredient;
     private final FluidIngredient fluidIngredient;
     private final int time;
     private final ItemStack result;
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-    public static TestMachineRecipeBuilder machine(IngredientStack itemIngredient, FluidIngredient fluidIngredient, int time, ItemStack result) {
-        return new TestMachineRecipeBuilder(itemIngredient, fluidIngredient, time, result);
+    public static TestMachineRecipeBuilder machine(RecipeCategory recipeCategory, IngredientStack itemIngredient, FluidIngredient fluidIngredient, int time, ItemStack result) {
+        return new TestMachineRecipeBuilder(recipeCategory, itemIngredient, fluidIngredient, time, result);
     }
 
-    public static TestMachineRecipeBuilder machine(Ingredient ingredient, FluidIngredient fluid, int time, ItemStack result) {
-        return new TestMachineRecipeBuilder(new IngredientStack(ingredient, 1), fluid, time, result);
+    public static TestMachineRecipeBuilder machine(RecipeCategory recipeCategory, Ingredient ingredient, FluidIngredient fluid, int time, ItemStack result) {
+        return new TestMachineRecipeBuilder(recipeCategory, new IngredientStack(ingredient, 1), fluid, time, result);
     }
 
-    private TestMachineRecipeBuilder(IngredientStack itemIngredient, FluidIngredient fluidIngredient, int time, ItemStack result) {
+    private TestMachineRecipeBuilder(RecipeCategory recipeCategory, IngredientStack itemIngredient, FluidIngredient fluidIngredient, int time, ItemStack result) {
+        this.recipeCategory = recipeCategory;
         this.itemIngredient = itemIngredient;
         this.fluidIngredient = fluidIngredient;
         this.time = time;
@@ -82,7 +85,7 @@ public class TestMachineRecipeBuilder implements RecipeBuilder {
                 advancement,
                 new ResourceLocation(
                         recipeId.getNamespace(),
-                        "recipes/" + this.result.getItem().getItemCategory().getRecipeFolderName() + "/"
+                        "recipes/" + this.recipeCategory.getFolderName() + "/"
                         + recipeId.getPath()
                 )
         ));

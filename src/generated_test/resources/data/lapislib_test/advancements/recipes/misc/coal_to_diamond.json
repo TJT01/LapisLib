@@ -31,7 +31,8 @@
           "recipes": [
             "lapislib_test:coal_to_diamond"
           ]
-        }
+        },
+        "sends_telemetry_event": false
       },
       "conditions": [
         {

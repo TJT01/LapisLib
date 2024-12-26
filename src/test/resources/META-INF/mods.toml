@@ -13,12 +13,12 @@ Just your average everyday test mod
 [[dependencies.lapislib_test]]
     modId="lapislib"
     mandatory=true
-    versionRange="[1.19.2,)"
+    versionRange="[1,)"
 [[dependencies.lapislib_test]]
     modId="forge"
     mandatory=true
-    versionRange="[43.4.0,)"
+    versionRange="[1,)"
 [[dependencies.lapislib_test]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2]"
+    versionRange="[1,)"

@@ -1,16 +1,14 @@
 package mod.tjt01.lapislibtest.block;
 
-import mod.tjt01.lapislib.block.OptionalBlock;
 import mod.tjt01.lapislibtest.LapisLibTest;
-import mod.tjt01.lapislibtest.config.LapisLibTestConfig;
-import mod.tjt01.lapislibtest.config.ServerConfig;
 import mod.tjt01.lapislibtest.item.LapisLibTestItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -25,24 +23,21 @@ public class LapisLibTestBlocks {
         return BLOCKS.register(name, supplier);
     }
 
-    public static RegistryObject<Block> makeBlock(String name, Supplier<Block> supplier, CreativeModeTab tab){
+    public static RegistryObject<Block> makeBlock(String name, Supplier<Block> supplier){
         RegistryObject<Block> blockRegistry = makeBlockWithoutItem(name, supplier);
-        LapisLibTestItems.ITEMS.register(name, () -> new BlockItem(blockRegistry.get(), new Item.Properties().tab(tab)));
+        LapisLibTestItems.ITEMS.register(name, () -> new BlockItem(blockRegistry.get(), new Item.Properties()));
         return blockRegistry;
     }
 
-    public static final RegistryObject<Block> OPTIONAL_BLOCK = makeBlock(
-            "optional_block", () -> new OptionalBlock(BlockBehaviour.Properties.of(Material.STONE), () -> LapisLibTestConfig.enableOptionalItems), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
     public static final RegistryObject<Block> CRAFTING_BLOCK = makeBlock(
             "test_crafting_block",
-            () -> new TestCraftingBlock(BlockBehaviour.Properties.of(Material.STONE)),
-            CreativeModeTab.TAB_DECORATIONS);
+            () -> new TestCraftingBlock(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM))
+    );
 
     public static final RegistryObject<Block> MACHINE_BLOCK = makeBlock(
             "test_machine",
-            () -> new TestMachineBlock(BlockBehaviour.Properties.of(Material.STONE)),
-            CreativeModeTab.TAB_DECORATIONS);
+            () -> new TestMachineBlock(BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM))
+    );
 
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);

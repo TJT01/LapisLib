@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import mod.tjt01.lapislib.registry.loot.LapisLibLootConditions;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Set;
 
@@ -69,7 +71,7 @@ public class BlockTagCondition implements LootItemCondition {
         @Override
         public BlockTagCondition deserialize(JsonObject json, JsonDeserializationContext context) {
             ResourceLocation tag = new ResourceLocation(GsonHelper.getAsString(json, "tag"));
-            return new BlockTagCondition(TagKey.create(Registry.BLOCK_REGISTRY, tag));
+            return new BlockTagCondition(TagKey.create(ForgeRegistries.Keys.BLOCKS, tag));
         }
     }
 }

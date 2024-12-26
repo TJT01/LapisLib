@@ -10,6 +10,7 @@ import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -23,6 +24,7 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class TestRecipeBuilder implements RecipeBuilder {
+    private final RecipeCategory category;
     @Nullable
     private String group;
     @Nullable
@@ -32,24 +34,25 @@ public class TestRecipeBuilder implements RecipeBuilder {
     private final ItemStack result;
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-    public TestRecipeBuilder(ItemStack result) {
+    public TestRecipeBuilder(RecipeCategory recipeCategory, ItemStack result) {
+        this.category = recipeCategory;
         this.result = result;
     }
 
-    public static TestRecipeBuilder testRecipe(ItemStack result) {
-        return new TestRecipeBuilder(result.copy());
+    public static TestRecipeBuilder testRecipe(RecipeCategory category, ItemStack result) {
+        return new TestRecipeBuilder(category, result.copy());
     }
 
-    public static TestRecipeBuilder testRecipe(ItemLike result) {
-        return new TestRecipeBuilder(new ItemStack(result));
+    public static TestRecipeBuilder testRecipe(RecipeCategory category, ItemLike result) {
+        return new TestRecipeBuilder(category, new  ItemStack(result));
     }
 
-    public static TestRecipeBuilder testRecipe(ItemLike result, int count) {
-        return new TestRecipeBuilder(new ItemStack(result, count));
+    public static TestRecipeBuilder testRecipe(RecipeCategory category, ItemLike result, int count) {
+        return new TestRecipeBuilder(category, new ItemStack(result, count));
     }
 
-    public static TestRecipeBuilder testRecipe(ItemLike result, int count, @Nullable CompoundTag data) {
-        return new TestRecipeBuilder(new ItemStack(result, count, data));
+    public static TestRecipeBuilder testRecipe(RecipeCategory category, ItemLike result, int count, @Nullable CompoundTag data) {
+        return new TestRecipeBuilder(category, new ItemStack(result, count, data));
     }
 
     public TestRecipeBuilder first(IngredientStack ingredientStack) {
@@ -152,7 +155,7 @@ public class TestRecipeBuilder implements RecipeBuilder {
                         this.advancement,
                         new ResourceLocation(
                                 recipeId.getNamespace(),
-                                "recipes/" + this.result.getItem().getItemCategory().getRecipeFolderName() + "/"
+                                "recipes/" + this.category.getFolderName() + "/"
                                         + recipeId.getPath()
                         )
                 )

@@ -14,6 +14,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 
+import java.util.List;
 import java.util.Optional;
 
 public class TestCraftingMenu extends AbstractContainerMenu {
@@ -132,7 +133,7 @@ public class TestCraftingMenu extends AbstractContainerMenu {
                 if (recipeOptional.isPresent()) {
                     TestRecipe recipe = recipeOptional.get();
                     if (resultContainer.setRecipeUsed(level, serverPlayer, recipe)) {
-                        stack = recipe.assemble(craftingContainer);
+                        stack = recipe.assemble(craftingContainer, level.registryAccess());
                     }
                 }
                 resultContainer.setItem(0, stack);
@@ -170,10 +171,10 @@ public class TestCraftingMenu extends AbstractContainerMenu {
         @Override
         public void onTake(Player pPlayer, ItemStack pStack) {
             checkTakeAchievements(pStack);
-            Optional<TestRecipe> testRecipe = pPlayer.level.getRecipeManager().getRecipeFor(
+            Optional<TestRecipe> testRecipe = pPlayer.level().getRecipeManager().getRecipeFor(
                     LapisLibTestRecipeTypes.TEST.get(),
                     grid,
-                    pPlayer.level
+                    pPlayer.level()
             );
             if (testRecipe.isPresent()) {
                 testRecipe.get().removeItems(pPlayer, grid);
@@ -202,11 +203,11 @@ public class TestCraftingMenu extends AbstractContainerMenu {
         @Override
         protected void checkTakeAchievements(ItemStack pStack) {
             if (this.removeCount > 0) {
-                pStack.onCraftedBy(player.level, player, removeCount);
+                pStack.onCraftedBy(player.level(), player, removeCount);
             }
 
             if (container instanceof ResultContainer resultContainer) {
-                resultContainer.awardUsedRecipes(player);
+                resultContainer.awardUsedRecipes(player, List.of(pStack));
             }
             removeCount = 0;
             super.checkTakeAchievements(pStack);

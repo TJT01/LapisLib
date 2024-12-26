@@ -1,4 +1,4 @@
-// 1.19.2	2024-07-30T18:39:20.0539553	Global Loot Modifiers : lapislib_test
+// 1.20.1	2024-12-25T18:55:45.7898646	Global Loot Modifiers : lapislib_test
 0066b5985f5576cf58e3497ab55d51ab20980faa data/forge/loot_modifiers/global_loot_modifiers.json
 641b37e3337a539c15cf594df760c9772b45e09e data/lapislib_test/loot_modifiers/test_add_loot.json
 590a9d1012486f751268a4b3341ea3244e5c3812 data/lapislib_test/loot_modifiers/test_block_tag.json
