@@ -7,6 +7,7 @@
   "lapislib.common.config.green": "Green: %s",
   "lapislib.common.config.no_level": "Join a world to edit server configs.",
   "lapislib.common.config.no_permission": "Only operators can modify server configs.",
+  "lapislib.common.config.open_picker": "Open color picker",
   "lapislib.common.config.red": "Red: %s",
   "lapislib.common.config.reset.text": "R",
   "lapislib.common.config.reset.tooltip": "Reset",

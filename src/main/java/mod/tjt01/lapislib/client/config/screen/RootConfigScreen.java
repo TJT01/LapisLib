@@ -68,12 +68,6 @@ public class RootConfigScreen extends Screen {
     @Override
     protected void init() {
         int center = this.width/2;
-        addRenderableWidget(
-                Button.builder(CommonComponents.GUI_BACK, button -> minecraft.setScreen(parent))
-                        .pos(center - 64, this.height - 32)
-                        .size(128, 20)
-                        .build()
-        );
 
         NonNullList<Button> buttons = NonNullList.create();
 
@@ -137,6 +131,13 @@ public class RootConfigScreen extends Screen {
             button.setY(yOffset + btY);
             btY += 24;
         }
+
+        addRenderableWidget(
+                Button.builder(CommonComponents.GUI_BACK, button -> minecraft.setScreen(parent))
+                        .pos(center - 64, this.height - 32)
+                        .size(128, 20)
+                        .build()
+        );
     }
 
     @Override
