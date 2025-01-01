@@ -5,10 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 but this project does not adhere to Semantic Versioning.
 The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.3
 
-## [1.19.2-1.1.0]
+## [UNRELEASED]
 ### Added
 - Ported to 1.20.1
 - The colored part of color picker buttons can now be changed by resource packs
+- Added `WaterloggableBlock` class
 
 ### Fixed
 - Fixed missing lang entry for color picker button
