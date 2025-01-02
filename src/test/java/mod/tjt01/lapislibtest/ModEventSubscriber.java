@@ -2,8 +2,6 @@ package mod.tjt01.lapislibtest;
 
 import mod.tjt01.lapislibtest.config.LapisLibTestConfig;
 import mod.tjt01.lapislibtest.data.gen.condition.TestCondition;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

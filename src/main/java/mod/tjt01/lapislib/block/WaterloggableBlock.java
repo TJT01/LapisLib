@@ -3,6 +3,7 @@ package mod.tjt01.lapislib.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -40,7 +41,9 @@ public class WaterloggableBlock extends Block implements SimpleWaterloggedBlock 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return super.getStateForPlacement(context);
+        BlockPos clicked = context.getClickedPos();
+        Level level = context.getLevel();
+        return this.defaultBlockState().setValue(WATERLOGGED, level.getFluidState(clicked).getType() == Fluids.WATER);
     }
 
     @Override
