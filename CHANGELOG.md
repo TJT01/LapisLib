@@ -14,6 +14,9 @@ The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.
 ### Fixed
 - Fixed missing lang entry for color picker button
 
+### Removed
+- `OptionalBlock` and `OptionalItem` have been removed due to the creative tab rework
+
 ## [1.19.2-1.1.0]
 ### Added
 - Ported to 1.19.2 🐸
