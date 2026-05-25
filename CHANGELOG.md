@@ -8,6 +8,7 @@ The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.
 ## [Unreleased]
 ### Added
 - Added `CustomArmorMaterial`
+- Added `lapislib:player.block_break_speed` as a backport of `minecraft:block_break_speed`
 
 ## [1.20.1-1.2.0]
 ### Added

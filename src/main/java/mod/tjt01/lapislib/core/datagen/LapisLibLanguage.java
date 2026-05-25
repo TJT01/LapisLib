@@ -35,5 +35,7 @@ public class LapisLibLanguage extends LanguageProvider {
         this.add("lapislib.common.config.alpha", "Alpha: %s");
 
         this.add("lapislib.common.config.open_picker", "Open color picker");
+
+        this.add("attribute.name.lapislib.player.block_break_speed", "Block Break Speed");
     }
 }

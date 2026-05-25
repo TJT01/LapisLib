@@ -2,6 +2,9 @@ package mod.tjt01.lapislib.core;
 
 import mod.tjt01.lapislib.LapisLib;
 import mod.tjt01.lapislib.core.config.LapisLibConfig;
+import mod.tjt01.lapislib.registry.entity.attribute.LapisLibAttributes;
+import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -9,6 +12,11 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 @Mod.EventBusSubscriber(modid = LapisLib.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventSubscriber {
+    @SubscribeEvent
+    public static void onModifyDefaultAttributes(EntityAttributeModificationEvent event) {
+        event.add(EntityType.PLAYER, LapisLibAttributes.BLOCK_BREAK_SPEED.get());
+    }
+
     @SubscribeEvent
     public static void onModConfigEvent(ModConfigEvent event) {
         final ModConfig config = event.getConfig();

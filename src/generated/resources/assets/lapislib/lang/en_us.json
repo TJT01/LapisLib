@@ -1,4 +1,5 @@
 {
+  "attribute.name.lapislib.player.block_break_speed": "Block Break Speed",
   "config.lapislib.showItemTags": "Show Item Tags",
   "lapislib.common.config.alpha": "Alpha: %s",
   "lapislib.common.config.blue": "Blue: %s",
