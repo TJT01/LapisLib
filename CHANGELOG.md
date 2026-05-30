@@ -9,7 +9,8 @@ The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.
 ### Added
 - Added `CustomArmorMaterial`
 - Added `lapislib:player.block_break_speed` as a backport of `minecraft:block_break_speed`
-
+- Added loot conditions `lapislib:block_entity_energy` and `lapislib:block_entity_fluid`
+  - These check if a block entity has an energy/fluid capability, and how much it contains.
 ## [1.20.1-1.2.0]
 ### Added
 - Ported to 1.20.1
