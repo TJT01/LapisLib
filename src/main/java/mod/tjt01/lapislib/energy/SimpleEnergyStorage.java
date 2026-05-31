@@ -1,8 +1,10 @@
 package mod.tjt01.lapislib.energy;
 
+import net.minecraft.nbt.IntTag;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public class SimpleEnergyStorage implements IEnergyStorage {
+public class SimpleEnergyStorage implements IEnergyStorage, INBTSerializable<IntTag> {
     protected final int capacity;
     protected final int maxReceive;
     protected final int maxExtract;
@@ -84,5 +86,15 @@ public class SimpleEnergyStorage implements IEnergyStorage {
     @Override
     public boolean canReceive() {
         return getMaxReceive() > 0;
+    }
+
+    @Override
+    public IntTag serializeNBT() {
+        return IntTag.valueOf(this.energy);
+    }
+
+    @Override
+    public void deserializeNBT(IntTag nbt) {
+        this.energy = nbt.getAsInt();
     }
 }
