@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 but this project does not adhere to Semantic Versioning.
 The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.3
 
-## [Unreleased]
+## [1.20.1-1.2.1]
 ### Added
 - Added `CustomArmorMaterial`
 - Added `lapislib:player.block_break_speed` as a backport of `minecraft:block_break_speed`
