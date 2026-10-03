@@ -105,6 +105,8 @@ public class SimpleItemStackHandler implements IItemHandlerModifiable, INBTSeria
             } else {
                 existing.grow(reachedLimit ? limit : stack.getCount());
             }
+
+            this.onContentsChanged();
         }
 
         return reachedLimit
