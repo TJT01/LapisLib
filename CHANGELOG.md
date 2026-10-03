@@ -5,9 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 but this project does not adhere to Semantic Versioning.
 The version format is MCMAJOR.MCMINOR.MCPATCH-MAJOR.MINOR.PATCH, eg, 1.18.1-1.2.3
 
-## [UNRELEASED]
+## [1.20.1-1.3.1] - 2026/10/02
+### Added
+- GitHub issue tracker is now specified in `mods.toml`
+
 ### Fixed
-- Fixed `SimpleItemStackHandler#insertItem` not calling `SimpleItemStackHandler#onContentsChanged`
+- `SimpleItemStackHandler#insertItem` not calling `SimpleItemStackHandler#onContentsChanged`
 
 ## [1.20.1-1.3.0]
 ### Added
